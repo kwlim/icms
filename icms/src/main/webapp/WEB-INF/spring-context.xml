@@ -23,7 +23,7 @@
 	
 	<import resource="security-servlet.xml"/>
 	
-	<jpa:repositories base-package="com.innov" />
+	<jpa:repositories base-package="com.lkwy" />
 	
 	<util:properties id="propertyConfigurer" location="classpath:properties/configuration.properties"/>
 	<context:property-placeholder properties-ref="propertyConfigurer" />
@@ -37,7 +37,7 @@
 
 	<!-- Scans within the base package of the application for @Components to 
 		configure as beans @Controller, @Service, @Configuration, etc. -->
-	<context:component-scan base-package="com.innov" />
+	<context:component-scan base-package="com.lkwy" />
 	<context:annotation-config />
 	
 	<task:scheduler id="threadPoolTaskScheduler" pool-size="50"/>
@@ -45,7 +45,7 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.innov" />
+		<property name="packagesToScan" value="com.lkwy" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="showSql" value="true" />

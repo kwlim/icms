@@ -23,7 +23,7 @@
 		<security:logout logout-success-url="/home"/>
 	</security:http>
 	
-	<beans:bean id='localAuthenticationProvider' class='com.innov.security.service.LocalAuthenticationProvider'/>
+	<beans:bean id='localAuthenticationProvider' class='com.lkwy.security.service.LocalAuthenticationProvider'/>
 	
 	<security:authentication-manager>
 		<security:authentication-provider ref="localAuthenticationProvider"/>
