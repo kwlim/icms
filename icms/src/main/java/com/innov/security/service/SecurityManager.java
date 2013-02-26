@@ -38,8 +38,8 @@ public class SecurityManager {
     
     @PostConstruct
     public void init(){
-//        initAdminGroup();
-//        initAdminUser();
+        initAdminGroup();
+        initAdminUser();
     }
     
     @Transactional
