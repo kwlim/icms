@@ -13,7 +13,6 @@ public interface IUserRepository extends PagingAndSortingRepository<User, String
 	
 	public User findByUsername(String username);
 	
-	//@Query("SELECT u FROM User u WHERE u.username LIKE ?1 AND u.firstName LIKE ?2 AND u.lastName LIKE ?3 AND u.group.id = ?4 ")
 	public Page<User> findAll(Specification<User> spec, Pageable page);
 	
 	

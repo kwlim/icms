@@ -7,3 +7,8 @@ icms/home/
 icms/build/
 icms/src/main/webapp/WEB-INF/classes/
 icms/src/main/webapp/WEB-INF/lib/
+
+# eclipse
+icms/.settings/
+icms/.project
+icms/.classpath

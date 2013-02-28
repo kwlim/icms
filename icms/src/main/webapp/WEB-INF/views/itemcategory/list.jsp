@@ -2,7 +2,7 @@
 
 <commons:header />
 
-<h1>Group</h1>
+<h1>Category Listing</h1>
 
 <c:if test="${!empty message}">
 	<div class="alert alert-success">
@@ -27,22 +27,22 @@
 	</div>
 	<div class="filter">
 		<button type="submit" class="btn" onclick="deleteRecords()"><fmt:message key="general.delete"/></button>
-		<button type="button" class="btn" onclick="newGroup()"><fmt:message key="general.new"/></button>
+		<button type="button" class="btn" onclick="newItemCategory()"><fmt:message key="general.new"/></button>
 	</div>
 	<display:table id="${id}" name="${rows}" size="${size}" pagesize="10"
 		export="false" class="table table-striped table-bordered table-condensed"
 		requestURI="?" sort="external" partialList="true">
 		<display:column media="html" title="">
-			<input name="id" type="checkbox" value="${group.id}" />
+			<input name="id" type="checkbox" value="${itemCategory.id}" />
 		</display:column>
 		<display:column titleKey="general.name" sortable="true">
-			<c:url var="editUrl" value="/group/edit/${ group.id }">
+			<c:url var="editUrl" value="/item/category/edit/${ itemCategory.id }">
 			</c:url>
-			<a href="${ editUrl }"><c:out value="${ group.name }" /></a>
+			<a href="${ editUrl }"><c:out value="${ itemCategory.name }" /></a>
 		</display:column>
 		<display:column titleKey="general.lastUpdatedDate" sortable="true">
-			<c:if test="${ group.modifiedDate != null }">
-				<fmt:formatDate value="${ group.modifiedDate }" pattern="dd MMM yyyy hh:mm a" />
+			<c:if test="${ itemCategory.modifiedDate != null }">
+				<fmt:formatDate value="${ itemCategory.modifiedDate }" pattern="dd MMM yyyy hh:mm a" />
 			</c:if>
 		</display:column>
 	</display:table>
@@ -51,15 +51,15 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui-1.9.1.custom.min.js"></script>
 <script type="text/javascript">
 
-function newGroup(){
-	document.location.href = "${pageContext.request.contextPath}/group/new";
+function newItemCategory(){
+	document.location.href = "${pageContext.request.contextPath}/item/category/new";
 }
 
 function deleteRecords() {
     if ($("[name=id]:checked").length > 0) {
         if (confirm('<fmt:message key="general.delete.confirmation"/>')) {
             $("#filterForm").attr("method", "POST");
-            $("#filterForm").attr("action", "${pageContext.request.contextPath}/group/delete");
+            $("#filterForm").attr("action", "${pageContext.request.contextPath}/item/category/delete");
             return true;
         }
     }

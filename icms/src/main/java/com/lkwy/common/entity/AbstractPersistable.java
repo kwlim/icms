@@ -1,5 +1,7 @@
 package com.lkwy.common.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -8,7 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.domain.Persistable;
 
 @MappedSuperclass
-public class AbstractPersistable implements Persistable<String> {
+public class AbstractPersistable implements Persistable<String>, Serializable {
 	
 	private static final long serialVersionUID = 7651818117162425863L;
 	

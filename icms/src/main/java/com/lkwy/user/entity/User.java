@@ -1,6 +1,5 @@
 package com.lkwy.user.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +18,7 @@ import com.lkwy.group.entity.PermissionDTO;
 
 @Entity
 @Table(name="user")
-public class User extends AbstractAuditablePersistable implements Serializable{
+public class User extends AbstractAuditablePersistable{
     
     private static final long serialVersionUID = 4980168230977242911L;
     

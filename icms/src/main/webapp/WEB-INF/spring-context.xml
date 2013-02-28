@@ -1,5 +1,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:task="http://www.springframework.org/schema/task"
@@ -19,7 +20,7 @@
        	http://www.springframework.org/schema/util
        	http://www.springframework.org/schema/util/spring-util.xsd
        	http://www.springframework.org/schema/data/jpa 
-       	http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+       	http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd">
 	
 	<import resource="security-servlet.xml"/>
 	
@@ -50,7 +51,7 @@
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="showSql" value="true" />
 				<property name="generateDdl" value="true" />
-				<!-- <property name="databasePlatform" value="${persistence.dialect}" /> -->
+				<property name="databasePlatform" value="${persistence.dialect}" />
 			</bean>
 		</property>
 		
