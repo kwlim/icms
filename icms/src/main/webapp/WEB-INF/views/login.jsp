@@ -6,36 +6,42 @@
 	<fmt:message key="general.login" />
 </h1>
 
-<c:if test="${not empty param.login_error}">
-<div class="alert alert-error">
-	<fmt:message key="${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}" />
+<div class="login-box">
+	<c:if test="${not empty param.login_error}">
+	<div class="alert alert-error">
+		<fmt:message key="${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}" />
+	</div>
+	</c:if>
+	
+	<div class="icons">
+		<a href="index.html"><i class="halflings-icon home"></i></a>
+		<a href="#"><i class="halflings-icon cog"></i></a>
+	</div>
+	<h2>Login to your account</h2>
+	<form class="form-horizontal" action="${ pageContext.request.contextPath }/j_spring_security_check"  method="post">		
+		<div class="input-prepend" title="Username">
+			<span class="add-on"><i class="halflings-icon user"></i></span>
+			<input class="input-large span10" name="j_username" id="username" type="text" placeholder="<fmt:message key="general.username"/>"/>
+		</div>
+		<div class="clearfix"></div>
+
+		<div class="input-prepend" title="Password">
+			<span class="add-on"><i class="halflings-icon lock"></i></span>
+			<input class="input-large span10" name="j_password" id="password" type="password" placeholder="<fmt:message key="general.password"/>"/>
+		</div>
+		<div class="clearfix"></div>
+		
+		<label class="remember" for="remember"><input type="checkbox" id="remember" />Remember me</label>
+
+		<div class="button-login">	
+			<button type="submit" class="btn btn-primary"><fmt:message key="general.login" /></button>
+		</div>
+		<div class="clearfix"></div>
+	</form>
+	<hr>
+	<h3>Forgot Password?</h3>
+	<p>
+		No problem, <a href="#">click here</a> to get a new password.
+	</p>
 </div>
-</c:if>
-
-<form class="forum-horizontal"
-	action="${ pageContext.request.contextPath }/j_spring_security_check"
-	method="POST">
-	<div class="control-group">
-		<label class="control-label" for="j_username"><fmt:message
-				key="general.username" /></label>
-		<div class="controls">
-			<input type="text" name="j_username"
-				placeholder="<fmt:message key="general.username"/>">
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label" for="j_password"><fmt:message
-				key="general.password" /></label>
-		<div class="controls">
-			<input type="password" name="j_password"
-				placeholder="<fmt:message key="general.password"/>">
-		</div>
-	</div>
-	<div class="control-group">
-		<button type="submit" class="btn">
-			<fmt:message key="general.login" />
-		</button>
-	</div>
-</form>
-
 <commons:footer />

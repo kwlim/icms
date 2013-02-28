@@ -2,11 +2,13 @@
 
 <commons:header />
 
+<!-- start: left menu bar -->
+<commons:left />
 <h1>Bootstrap starter template</h1>
 <p>
 	<fmt:message key="general.welcome"/>
-	<br/>
-	<img alt="" src="${ pageContext.request.contextPath }/images/innov-logo.png">
+	<br/>testtest sdsds okok
+	<img alt="" src="${ pageContext.request.contextPath }/img/innov-logo.png">
 </p>
 
 <commons:footer />
