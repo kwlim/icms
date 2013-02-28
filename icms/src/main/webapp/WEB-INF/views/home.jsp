@@ -2,8 +2,6 @@
 
 <commons:header />
 
-<!-- start: left menu bar -->
-<commons:left />
 <h1>Bootstrap starter template</h1>
 <p>
 	<fmt:message key="general.welcome"/>

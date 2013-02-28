@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
-
+<commons:widget-header />
 <c:if test="${!empty message}">
 	<div class="alert alert-success">
 		<fmt:message key='${message}' />
@@ -39,12 +39,16 @@
 			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />
 		</span>
 	</div>
-	<div class="filter">
-		<button type="submit" class="btn" onclick="deleteRecords()"><fmt:message key="general.delete"/></button>
-		<button type="button" class="btn" onclick="newItem()"><fmt:message key="general.new"/></button>
+	<div class="span6">
+		<button type="submit" class="btn btn-danger" onclick="deleteRecords()">
+			<i class="halflings-icon trash halflings-icon"></i> <fmt:message key="general.delete"/>
+		</button>
+		<button type="button" class="btn btn-info" onclick="newItem()">
+			<i class="halflings-icon edit halflings-icon"></i>  <fmt:message key="general.new"/>
+		</button>
 	</div>
 	<display:table id="${id}" name="${rows}" size="${size}" pagesize="10"
-		export="false" class="table table-striped table-bordered table-condensed"
+		export="false" class="table table-striped table-bordered bootstrap-datatable datatable"
 		requestURI="?" sort="external" partialList="true">
 		<display:column media="html" title="">
 			<input name="id" type="checkbox" value="${item.id}" />
@@ -81,5 +85,5 @@ function deleteRecords() {
     }
 }
 </script>
-
+<commons:widget-footer />
 <commons:footer />

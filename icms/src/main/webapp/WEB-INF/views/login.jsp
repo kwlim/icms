@@ -1,11 +1,6 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
-<commons:header />
-
-<h1>
-	<fmt:message key="general.login" />
-</h1>
-
+<commons:header-login/>
 <div class="login-box">
 	<c:if test="${not empty param.login_error}">
 	<div class="alert alert-error">
@@ -44,4 +39,4 @@
 		No problem, <a href="#">click here</a> to get a new password.
 	</p>
 </div>
-<commons:footer />
+<commons:footer-login />

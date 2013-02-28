@@ -24,7 +24,7 @@
 		</p>
 	</footer>
 	</div><!--/.fluid-container-->
-	<jsp:include page="/WEB-INF/views/includes/scripts.jsp" />
+	
 
 </body>
 
