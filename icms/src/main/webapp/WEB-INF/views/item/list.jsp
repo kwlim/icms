@@ -1,6 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
+<commons:widget-header widgetLogo="" widgetLabel="item.label" />
 
 <c:if test="${!empty message}">
 	<div class="alert alert-success">
@@ -39,9 +40,13 @@
 			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />
 		</span>
 	</div>
-	<div class="filter">
-		<button type="submit" class="btn" onclick="javascript:deleteRecords()"><fmt:message key="general.delete"/></button>
-		<button type="button" class="btn" onclick="javascript:newItem()"><fmt:message key="general.new"/></button>
+	<div class="span6">
+		<button type="submit" class="btn btn-danger" onclick="deleteRecords()">
+			<i class="halflings-icon trash halflings-icon"></i> <fmt:message key="general.delete"/>
+		</button>
+		<button type="button" class="btn btn-info" onclick="newItem()">
+			<i class="halflings-icon edit halflings-icon"></i>  <fmt:message key="general.new"/>
+		</button>
 	</div>
 	<display:table id="${id}" name="${rows}" size="${size}" pagesize="10"
 		export="false" class="table table-striped table-bordered table-condensed"
@@ -102,5 +107,5 @@ function deleteRecords() {
     return false;
 }
 </script>
-
+<commons:widget-footer />
 <commons:footer />

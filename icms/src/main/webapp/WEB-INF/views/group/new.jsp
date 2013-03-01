@@ -1,6 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
+<commons:widget-header widgetLogo="bookmark" widgetLabel="user.group.new" />
 
 <fmt:message key='campaign.module' var="pageModule"/>
 <c:choose>

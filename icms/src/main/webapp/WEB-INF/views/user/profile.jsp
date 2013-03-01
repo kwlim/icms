@@ -1,6 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
+<commons:widget-header widgetLogo="user" widgetLabel="Users"/>
 
 <fmt:message key='user.profile' var="pageModule"/>
 <fmt:message key='user.profile.update' var="pageTitle"/>
@@ -126,4 +127,5 @@ $(document).ready(function(){
 
 </script>
 
+<commons:widget-footer />
 <commons:footer />

@@ -17,6 +17,7 @@
 	
 	<!-- start: CSS -->
 	<jsp:include page="/WEB-INF/views/includes/css.jsp" />
+	<jsp:include page="/WEB-INF/views/includes/scripts.jsp" />
 	<!-- end: CSS -->
 </head>
 
@@ -261,7 +262,7 @@
 						<!-- start: User Dropdown -->
 						<li class="dropdown">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-								<i class="halflings-icon white user"></i> Łukasz Holeczek
+								<i class="halflings-icon white user"></i> Kit Yee Loh
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
@@ -281,6 +282,8 @@
 	
 	<div class="container-fluid">
 	<div class="row-fluid">
+	
+	<commons:left />
 		
 		
 		
