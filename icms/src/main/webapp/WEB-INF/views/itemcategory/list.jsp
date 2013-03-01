@@ -25,7 +25,7 @@
 		</span>
 	</div>
 	<div class="filter">
-		<button type="submit" class="btn" onclick="deleteRecords()"><fmt:message key="general.delete"/></button>
+		<button type="submit" class="btn" onclick="return deleteRecords()"><fmt:message key="general.delete"/></button>
 		<button type="button" class="btn" onclick="newItemCategory()"><fmt:message key="general.new"/></button>
 	</div>
 	<display:table id="${id}" name="${rows}" size="${size}" pagesize="10"
@@ -82,6 +82,7 @@ function deleteRecords() {
             return true;
         }
     }
+    return false;
 }
 </script>
 

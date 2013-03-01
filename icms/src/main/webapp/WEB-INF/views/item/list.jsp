@@ -41,7 +41,7 @@
 		</span>
 	</div>
 	<div class="span6">
-		<button type="submit" class="btn btn-danger" onclick="deleteRecords()">
+		<button type="submit" class="btn btn-danger" onclick="return deleteRecords()">
 			<i class="halflings-icon trash halflings-icon"></i> <fmt:message key="general.delete"/>
 		</button>
 		<button type="button" class="btn btn-info" onclick="newItem()">
