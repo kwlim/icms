@@ -1,6 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
+<commons:widget-header widgetLogo="barcode" widgetLabel="item.new" />
 
 <c:choose>
 	<c:when test="${ campaignForm.edit }">
@@ -89,4 +90,5 @@ function cancel(){
 
 </script>
 
+<commons:widget-footer />
 <commons:footer />

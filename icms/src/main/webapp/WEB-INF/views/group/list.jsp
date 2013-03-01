@@ -1,8 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
-
-<h1>Group</h1>
+<commons:widget-header widgetLogo="bookmark" widgetLabel="user.group" />
 
 <c:if test="${!empty message}">
 	<div class="alert alert-success">

@@ -1,8 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
-
-<h1>Category Listing</h1>
+<commons:widget-header widgetLogo="tags" widgetLabel="item.category"/>
 
 <c:if test="${!empty message}">
 	<div class="alert alert-success">
@@ -66,4 +65,5 @@ function deleteRecords() {
 }
 </script>
 
+<commons:widget-footer />
 <commons:footer />

@@ -1,7 +1,5 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
-<%---- <%@ attribute name="test" required="true"%>  --%>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>

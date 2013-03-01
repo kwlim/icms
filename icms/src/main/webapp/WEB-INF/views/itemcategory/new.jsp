@@ -1,6 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
+<commons:widget-header widgetLogo="tags" widgetLabel="item.category.new"/>
 
 <fmt:message key='campaign.module' var="pageModule"/>
 <c:choose>
@@ -61,4 +62,5 @@ function cancel(){
 
 </script>
 
+<commons:widget-footer />
 <commons:footer />
