@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
-<commons:widget-header widgetLogo="" widgetLabel="item.label" />
+<commons:widget-header widgetLogo="barcode" widgetLabel="item.label" />
 
 <c:if test="${!empty message}">
 	<div class="alert alert-success">
