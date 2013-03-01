@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -28,6 +29,9 @@ public class Item extends AbstractAuditablePersistable{
 	@OneToOne 
 	private ItemCategory category;
 	private Integer lowAmountNotif;
+	
+	@Transient
+	private String newCategoryName;
 	
 	public String getName() {
 		return name;
@@ -58,6 +62,12 @@ public class Item extends AbstractAuditablePersistable{
 	}
 	public void setLowAmountNotif(Integer lowAmountNotif) {
 		this.lowAmountNotif = lowAmountNotif;
+	}
+	public String getNewCategoryName() {
+		return newCategoryName;
+	}
+	public void setNewCategoryName(String newCategoryName) {
+		this.newCategoryName = newCategoryName;
 	}
 	
 }

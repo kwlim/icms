@@ -1,5 +1,5 @@
 /*
-* Author: Łukasz Holeczek
+* Author: Å�ukasz Holeczek
 * Template: Acme Dashboard -  Bootstrap Theme
 * Version: 1.0.2
 * Bootstrap version: 2.3.0
@@ -3521,4 +3521,8 @@ ul.messagesList li span.date {
 		background-size: 100%;
 	}
     
+}
+
+.selectAll {
+	width: 5px
 }

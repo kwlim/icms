@@ -52,10 +52,14 @@
 			<fmt:message key="user.group"/>
 		</label>
 		<div class="controls">
-			<form:select path="category.id">
+			<form:select path="category.id" onchange="toggleNewCategory()">
 				<form:option value=""></form:option>
+				<form:option value="new">Create New...</form:option>
 				<form:options items="${ allCategoryList }" itemLabel="name" itemValue="id"/>
 			</form:select>
+			
+			<form:input path="newCategoryName" placeholder="New Category Name"/>
+			
 		</div>
 	</div>
 	<div class="control-group">
@@ -66,12 +70,13 @@
 			<form:textarea path="remark" />
 		</div>
 	</div>
-	<div class="control-group">
+	<div class="control-group <form:errors path="lowAmountNotif" cssClass="error">error</form:errors>">
 		<label class="control-label" for="lowAmountNotif">
 			<fmt:message key="item.lowAmountNotif"/>
 		</label>
 		<div class="controls">
 			<form:input path="lowAmountNotif" />
+			<form:errors path="lowAmountNotif" cssClass="help-inline"/>
 		</div>
 	</div>
 	<div class="form-actions">
@@ -82,6 +87,19 @@
 </form:form>
 
 <script type="text/javascript">
+
+$(document).ready(function() {
+	$('#newCategoryName').hide();
+});
+
+function toggleNewCategory(){
+	
+	if($('#category\\.id').val() == 'new'){
+		$('#newCategoryName').show();
+	}else{
+		$('#newCategoryName').hide();
+	} 
+}
 
 function cancel(){
 	document.location.href = "${pageContext.request.contextPath}/item/list";

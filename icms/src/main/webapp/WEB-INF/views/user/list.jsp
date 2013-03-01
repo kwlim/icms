@@ -54,7 +54,7 @@
 	<display:table id="${id}" name="${rows}" size="${size}" pagesize="10"
 		export="false" class="table table-striped table-bordered table-condensed"
 		requestURI="?" sort="external" partialList="true">
-		<display:column media="html" title="">
+		<display:column media="html" title="<input type='checkbox' id='selectall'/>" class="selectAll">
 			<input name="id" type="checkbox" value="${user.id}" />
 		</display:column>
 		<display:column titleKey="general.name" sortable="true">
@@ -64,7 +64,8 @@
 		</display:column>
 		<display:column titleKey="user.firstname" property="firstname" sortable="true"/>
 		<display:column titleKey="user.lastname" property="lastname" sortable="true"/>
-		<display:column titleKey="genereal.lastUpdatedDate" sortable="true">
+		<display:column titleKey="user.group" property="group.name" sortable="true"/>
+		<display:column titleKey="general.lastUpdatedDate" sortable="true">
 			<c:if test="${ user.modifiedDate != null }">
 				<fmt:formatDate value="${ user.modifiedDate }" pattern="dd/MM/yyyy hh:mm a" />
 			</c:if>
@@ -74,6 +75,26 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui-1.9.1.custom.min.js"></script>
 <script type="text/javascript">
+
+$(document).ready(function() {
+	initSelectAll();
+});
+
+function initSelectAll(){
+	$('#selectall').click(function(){ 
+	       var $checkbox = $(this).find(':checkbox');
+	       $checkbox.attr('checked', !$checkbox.attr('checked'));
+	       
+	       if($('#selectall').is(":checked")){
+	    	   var cb = $("#filterForm :checkbox").attr('checked', true);
+	    	   $.uniform.update(cb);
+	       }else{
+	    	   var cb = $("#filterForm :checkbox").removeAttr('checked');
+	    	   $.uniform.update(cb);
+	       }
+	       
+	 });
+}
 
 function newUser(){
 	document.location.href = "${pageContext.request.contextPath}/user/new";

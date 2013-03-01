@@ -97,11 +97,11 @@ static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
             
             if(StringUtils.isEmpty(profileForm.getRetypePassword())){
                 valid = false;
-                result.rejectValue("retypePassword", "NotEmpty.userForm.retypePassword");
+                result.rejectValue("retypePassword", "NotEmpty.userDTO.retypePassword");
             }
             else if(!StringUtils.equals(profileForm.getPassword(), profileForm.getRetypePassword())){
                 valid = false;
-                result.rejectValue("retypePassword", "NotEqual.userForm.retypePassword");
+                result.rejectValue("retypePassword", "NotEqual.userDTO.retypePassword");
             }
         }
         

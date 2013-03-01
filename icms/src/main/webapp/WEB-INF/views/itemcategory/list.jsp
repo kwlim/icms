@@ -32,7 +32,7 @@
 	<display:table id="${id}" name="${rows}" size="${size}" pagesize="10"
 		export="false" class="table table-striped table-bordered table-condensed"
 		requestURI="?" sort="external" partialList="true">
-		<display:column media="html" title="">
+		<display:column media="html" title="<input type='checkbox' id='selectall'/>" class="selectAll">
 			<input name="id" type="checkbox" value="${itemCategory.id}" />
 		</display:column>
 		<display:column titleKey="general.name" sortable="true">
@@ -50,6 +50,26 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui-1.9.1.custom.min.js"></script>
 <script type="text/javascript">
+
+$(document).ready(function() {
+	initSelectAll();
+});
+
+function initSelectAll(){
+	$('#selectall').click(function(){ 
+	       var $checkbox = $(this).find(':checkbox');
+	       $checkbox.attr('checked', !$checkbox.attr('checked'));
+	       
+	       if($('#selectall').is(":checked")){
+	    	   var cb = $("#filterForm :checkbox").attr('checked', true);
+	    	   $.uniform.update(cb);
+	       }else{
+	    	   var cb = $("#filterForm :checkbox").removeAttr('checked');
+	    	   $.uniform.update(cb);
+	       }
+	       
+	 });
+}
 
 function newItemCategory(){
 	document.location.href = "${pageContext.request.contextPath}/item/category/new";

@@ -40,14 +40,14 @@
 		</span>
 	</div>
 	<div class="filter">
-		<button type="submit" class="btn" onclick="deleteRecords()"><fmt:message key="general.delete"/></button>
-		<button type="button" class="btn" onclick="newItem()"><fmt:message key="general.new"/></button>
+		<button type="submit" class="btn" onclick="javascript:deleteRecords()"><fmt:message key="general.delete"/></button>
+		<button type="button" class="btn" onclick="javascript:newItem()"><fmt:message key="general.new"/></button>
 	</div>
 	<display:table id="${id}" name="${rows}" size="${size}" pagesize="10"
 		export="false" class="table table-striped table-bordered table-condensed"
 		requestURI="?" sort="external" partialList="true">
-		<display:column media="html" title="">
-			<input name="id" type="checkbox" value="${item.id}" />
+		<display:column media="html" title="<input type='checkbox' id='selectall'/>" class="selectAll">
+			<input id="id" name="id" type="checkbox" value="${item.id}" />
 		</display:column>
 		<display:column titleKey="item.code" sortable="true">
 			<c:url var="editUrl" value="/item/edit/${ item.id }">
@@ -55,6 +55,7 @@
 			<a href="${ editUrl }"><c:out value="${ item.code }" /></a>
 		</display:column>
 		<display:column titleKey="general.name" property="name" sortable="true"/>
+		<display:column titleKey="item.lowAmountNotif" property="lowAmountNotif" sortable="true"/>
 		<display:column titleKey="item.category" property="category.name" sortable="true"/>
 		<display:column titleKey="general.lastUpdatedDate" sortable="true">
 			<c:if test="${ item.modifiedDate != null }">
@@ -64,8 +65,27 @@
 	</display:table>
 </form>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui-1.9.1.custom.min.js"></script>
 <script type="text/javascript">
+
+$(document).ready(function() {
+	initSelectAll();
+});
+
+function initSelectAll(){
+	$('#selectall').click(function(){ 
+	       var $checkbox = $(this).find(':checkbox');
+	       $checkbox.attr('checked', !$checkbox.attr('checked'));
+	       
+	       if($('#selectall').is(":checked")){
+	    	   var cb = $("#filterForm :checkbox").attr('checked', true);
+	    	   $.uniform.update(cb);
+	       }else{
+	    	   var cb = $("#filterForm :checkbox").removeAttr('checked');
+	    	   $.uniform.update(cb);
+	       }
+	       
+	 });
+}
 
 function newItem(){
 	document.location.href = "${pageContext.request.contextPath}/item/new";
@@ -79,6 +99,7 @@ function deleteRecords() {
             return true;
         }
     }
+    return false;
 }
 </script>
 

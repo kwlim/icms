@@ -127,18 +127,18 @@ public class UserAdminController {
         
         if(!userForm.isEdit()){
             if(StringUtils.isEmpty(userForm.getPassword())){
-                result.rejectValue("password", "NotEmpty.userForm.password");
+                result.rejectValue("password", "NotEmpty.userDTO.password");
                 invalid = true;
             }
             if(StringUtils.isEmpty(userForm.getRetypePassword())){
-                result.rejectValue("retypePassword", "NotEmpty.userForm.retypePassword");
+                result.rejectValue("retypePassword", "NotEmpty.userDTO.retypePassword");
                 invalid = true;
             }
         }
         
         if (!StringUtils.isEmpty(userForm.getPassword())) {
             if (!StringUtils.equals(userForm.getPassword(), userForm.getRetypePassword())) {
-                result.rejectValue("retypePassword", "NotEqual.userForm.retypePassword");
+                result.rejectValue("retypePassword", "NotEqual.userDTO.retypePassword");
                 invalid = true;
             }
         }

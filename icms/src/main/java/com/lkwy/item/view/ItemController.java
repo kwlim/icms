@@ -28,7 +28,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.lkwy.category.entity.ItemCategory;
 import com.lkwy.category.service.ItemCategoryService;
-import com.lkwy.category.view.ItemCategoryPropertyEditor;
 import com.lkwy.common.util.DisplayTagUtil;
 import com.lkwy.item.entity.Item;
 import com.lkwy.item.service.ItemService;
@@ -78,8 +77,15 @@ public class ItemController {
 		
 		try{
 			//set category = null when empty select box is selected to prevent jpa exception saying cannot find category(category with emtpy id)
-			if(item.getCategory() != null && StringUtils.isEmpty(item.getCategory().getId())){
-				item.setCategory(null);
+			//set category = null when user select new category
+			if(item.getCategory() != null){
+				if(StringUtils.isEmpty(item.getCategory().getId())){
+					item.setCategory(null);
+				}else if(StringUtils.equals(item.getCategory().getId(), "new")){
+					
+					ItemCategory newCat = itemCatService.saveCategory(new ItemCategory(item.getNewCategoryName()));
+					item.setCategory(newCat);
+				}
 			}
 			
 			itemService.saveItem(item);

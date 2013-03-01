@@ -18,6 +18,14 @@ public class ItemCategory extends AbstractAuditablePersistable{
 	
 	private String remark;
 	
+	public ItemCategory() {
+		
+	}
+	
+	public ItemCategory(String name) {
+		this.name = name;
+	}
+	
 	public String getName() {
 		return name;
 	}

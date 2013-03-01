@@ -1,10 +1,11 @@
 package com.lkwy.common.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
-
-import com.lkwy.common.util.CommonUtil;
 
 public class TestCommonUtil {
 	
@@ -24,6 +25,12 @@ public class TestCommonUtil {
 		Assert.assertEquals("%test%", result);
 	}
 	
+	@Test
+	public void something() throws Exception{
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		Date date = sdf.parse("01-05-2013");
+		System.out.println("date = " + date);
+	}
 	
 
 }

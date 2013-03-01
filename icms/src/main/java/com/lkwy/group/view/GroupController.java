@@ -124,7 +124,7 @@ public class GroupController {
         
         if(form.getPermissionArray() == null){
             invalid = true;
-            model.addAttribute("error", "NotEmpty.groupForm.permission");
+            model.addAttribute("error", "NotEmpty.groupDTO.permission");
         }
         
         return invalid;
