@@ -86,4 +86,5 @@ function deleteRecords() {
 }
 </script>
 
+<commons:widget-footer />
 <commons:footer />

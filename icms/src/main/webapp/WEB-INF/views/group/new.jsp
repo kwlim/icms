@@ -86,4 +86,5 @@ function cancel(){
 
 </script>
 
+<commons:widget-footer />
 <commons:footer />
