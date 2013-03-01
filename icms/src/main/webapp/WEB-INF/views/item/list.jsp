@@ -21,7 +21,7 @@
 			<input id="name" name="name" class="input-medium" value="${name}" />
 		</span> 
 		<span class="filterCell"> 
-			<label for="group"><fmt:message key="item.category" /></label> 
+			<label for="group"><fmt:message key="item.category.label" /></label> 
 			<select name="categoryId">
 				<option value=""/>
 				<c:forEach var="category" items="${ allCategoryList }">
@@ -61,7 +61,7 @@
 		</display:column>
 		<display:column titleKey="general.name" property="name" sortable="true"/>
 		<display:column titleKey="item.lowAmountNotif" property="lowAmountNotif" sortable="true"/>
-		<display:column titleKey="item.category" property="category.name" sortable="true"/>
+		<display:column titleKey="item.category.label" property="category.name" sortable="true"/>
 		<display:column titleKey="general.lastUpdatedDate" sortable="true">
 			<c:if test="${ item.modifiedDate != null }">
 				<fmt:formatDate value="${ item.modifiedDate }" pattern="dd/MM/yyyy hh:mm a" />
