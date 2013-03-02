@@ -267,7 +267,7 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="#"><i class="halflings-icon white user"></i> Profile</a></li>
-								<li><a href="login.html"><i class="halflings-icon white off"></i> Logout</a></li>
+								<li><a href="${ pageContext.request.contextPath }/logout"><i class="halflings-icon white off"></i> Logout</a></li>
 							</ul>
 						</li>
 						<!-- end: User Dropdown -->

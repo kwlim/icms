@@ -19,8 +19,8 @@
 		
 		<security:intercept-url pattern="/**" access="permitAll" />
 		
-		<security:form-login login-page="/login" authentication-failure-url="/login?login_error=1" default-target-url="/home"/>
-		<security:logout logout-success-url="/home"/>
+		<security:form-login login-page="/login" authentication-failure-url="/login?login_error=1" default-target-url="/"/>
+		<security:logout logout-url="/logout" logout-success-url="/"/>
 	</security:http>
 	
 	<beans:bean id='localAuthenticationProvider' class='com.lkwy.security.service.LocalAuthenticationProvider'/>

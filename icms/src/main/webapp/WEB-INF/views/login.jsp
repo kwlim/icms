@@ -39,4 +39,11 @@
 		No problem, <a href="#">click here</a> to get a new password.
 	</p>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#username").focus();
+});
+</script>
+
 <commons:footer-login />

@@ -17,6 +17,7 @@
 	
 	<!-- start: CSS -->
 	<jsp:include page="/WEB-INF/views/includes/css.jsp" />
+	<jsp:include page="/WEB-INF/views/includes/scripts.jsp" />
 	<!-- end: CSS -->
 </head>
 
