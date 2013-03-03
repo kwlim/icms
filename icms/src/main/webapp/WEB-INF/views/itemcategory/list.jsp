@@ -20,13 +20,17 @@
 			<label for="name"><fmt:message key="general.name" /></label> 
 			<input id="name" name="name" class="input-medium" value="${name}" />
 		</span> 
-		<span class="filterSubmit"> 
-			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />
+		<span> 
+			<input type="submit" value="<fmt:message key='general.search' />" />
 		</span>
 	</div>
-	<div class="filter">
-		<button type="submit" class="btn" onclick="return deleteRecords()"><fmt:message key="general.delete"/></button>
-		<button type="button" class="btn" onclick="newItemCategory()"><fmt:message key="general.new"/></button>
+	<div class="control-group">
+		<button type="submit" class="btn btn-danger" onclick="return deleteRecords()">
+			<i class="halflings-icon trash halflings-icon"></i> <fmt:message key="general.delete"/>
+		</button>
+		<button type="button" class="btn btn-info" onclick="newRecords()">
+			<i class="halflings-icon edit halflings-icon"></i>  <fmt:message key="general.new"/>
+		</button>
 	</div>
 	<display:table id="${id}" name="${rows}" size="${size}" pagesize="10"
 		export="false" class="table table-striped table-bordered table-condensed"
@@ -70,7 +74,7 @@ function initSelectAll(){
 	 });
 }
 
-function newItemCategory(){
+function newRecords(){
 	document.location.href = "${pageContext.request.contextPath}/item/category/new";
 }
 

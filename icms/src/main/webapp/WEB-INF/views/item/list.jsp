@@ -40,11 +40,11 @@
 			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />
 		</span>
 	</div>
-	<div class="span6">
+	<div class="control-group">
 		<button type="submit" class="btn btn-danger" onclick="return deleteRecords()">
 			<i class="halflings-icon trash halflings-icon"></i> <fmt:message key="general.delete"/>
 		</button>
-		<button type="button" class="btn btn-info" onclick="newItem()">
+		<button type="button" class="btn btn-info" onclick="newRecords()">
 			<i class="halflings-icon edit halflings-icon"></i>  <fmt:message key="general.new"/>
 		</button>
 	</div>
@@ -92,7 +92,7 @@ function initSelectAll(){
 	 });
 }
 
-function newItem(){
+function newRecords(){
 	document.location.href = "${pageContext.request.contextPath}/item/new";
 }
 
