@@ -13,16 +13,7 @@
 	</c:otherwise>
 </c:choose>
 
-<c:if test="${!empty message}">
-	<div class="alert alert-success">
-		<fmt:message key='${message}' />
-	</div>
-</c:if>
-<c:if test="${!empty error}">
-	<div class="alert alert-error">
-		<fmt:message key='${error}' />
-	</div>
-</c:if>
+<commons:notification-message/>
 
 <form:form class="form-horizontal" commandName="groupDTO" method="POST"
 	action="${pageContext.request.contextPath}/group/save/submit">
