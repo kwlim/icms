@@ -2,12 +2,12 @@ package com.lkwy.sample.data.dao;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 
 import com.lkwy.sample.data.entity.SampleEntityObject;
 
-public interface ISampleEntityObjectRepository extends CrudRepository<SampleEntityObject, String>{
+public interface ISampleEntityObjectRepository extends JpaRepository<SampleEntityObject, String>{
 	
 	public SampleEntityObject findByName(String name);
 	

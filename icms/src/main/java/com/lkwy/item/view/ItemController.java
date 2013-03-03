@@ -111,7 +111,7 @@ public class ItemController {
             LOGGER.error("error in saving item", e);
             return "item/new";
         }
-
+		
 		return "redirect:/item/list";
 	}
 	
