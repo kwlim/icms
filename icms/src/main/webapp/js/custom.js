@@ -142,14 +142,14 @@ $(document).ready(function(){
 			
 	/* ---------- Acivate Functions ---------- */
 	template_functions();
-	init_masonry();
-	sparkline_charts();
-	charts();
-	calendars();
+	//init_masonry();
+	//sparkline_charts();
+	//charts();
+	//calendars();
 	growlLikeNotifications();
 	widthFunctions();
 	
-	if(jQuery.browser.version.substring(0, 2) == "8.") {
+	/*if(jQuery.browser.version.substring(0, 2) == "8.") {
 		 
 		//disable jQuery Knob
 		
@@ -157,12 +157,12 @@ $(document).ready(function(){
 		
 		circle_progess();
 		
-	}
+	}*/
 	
-	chart();
+	//chart();
 	messageLike();
 	
-	setInterval(tempStats, 3000);
+	//setInterval(tempStats, 3000);
 	//tempStats();
 	
 	
@@ -361,7 +361,7 @@ function template_functions(){
 	});
 	
 	/* ---------- Text editor ---------- */
-	$('.cleditor').cleditor();
+	//$('.cleditor').cleditor();
 	
 	/* ---------- Datapicker ---------- */
 	$('.datepicker').datepicker();
@@ -377,7 +377,7 @@ function template_functions(){
 	$("input:checkbox, input:radio, input:file").not('[data-no-uniform="true"],#uniform-is-ajax').uniform();
 
 	/* ---------- Choosen ---------- */
-	$('[data-rel="chosen"],[rel="chosen"]').chosen();
+	//$('[data-rel="chosen"],[rel="chosen"]').chosen();
 
 	/* ---------- Tabs ---------- */
 	$('#myTab a:first').tab('show');
@@ -403,21 +403,21 @@ function template_functions(){
 	$('[rel="popover"],[data-rel="popover"]').popover();
 
 	/* ---------- File Manager ---------- */
-	var elf = $('.file-manager').elfinder({
+	/*var elf = $('.file-manager').elfinder({
 		url : 'misc/elfinder-connector/connector.php'  // connector URL (REQUIRED)
-	}).elfinder('instance');
+	}).elfinder('instance');*/
 
 	/* ---------- Star Rating ---------- */
-	$('.raty').raty({
+	/*$('.raty').raty({
 		score : 4 //default stars
-	});
+	});*/
 
 	/* ---------- Uploadify ---------- */
-	$('#file_upload').uploadify({
+	/*$('#file_upload').uploadify({
 		'swf'      : 'misc/uploadify.swf',
 		'uploader' : 'misc/uploadify.php'
 		// Put your options here
-	});
+	});*/
 
 	/* ---------- Fullscreen ---------- */
 	$('#toggle-fullscreen').button().click(function () {
@@ -440,13 +440,13 @@ function template_functions(){
 	});
 
 	/* ---------- Datable ---------- */
-	$('.datatable').dataTable({
+	/*$('.datatable').dataTable({
 			"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>",
 			"sPaginationType": "bootstrap",
 			"oLanguage": {
 			"sLengthMenu": "_MENU_ records per page"
 			}
-		} );
+		} );*/
 	$('.btn-close').click(function(e){
 		e.preventDefault();
 		$(this).parent().parent().parent().fadeOut();
@@ -2026,7 +2026,7 @@ function growlLikeNotifications() {
 
 
 /* ---------- Additional functions for data table ---------- */
-$.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )
+/*$.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )
 {
 	return {
 		"iStart":         oSettings._iDisplayStart,
@@ -2112,7 +2112,7 @@ $.extend( $.fn.dataTableExt.oPagination, {
 			}
 		}
 	}
-});
+});*/
 
 /* ---------- Page width functions ---------- */
 

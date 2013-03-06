@@ -41,7 +41,7 @@
 	</div>
 	<div class="control-group">
 		<label class="control-label" for="category">
-			<fmt:message key="user.group"/>
+			<fmt:message key="item.category.label"/>
 		</label>
 		<div class="controls">
 			<form:select path="category.id" onchange="toggleNewCategory()">
