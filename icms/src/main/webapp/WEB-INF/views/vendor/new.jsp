@@ -1,16 +1,13 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
-<commons:widget-header widgetLogo="barcode" widgetLabel="item.new" />
 
-<c:choose>
-	<c:when test="${ campaignForm.edit }">
-		<fmt:message key='campaign.edit' var="pageTitle"/>
-	</c:when>
-	<c:otherwise>
-		<fmt:message key='campaign.new' var="pageTitle"/>		
-	</c:otherwise>
-</c:choose>
+<c:set var="widgetLabel" value="vendor.new"/>
+<c:if test="${ !empty vendor.id }">
+	<c:set var="widgetLabel" value="vendor.edit"/>
+</c:if>
+
+<commons:widget-header widgetLogo="barcode" widgetLabel="${ widgetLabel }" />
 
 <commons:notification-message/>
 
@@ -69,11 +66,14 @@
 </form:form>
 
 <script type="text/javascript">
-
 function cancel(){
-	document.location.href = "${pageContext.request.contextPath}/vendor/list";
+	if(vendor.id.value == ''){
+		document.location.href = "${pageContext.request.contextPath}/vendor/list";
+	}else{
+		document.location.href = "${pageContext.request.contextPath}/vendor/view/${vendor.id}";
+	}
+		
 }
-
 </script>
 
 <commons:widget-footer />

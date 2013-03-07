@@ -39,7 +39,7 @@
 			<input id="id" name="id" type="checkbox" value="${vendor.id}" />
 		</display:column>
 		<display:column titleKey="vendor.company.name" sortable="true">
-			<c:url var="editUrl" value="/vendor/edit/${ vendor.id }">
+			<c:url var="editUrl" value="/vendor/view/${ vendor.id }">
 			</c:url>
 			<a href="${ editUrl }"><c:out value="${ vendor.companyName }" /></a>
 		</display:column>
@@ -49,6 +49,14 @@
 			<c:if test="${ vendor.modifiedDate != null }">
 				<fmt:formatDate value="${ vendor.modifiedDate }" pattern="dd/MM/yyyy hh:mm a" />
 			</c:if>
+		</display:column>
+		<display:column media="html"  titleKey="general.actions" sortable="false">
+			<a class="btn btn-success" href="${pageContext.request.contextPath}/vendor/edit/${ vendor.id }">
+				<i class="halflings-icon edit halflings-icon"></i>                                            
+			</a>
+			<a class="btn btn-danger" href="#">
+				<i class="halflings-icon trash halflings-icon"></i> 
+			</a>
 		</display:column>
 	</display:table>
 </form>
