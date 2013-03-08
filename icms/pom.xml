@@ -32,10 +32,17 @@
 		<commons.fileupload-version>1.2.2</commons.fileupload-version>
 		<joda-time>2.1</joda-time>
 		<displaytag-version>1.2</displaytag-version>
+		<cloud-foundry-version>0.8.1</cloud-foundry-version>
 	</properties>
 
 	<dependencies>
-
+		
+		<dependency>
+	        <groupId>org.cloudfoundry</groupId>
+	        <artifactId>cloudfoundry-runtime</artifactId>
+	        <version>${cloud-foundry-version}</version>
+	    </dependency>
+		
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
@@ -250,6 +257,18 @@
 		
 	</dependencies>
 
+	<repositories>
+		<repository>
+			<id>org.springframework.maven.milestone</id>
+			<name>Spring Maven Milestone Repository</name>
+			<url>http://maven.springframework.org/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<!-- additional repository declarations -->
+	</repositories>
+	
 	<build>
 
 		<plugins>
