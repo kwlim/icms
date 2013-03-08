@@ -104,6 +104,23 @@
 		</div>
 	</div>
 	
+	<div class="control-group <form:errors path="status" cssClass="error">error</form:errors>">
+		<label class="control-label" for="status">
+			<fmt:message key="user.status"/>
+			<span class="mandatory"><fmt:message key="general.mandatory"/></span>
+		</label>
+		<div class="controls">
+			<form:select path="status">
+				<form:option value=""></form:option>
+				<c:forEach var="tempStatus" items="${ userStatusList }">
+					<fmt:message key="user.status.${ tempStatus.value }" var="statusLabel"/>
+					<form:option value="${ tempStatus.value }"><c:out value="${ statusLabel }"/></form:option>
+				</c:forEach>
+			</form:select>
+			<form:errors path="status" cssClass="help-inline"/>
+		</div>
+	</div>
+	
 	<div class="control-group <form:errors path="password" cssClass="error">error</form:errors>">
 		<label class="control-label" for="password">
 			<fmt:message key="user.password"/>

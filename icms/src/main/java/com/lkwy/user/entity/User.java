@@ -20,6 +20,22 @@ import com.lkwy.group.entity.PermissionDTO;
 @Table(name="user")
 public class User extends AbstractAuditablePersistable{
     
+	public static enum STATUS{
+		INACTIVE(0),
+		ACTIVE(1),
+		;
+		
+		private int value;
+		
+		private STATUS(int value) {
+			this.value = value;
+		}
+		
+		public int getValue() {
+			return value;
+		}
+	}
+	
     private static final long serialVersionUID = 4980168230977242911L;
     
     @Column(unique=true, nullable=false)
@@ -38,6 +54,8 @@ public class User extends AbstractAuditablePersistable{
     
     @OneToOne
     private Group group;
+    
+    private Integer status;
     
     @Transient
     private List<PermissionDTO> permissionList;
@@ -129,14 +147,19 @@ public class User extends AbstractAuditablePersistable{
 		this.group = group;
 	}
 
-
 	public List<PermissionDTO> getPermissionList() {
 		return permissionList;
 	}
 
-
 	public void setPermissionList(List<PermissionDTO> permissionList) {
 		this.permissionList = permissionList;
 	}
-    
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 }

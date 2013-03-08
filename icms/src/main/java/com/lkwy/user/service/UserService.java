@@ -89,6 +89,7 @@ public class UserService {
 	    user.setFirstname(form.getFirstname());
         user.setLastname(form.getLastname());
 	    user.setNickname(form.getNickname());
+	    user.setStatus(form.getStatus());
 	    
 	    Group group = groupService.getGroupById(form.getGroupId());
 	    user.setGroup(group);
@@ -120,6 +121,10 @@ public class UserService {
 	    
 	    return userDao.findUserCountByUsernameFullnameCount(username, fullname, groupId);
 	}*/
+	
+	public User getActiveUserByUsername(String username){
+		return userRepo.findByUserNameAndActive(username, User.STATUS.ACTIVE.getValue());
+	}
 	
 	public User getUserByUsername(String username){
 	    return userRepo.findByUsername(username);

@@ -70,6 +70,9 @@
 		<display:column titleKey="user.firstname" property="firstname" sortable="true"/>
 		<display:column titleKey="user.lastname" property="lastname" sortable="true"/>
 		<display:column titleKey="user.group" property="group.name" sortable="true"/>
+		<display:column titleKey="user.status" sortable="true">
+			<fmt:message key="user.status.${ user.status }"/>
+		</display:column>
 		<display:column titleKey="general.lastUpdatedDate" sortable="true">
 			<c:if test="${ user.modifiedDate != null }">
 				<fmt:formatDate value="${ user.modifiedDate }" pattern="dd/MM/yyyy hh:mm a" />

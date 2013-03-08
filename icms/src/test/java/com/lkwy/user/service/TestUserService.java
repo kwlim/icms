@@ -17,7 +17,6 @@ import com.lkwy.group.entity.GroupDTO;
 import com.lkwy.group.service.GroupService;
 import com.lkwy.user.entity.User;
 import com.lkwy.user.entity.UserDTO;
-import com.lkwy.user.service.UserService;
 
 public class TestUserService extends AbstractTest{
 	
@@ -28,6 +27,13 @@ public class TestUserService extends AbstractTest{
 	
 	@Autowired
 	GroupService groupService;
+	
+	@Test
+	public void testGetActiveUserByUsername(){
+		User user = userService.getActiveUserByUsername("admin3");
+		LOGGER.debug("user = " + user);
+		Assert.assertNotNull(user); 
+	}
 	
 	@Test
 	public void testGetUserByUsernameFirstnameLastnameGroup(){

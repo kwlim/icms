@@ -48,6 +48,11 @@ public class UserAdminController {
     @Autowired
     GroupService groupService;
     
+    @ModelAttribute("userStatusList")
+    public User.STATUS[] getAllUserStatus(){
+    	return User.STATUS.values();
+    }
+    
     @ModelAttribute("allGroupList")
     public List<Group> getAllGroup(){
         return groupService.getAllGroup();

@@ -1,10 +1,15 @@
 package com.lkwy.user.entity;
 
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class UserDTO extends UserProfileDTO{
     
     private boolean edit;
+    
+    @NotNull
+    private Integer status;
     
     @NotEmpty
     private String groupId;
@@ -36,5 +41,13 @@ public class UserDTO extends UserProfileDTO{
     public void setGroupId(String groupId) {
         this.groupId = groupId;
     }
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
     
 }

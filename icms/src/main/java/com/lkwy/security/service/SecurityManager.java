@@ -93,7 +93,7 @@ public class SecurityManager {
     @Transactional
     public User authenticateUser(String username, String password) throws BadCredentialsException{
         
-    	User user = userService.getUserByUsername(username);
+    	User user = userService.getActiveUserByUsername(username);
         
         if(user == null){
             throw new BadCredentialsException("error.login.invalid");
