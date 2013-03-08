@@ -52,14 +52,16 @@ public class CustomerController {
 		if(StringUtils.isEmpty(customer.getId())){
 			//new
 			redirectAttributes.addFlashAttribute("message", "customer.new.success.message");
+			return "redirect:/customer/list";
 		}
 		else{
 			//update
 			redirectAttributes.addFlashAttribute("message", "customer.edit.success.message");
+			return "redirect:/customer/view/" + customer.getId();
 		}
 		
 		
-		return "redirect:/customer/list";
+		
 	}
 	
 	@RequestMapping("/edit/{id}")
@@ -69,6 +71,15 @@ public class CustomerController {
 		model.addAttribute("customer", customer);
 		
 		return "customer/new";
+	}
+	
+	@RequestMapping("/view/{id}")
+	public String viewCustomer(ModelMap model, @PathVariable("id") String id){
+
+		Customer customer = customerService.getCustomerById(id);
+		model.addAttribute("customer", customer);
+		
+		return "customer/view";
 	}
 	
 	@RequestMapping("/new")

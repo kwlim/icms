@@ -30,7 +30,7 @@
 			<input id="id" name="id" type="checkbox" value="${customer.id}" />
 		</display:column>
 		<display:column titleKey="customer.carPlateNumber" sortable="true">
-			<c:url var="editUrl" value="/customer/edit/${ customer.id }">
+			<c:url var="editUrl" value="/customer/view/${ customer.id }">
 			</c:url>
 			<a href="${ editUrl }"><c:out value="${ customer.carPlateNumber }" /></a>
 		</display:column>
@@ -40,6 +40,14 @@
 			<c:if test="${ customer.modifiedDate != null }">
 				<fmt:formatDate value="${ customer.modifiedDate }" pattern="dd/MM/yyyy hh:mm a" />
 			</c:if>
+		</display:column>
+		<display:column media="html"  titleKey="general.actions" sortable="false">
+			<a class="btn btn-success" href="${pageContext.request.contextPath}/customer/edit/${ customer.id }">
+				<i class="halflings-icon edit halflings-icon"></i>                                            
+			</a>
+			<a class="btn btn-danger" href="#">
+				<i class="halflings-icon trash halflings-icon"></i> 
+			</a>
 		</display:column>
 	</display:table>
 </form>

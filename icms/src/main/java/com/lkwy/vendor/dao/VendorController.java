@@ -41,6 +41,15 @@ public class VendorController {
 		return "vendor/new";
 	}
 	
+	@RequestMapping("/view/{id}")
+	public String viewVendor(ModelMap model, @PathVariable("id") String id){
+		
+		Vendor vendor = vendorService.getVendorById(id);
+		model.addAttribute("vendor", vendor);
+		
+		return "vendor/view";
+	}
+	
 	@RequestMapping("/edit/{id}")
 	public String editVendor(ModelMap model, @PathVariable("id") String id){
 		
@@ -62,13 +71,15 @@ public class VendorController {
 		if(StringUtils.isEmpty(vendor.getId())){
 			//new
 			redirectAttributes.addFlashAttribute("message", "vendor.new.success.message");
+			return "redirect:/vendor/list";
 		}
 		else{
 			//update
 			redirectAttributes.addFlashAttribute("message", "vendor.edit.success.message");
+			return "redirect:/vendor/view/" + vendor.getId();
 		}
 		
-		return "redirect:/vendor/list";
+		
 	}
 	
 	@RequestMapping("/list")
