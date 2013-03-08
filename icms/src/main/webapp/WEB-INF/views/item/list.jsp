@@ -16,7 +16,7 @@
 
 <form id="filterForm" method="GET" action="?" class="form-search">
 	<div class="filterContainer well">
-		<span class="filterCell"> 
+		<span class="filterCell">
 			<label for="name"><fmt:message key="item.nameOrCode" /></label> 
 			<input id="name" name="name" class="input-medium" value="${name}" />
 		</span> 
@@ -54,11 +54,7 @@
 		<display:column media="html" title="<input type='checkbox' id='selectall'/>" class="selectAll">
 			<input id="id" name="id" type="checkbox" value="${item.id}" />
 		</display:column>
-		<display:column titleKey="item.code" sortable="true">
-			<c:url var="editUrl" value="/item/edit/${ item.id }">
-			</c:url>
-			<a href="${ editUrl }"><c:out value="${ item.code }" /></a>
-		</display:column>
+		<display:column titleKey="item.code" property="code" sortable="true"/>
 		<display:column titleKey="general.name" property="name" sortable="true"/>
 		<display:column titleKey="item.lowAmountNotif" property="lowAmountNotif" sortable="true"/>
 		<display:column titleKey="item.category.label" property="category.name" sortable="true"/>
@@ -66,6 +62,16 @@
 			<c:if test="${ item.modifiedDate != null }">
 				<fmt:formatDate value="${ item.modifiedDate }" pattern="dd/MM/yyyy hh:mm a" />
 			</c:if>
+		</display:column>
+		<display:column media="html"  titleKey="general.actions" sortable="false">
+			<c:url var="viewUrl" value="/item/view/${ item.id }"/>
+			<a href="${ viewUrl }" class="btn btn-success" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
+				<i class="halflings-icon zoom-in halflings-icon"></i> 
+			</a>
+			<c:url var="editUrl" value="/item/edit/${ item.id }"/>
+			<a href="${ editUrl }" class="btn btn-info" data-rel="tooltip" data-original-title="<fmt:message key='general.edit'/>">
+				<i class="halflings-icon edit halflings-icon" ></i>                                       
+			</a>
 		</display:column>
 	</display:table>
 </form>

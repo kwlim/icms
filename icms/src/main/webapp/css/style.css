@@ -2356,6 +2356,10 @@ input[type="file"],
 	float: right;
 }
 
+.login-box .alert{
+	margin: 10px;
+}
+
 /* UI - Uniform
 =================================================================== */
 

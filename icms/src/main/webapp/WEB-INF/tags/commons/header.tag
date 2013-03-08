@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="Mr Lim & Mrs Lim">
-	<title>Inventory</title>
+	<title><fmt:message key="general.app.name"/></title>
 	<!-- end: Meta -->
 	
 	<!-- start: Mobile Specific -->
@@ -31,11 +31,12 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="index.html"><span>Inventory</span></a>
+				<a class="brand" href="index.html"><span><fmt:message key="general.app.name"/></span></a>
 								
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
 					<ul class="nav pull-right">
+						<!-- 
 						<li class="dropdown hidden-phone">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="halflings-icon white warning-sign"></i>
@@ -98,8 +99,8 @@
                             		<a class="dropdown-menu-sub-footer">View all notifications</a>
 								</li>	
 							</ul>
-						</li>
-						<!-- start: Notifications Dropdown -->
+						</li> -->
+						<!-- start: Notifications Dropdown 
 						<li class="dropdown hidden-phone">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="halflings-icon white tasks"></i>
@@ -157,9 +158,9 @@
                             		<a class="dropdown-menu-sub-footer">View all tasks</a>
 								</li>	
 							</ul>
-						</li>
+						</li> -->
 						<!-- end: Notifications Dropdown -->
-						<!-- start: Message Dropdown -->
+						<!-- start: Message Dropdown 
 						<li class="dropdown hidden-phone">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="halflings-icon white envelope"></i>
@@ -252,12 +253,19 @@
                             		<a class="dropdown-menu-sub-footer">View all messages</a>
 								</li>	
 							</ul>
-						</li>
+						</li>-->
 						<!-- end: Message Dropdown -->
-						<li>
-							<a class="btn" href="#">
+						<li class="dropdown">
+							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="halflings-icon white wrench"></i>
+								<span class="caret"></span>
 							</a>
+							<ul class="dropdown-menu">
+								<li><a href="${pageContext.request.contextPath}/item/category/list"><i class="halflings-icon white tags"></i> <fmt:message key="item.category.label"/></a></li>
+								<li><a href="${pageContext.request.contextPath}/vendor/list"><i class="halflings-icon white road"></i> <fmt:message key="vendor.label"/></a></li>
+								<li><a href="${pageContext.request.contextPath}/group/list"><i class="halflings-icon white th"></i> <fmt:message key="user.group"/></a></li>
+								<li><a href="${pageContext.request.contextPath}/user/list"><i class="halflings-icon white eye-open"></i> <fmt:message key="user.label"/></a></li>
+							</ul>
 						</li>
 						<!-- start: User Dropdown -->
 						<li class="dropdown">

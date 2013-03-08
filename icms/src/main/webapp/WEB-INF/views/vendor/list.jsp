@@ -38,11 +38,7 @@
 		<display:column media="html" title="<input type='checkbox' id='selectall'/>" class="selectAll">
 			<input id="id" name="id" type="checkbox" value="${vendor.id}" />
 		</display:column>
-		<display:column titleKey="vendor.company.name" sortable="true">
-			<c:url var="editUrl" value="/vendor/view/${ vendor.id }">
-			</c:url>
-			<a href="${ editUrl }"><c:out value="${ vendor.companyName }" /></a>
-		</display:column>
+		<display:column titleKey="vendor.company.name" property="companyName" sortable="true"/>
 		<display:column titleKey="vendor.contact.person" property="contactPerson" sortable="true"/>
 		<display:column titleKey="vendor.contact.number" property="contactNumber" sortable="true"/>
 		<display:column titleKey="general.lastUpdatedDate" sortable="true">
@@ -51,11 +47,13 @@
 			</c:if>
 		</display:column>
 		<display:column media="html"  titleKey="general.actions" sortable="false">
-			<a class="btn btn-success" href="${pageContext.request.contextPath}/vendor/edit/${ vendor.id }">
-				<i class="halflings-icon edit halflings-icon"></i>                                            
+			<c:url var="viewUrl" value="/vendor/view/${ vendor.id }"/>
+			<a href="${ viewUrl }" class="btn btn-success" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
+				<i class="halflings-icon zoom-in halflings-icon"></i> 
 			</a>
-			<a class="btn btn-danger" href="#">
-				<i class="halflings-icon trash halflings-icon"></i> 
+			<c:url var="editUrl" value="/vendor/edit/${ vendor.id }"/>
+			<a href="${ editUrl }" class="btn btn-info" data-rel="tooltip" data-original-title="<fmt:message key='general.edit'/>">
+				<i class="halflings-icon edit halflings-icon" ></i>                                       
 			</a>
 		</display:column>
 	</display:table>

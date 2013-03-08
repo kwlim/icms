@@ -62,21 +62,30 @@
 		<display:column media="html" title="<input type='checkbox' id='selectall'/>" class="selectAll">
 			<input name="id" type="checkbox" value="${user.id}" />
 		</display:column>
-		<display:column titleKey="general.name" sortable="true">
-			<c:url var="editUrl" value="/user/edit/${ user.id }">
-			</c:url>
-			<a href="${ editUrl }"><c:out value="${ user.username }" /></a>
-		</display:column>
+		<display:column titleKey="general.name" property="username" sortable="true"/>
 		<display:column titleKey="user.firstname" property="firstname" sortable="true"/>
 		<display:column titleKey="user.lastname" property="lastname" sortable="true"/>
 		<display:column titleKey="user.group" property="group.name" sortable="true"/>
 		<display:column titleKey="user.status" sortable="true">
-			<fmt:message key="user.status.${ user.status }"/>
+			<c:choose>
+				<c:when test="${ user.status == 1 }">
+					<span class="label label-success"><fmt:message key="user.status.${ user.status }"/></span>
+				</c:when>
+				<c:otherwise>
+					<span class="label"><fmt:message key="user.status.${ user.status }"/></span>
+				</c:otherwise>
+			</c:choose>
 		</display:column>
 		<display:column titleKey="general.lastUpdatedDate" sortable="true">
 			<c:if test="${ user.modifiedDate != null }">
 				<fmt:formatDate value="${ user.modifiedDate }" pattern="dd/MM/yyyy hh:mm a" />
 			</c:if>
+		</display:column>
+		<display:column media="html"  titleKey="general.actions" sortable="false">
+			<c:url var="editUrl" value="/user/edit/${ user.id }"/>
+			<a class="btn btn-success" href="${ editUrl }" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
+				<i class="halflings-icon zoom-in halflings-icon"></i> 
+			</a>
 		</display:column>
 	</display:table>
 </form>

@@ -29,15 +29,17 @@
 		<display:column media="html" title="<input type='checkbox' id='selectall'/>" class="selectAll">
 			<input name="id" type="checkbox" value="${group.id}" />
 		</display:column>
-		<display:column titleKey="general.name" sortable="true">
-			<c:url var="editUrl" value="/group/edit/${ group.id }">
-			</c:url>
-			<a href="${ editUrl }"><c:out value="${ group.name }" /></a>
-		</display:column>
+		<display:column titleKey="general.name" property="name" sortable="true"/>
 		<display:column titleKey="general.lastUpdatedDate" sortable="true">
 			<c:if test="${ group.modifiedDate != null }">
 				<fmt:formatDate value="${ group.modifiedDate }" pattern="dd MMM yyyy hh:mm a" />
 			</c:if>
+		</display:column>
+		<display:column media="html"  titleKey="general.actions" sortable="false">
+			<c:url var="editUrl" value="/group/edit/${ group.id }"/>
+			<a class="btn btn-success" href="${ editUrl }" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
+				<i class="halflings-icon zoom-in halflings-icon"></i> 
+			</a>
 		</display:column>
 	</display:table>
 </form>

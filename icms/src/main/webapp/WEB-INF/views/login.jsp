@@ -1,6 +1,9 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header-login/>
+
+
+
 <div class="login-box"> 
 	<c:if test="${not empty param.login_error}">
 	<div class="alert alert-error">
