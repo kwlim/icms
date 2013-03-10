@@ -76,7 +76,7 @@
                                     </a>
                                 </li>
 								<li class="warning">
-                                    <a href="#">
+x                                    <a href="#">
 										- <i class="halflings-icon white user"></i> <span class="message">User deleted account</span> <span class="time">2 hour</span> 
                                     </a>
                                 </li>
@@ -262,7 +262,7 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="${pageContext.request.contextPath}/item/category/list"><i class="halflings-icon white tags"></i> <fmt:message key="item.category.label"/></a></li>
-								<li><a href="${pageContext.request.contextPath}/vendor/list"><i class="halflings-icon white road"></i> <fmt:message key="vendor.label"/></a></li>
+								<li><a href="${pageContext.request.contextPath}/billing/list"><i class="halflings-icon white road"></i> <fmt:message key="billing.label"/></a></li>
 								<li><a href="${pageContext.request.contextPath}/group/list"><i class="halflings-icon white th"></i> <fmt:message key="user.group"/></a></li>
 								<li><a href="${pageContext.request.contextPath}/user/list"><i class="halflings-icon white eye-open"></i> <fmt:message key="user.label"/></a></li>
 							</ul>
