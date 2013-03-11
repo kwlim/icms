@@ -1,8 +1,11 @@
 package com.lkwy.vendor.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.lkwy.common.util.CommonUtil;
@@ -15,6 +18,10 @@ public class VendorService {
 	
 	@Autowired
 	IVendorRepository vendorRepo;
+	
+	public List<Vendor> getAllVendor(){
+		return vendorRepo.findAll(new Sort(Sort.Direction.ASC, "companyName"));
+	}
 	
 	public void deleteVendor(String id){
 		vendorRepo.delete(id);
