@@ -24,7 +24,7 @@ public class TestItemService extends AbstractTest{
 	public void testGetItemByNameCodeCategoryId(){
 		
 		Pageable pageable = new PageRequest(0, DisplayTagUtil.DEFAULT_PAGE_SIZE, Sort.Direction.ASC, "name");
-		Page<Item> list = itemService.getItemByNameCodeCategoryId("", "", pageable);
+		Page<Item> list = itemService.getItemByNameCodeCategoryId("", "", "", pageable);
 		
 		LOGGER.debug("list size: {}", list.getTotalElements());
 		
