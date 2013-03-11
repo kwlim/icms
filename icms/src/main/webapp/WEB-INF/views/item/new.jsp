@@ -50,8 +50,21 @@
 				<form:options items="${ allCategoryList }" itemLabel="name" itemValue="id"/>
 			</form:select>
 			
-			<form:input path="newCategoryName" placeholder="New Category Name"/>
+			<form:input path="newCategoryName" placeholder="New Category"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="brand">
+			<fmt:message key="item.brand.label"/>
+		</label>
+		<div class="controls">
+			<form:select path="brand.id" onchange="toggleNewBrand()">
+				<form:option value=""></form:option>
+				<form:option value="new">Create New...</form:option>
+				<form:options items="${ allBrandList }" itemLabel="name" itemValue="id"/>
+			</form:select>
 			
+			<form:input path="newBrandName" placeholder="New Brand"/>
 		</div>
 	</div>
 	<div class="control-group">
@@ -82,6 +95,7 @@
 
 $(document).ready(function() {
 	$('#newCategoryName').hide();
+	$('#newBrandName').hide();
 });
 
 function toggleNewCategory(){
@@ -90,6 +104,15 @@ function toggleNewCategory(){
 		$('#newCategoryName').show();
 	}else{
 		$('#newCategoryName').hide();
+	} 
+}
+
+function toggleNewBrand(){
+	
+	if($('#brand\\.id').val() == 'new'){
+		$('#newBrandName').show();
+	}else{
+		$('#newBrandName').hide();
 	} 
 }
 

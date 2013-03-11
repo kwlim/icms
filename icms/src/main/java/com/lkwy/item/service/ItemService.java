@@ -29,9 +29,9 @@ public class ItemService {
 		return itemRepo.save(item);
 	}
 	
-	public Page<Item> getItemByNameCodeCategoryId(String input, String categoryId, Pageable pageable){
+	public Page<Item> getItemByNameCodeCategoryId(String input, String categoryId, String brandId, Pageable pageable){
 		String inputWildCard = CommonUtil.addWildCard(input);
-		return itemRepo.findAll(ItemSpecifications.byLikeNameCategoryId(inputWildCard, categoryId), pageable);
+		return itemRepo.findAll(ItemSpecifications.byLikeNameCategoryIdBrandId(inputWildCard, categoryId, brandId), pageable);
 	}
 
 }

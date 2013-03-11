@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.lkwy.brand.entity.Brand;
+import com.lkwy.brand.service.BrandService;
 import com.lkwy.category.entity.ItemCategory;
 import com.lkwy.category.service.ItemCategoryService;
 import com.lkwy.common.util.DisplayTagUtil;
@@ -43,6 +45,14 @@ public class ItemController {
 	
 	@Autowired
 	ItemCategoryService itemCatService;
+	
+	@Autowired
+	BrandService brandService;
+	
+	@ModelAttribute("allBrandList")
+	public List<Brand> getAllBrand(){
+		return brandService.getAllBrand();
+	}
 	
 	@ModelAttribute("allCategoryList")
 	public List<ItemCategory> getAllCategory(){
@@ -85,6 +95,15 @@ public class ItemController {
 					
 					ItemCategory newCat = itemCatService.saveCategory(new ItemCategory(item.getNewCategoryName()));
 					item.setCategory(newCat);
+				}
+			}
+			if(item.getBrand() != null){
+				if(StringUtils.isEmpty(item.getBrand().getId())){
+					item.setBrand(null);
+				}else if(StringUtils.equals(item.getBrand().getId(), "new")){
+					
+					Brand brand = brandService.addNewBrand(new Brand(item.getNewBrandName()));
+					item.setBrand(brand);
 				}
 			}
 			
@@ -131,20 +150,22 @@ public class ItemController {
 	@RequestMapping("/list")
 	public String list(ModelMap model, HttpServletRequest request, 
 			@RequestParam(value = "name", required = false) String name, 
-			@RequestParam(value = "categoryId", required = false) String categoryId){
+			@RequestParam(value = "categoryId", required = false) String categoryId,
+			@RequestParam(value = "brandId", required = false) String brandId){
 		
 		String id = "item";
-        String sort = DisplayTagUtil.getListSort(id, request, new String[]{"", "code", "name", "modifiedDate"}, "code");
+        String sort = DisplayTagUtil.getListSort(id, request, new String[]{"", "code", "name", "brand", "modifiedDate"}, "code");
         Boolean desc = DisplayTagUtil.getListDesc(id, request, false);
         Integer start = DisplayTagUtil.getListStart(id, request, null);
         
         model.addAttribute("name", name);
         model.addAttribute("categoryId", categoryId);
+        model.addAttribute("brandId", brandId);
         model.addAttribute("id", id);
         
         Pageable pageable = new PageRequest(start, DisplayTagUtil.DEFAULT_PAGE_SIZE, (desc != null && desc)?Sort.Direction.DESC:Sort.Direction.ASC, sort);
         
-        Page<Item> page = itemService.getItemByNameCodeCategoryId(name, categoryId, pageable);
+        Page<Item> page = itemService.getItemByNameCodeCategoryId(name, categoryId, brandId, pageable);
         
         model.put("rows", page);
         model.put("size", (int)page.getTotalElements());

@@ -36,6 +36,22 @@
 				</c:forEach>
 			</select>
 		</span>
+		<span class="filterCell"> 
+			<label for="group"><fmt:message key="item.brand.label" /></label> 
+			<select name="brandId">
+				<option value=""/>
+				<c:forEach var="brand" items="${ allBrandList }">
+					<c:choose>
+						<c:when test="${ brandId eq brand.id }">
+							<option value="${ brand.id }" selected="selected"><c:out value="${ brand.name }"/></option>
+						</c:when>
+						<c:otherwise>
+							<option value="${ brand.id }"><c:out value="${ brand.name }"/></option>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</select>
+		</span>
 		<span class="filterSubmit"> 
 			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />
 		</span>
@@ -56,8 +72,9 @@
 		</display:column>
 		<display:column titleKey="item.code" property="code" sortable="true"/>
 		<display:column titleKey="general.name" property="name" sortable="true"/>
-		<display:column titleKey="item.lowAmountNotif" property="lowAmountNotif" sortable="true"/>
 		<display:column titleKey="item.category.label" property="category.name" sortable="true"/>
+		<display:column titleKey="item.brand.new" property="brand.name" sortable="true"/>
+		<display:column titleKey="item.lowAmountNotif" property="lowAmountNotif" sortable="true"/>
 		<display:column titleKey="general.lastUpdatedDate" sortable="true">
 			<c:if test="${ item.modifiedDate != null }">
 				<fmt:formatDate value="${ item.modifiedDate }" pattern="dd/MM/yyyy hh:mm a" />

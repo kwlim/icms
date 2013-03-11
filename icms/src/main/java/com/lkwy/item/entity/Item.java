@@ -9,6 +9,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.lkwy.brand.entity.Brand;
 import com.lkwy.category.entity.ItemCategory;
 import com.lkwy.common.entity.AbstractAuditablePersistable;
 
@@ -28,10 +29,16 @@ public class Item extends AbstractAuditablePersistable{
 	private String remark;
 	@OneToOne 
 	private ItemCategory category;
+	@OneToOne
+	private Brand brand;
+	
 	private Integer lowAmountNotif;
 	
 	@Transient
 	private String newCategoryName;
+	
+	@Transient
+	private String newBrandName;
 	
 	public String getName() {
 		return name;
@@ -68,6 +75,18 @@ public class Item extends AbstractAuditablePersistable{
 	}
 	public void setNewCategoryName(String newCategoryName) {
 		this.newCategoryName = newCategoryName;
+	}
+	public String getNewBrandName() {
+		return newBrandName;
+	}
+	public void setNewBrandName(String newBrandName) {
+		this.newBrandName = newBrandName;
+	}
+	public Brand getBrand() {
+		return brand;
+	}
+	public void setBrand(Brand brand) {
+		this.brand = brand;
 	}
 	
 }
