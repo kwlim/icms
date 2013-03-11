@@ -42,6 +42,14 @@
 			<form:input path="contactNumber" />
 		</div>
 	</div>
+	<div class="control-group ">
+		<label class="control-label" for="officeNumber">
+			<fmt:message key="vendor.office.number"/>
+		</label>
+		<div class="controls">
+			<form:input path="officeNumber" />
+		</div>
+	</div>
 	<div class="control-group">
 		<label class="control-label" for="address">
 			<fmt:message key="vendor.address"/>

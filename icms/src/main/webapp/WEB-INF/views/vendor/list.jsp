@@ -41,6 +41,7 @@
 		<display:column titleKey="vendor.company.name" property="companyName" sortable="true"/>
 		<display:column titleKey="vendor.contact.person" property="contactPerson" sortable="true"/>
 		<display:column titleKey="vendor.contact.number" property="contactNumber" sortable="true"/>
+		<display:column titleKey="vendor.office.number" property="officeNumber" sortable="true"/>
 		<display:column titleKey="general.lastUpdatedDate" sortable="true">
 			<c:if test="${ vendor.modifiedDate != null }">
 				<fmt:formatDate value="${ vendor.modifiedDate }" pattern="dd/MM/yyyy hh:mm a" />

@@ -17,6 +17,7 @@ public class Vendor extends AbstractAuditablePersistable{
 	private String companyName;
 	private String contactPerson;
 	private String contactNumber;
+	private String officeNumber;
 	private String address;
 	private String remark;
 	
@@ -49,6 +50,12 @@ public class Vendor extends AbstractAuditablePersistable{
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	public String getOfficeNumber() {
+		return officeNumber;
+	}
+	public void setOfficeNumber(String officeNumber) {
+		this.officeNumber = officeNumber;
 	}
 	
 }
