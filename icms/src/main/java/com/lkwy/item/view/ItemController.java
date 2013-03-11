@@ -147,7 +147,7 @@ public class ItemController {
         return "redirect:/item/list";
 	}
 	
-	@RequestMapping("/list")
+	@RequestMapping(value={"/",""})
 	public String list(ModelMap model, HttpServletRequest request, 
 			@RequestParam(value = "name", required = false) String name, 
 			@RequestParam(value = "categoryId", required = false) String categoryId,

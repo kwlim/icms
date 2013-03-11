@@ -16,7 +16,7 @@
 <commons:notification-message/>
 
 <form:form class="form-horizontal" commandName="itemCategory" method="POST"
-	action="${pageContext.request.contextPath}/item/category/save/submit">
+	action="${pageContext.request.contextPath}/itemCategory/save/submit">
 	
 	<form:hidden path="id"/>
 	
@@ -48,7 +48,7 @@
 <script type="text/javascript">
 
 function cancel(){
-	document.location.href = "${pageContext.request.contextPath}/item/category/list";
+	document.location.href = "${pageContext.request.contextPath}/itemCategory/";
 }
 
 </script>

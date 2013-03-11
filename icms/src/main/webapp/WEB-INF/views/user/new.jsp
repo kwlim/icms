@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
-<commons:widget-header widgetLogo="user" widgetLabel="user.new"/>
+<commons:widget-header widgetLogo="eye-open" widgetLabel="user.new"/>
 
 <fmt:message key='campaign.module' var="pageModule"/>
 <c:choose>
@@ -156,7 +156,7 @@ $(document).ready(function(){
 });
 
 function cancel(){
-	document.location.href = "${pageContext.request.contextPath}/user/list";
+	document.location.href = "${pageContext.request.contextPath}/user/";
 }
 
 </script>

@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
-<commons:widget-header widgetLogo="bookmark" widgetLabel="user.group" />
+<commons:widget-header widgetLogo="th" widgetLabel="user.group" />
 
 <commons:notification-message/>
 

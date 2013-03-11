@@ -76,7 +76,7 @@
 <script type="text/javascript">
 function cancel(){
 	if(vendor.id.value == ''){
-		document.location.href = "${pageContext.request.contextPath}/vendor/list";
+		document.location.href = "${pageContext.request.contextPath}/vendor/";
 	}else{
 		document.location.href = "${pageContext.request.contextPath}/vendor/view/${vendor.id}";
 	}

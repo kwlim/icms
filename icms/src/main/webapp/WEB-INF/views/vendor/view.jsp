@@ -62,7 +62,7 @@ function gotoEdit(){
 }
 
 function cancel(){
-	document.location.href = "${pageContext.request.contextPath}/vendor/list";
+	document.location.href = "${pageContext.request.contextPath}/vendor/";
 }
 
 </script>

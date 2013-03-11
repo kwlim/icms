@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
-<commons:widget-header widgetLogo="user" widgetLabel="Users"/>
+<commons:widget-header widgetLogo="eye-open" widgetLabel="Users"/>
 
 <fmt:message key='user.profile' var="pageModule"/>
 <fmt:message key='user.profile.update' var="pageTitle"/>

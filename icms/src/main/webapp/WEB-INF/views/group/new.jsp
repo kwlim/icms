@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
-<commons:widget-header widgetLogo="bookmark" widgetLabel="user.group.new" />
+<commons:widget-header widgetLogo="th" widgetLabel="user.group.new" />
 
 <fmt:message key='campaign.module' var="pageModule"/>
 <c:choose>
@@ -72,7 +72,7 @@
 <script type="text/javascript">
 
 function cancel(){
-	document.location.href = "${pageContext.request.contextPath}/group/list";
+	document.location.href = "${pageContext.request.contextPath}/group/";
 }
 
 </script>

@@ -45,7 +45,7 @@
 			</c:if>
 		</display:column>
 		<display:column media="html"  titleKey="general.actions" sortable="false">
-			<c:url var="editUrl" value="/item/category/edit/${ itemCategory.id }"/>
+			<c:url var="editUrl" value="/itemCategory/edit/${ itemCategory.id }"/>
 			<a class="btn btn-success" href="${ editUrl }" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
 				<i class="halflings-icon zoom-in halflings-icon"></i> 
 			</a>
@@ -77,14 +77,14 @@ function initSelectAll(){
 }
 
 function newRecords(){
-	document.location.href = "${pageContext.request.contextPath}/item/category/new";
+	document.location.href = "${pageContext.request.contextPath}/itemCategory/new";
 }
 
 function deleteRecords() {
     if ($("[name=id]:checked").length > 0) {
         if (confirm('<fmt:message key="general.delete.confirmation"/>')) {
             $("#filterForm").attr("method", "POST");
-            $("#filterForm").attr("action", "${pageContext.request.contextPath}/item/category/delete");
+            $("#filterForm").attr("action", "${pageContext.request.contextPath}/itemCategory/delete");
             return true;
         }
     }

@@ -11,7 +11,7 @@ public class HomeController {
     
     static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
     
-    @RequestMapping(value={"/","/home"})
+    @RequestMapping(value={"/","/dashboard"})
     public String home(ModelMap model){
         
         LOGGER.debug("HOME CONTROLLER~!");

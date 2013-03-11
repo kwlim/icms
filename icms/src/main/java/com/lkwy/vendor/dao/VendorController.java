@@ -82,7 +82,7 @@ public class VendorController {
 		
 	}
 	
-	@RequestMapping("/list")
+	@RequestMapping(value={"/",""})
 	public String list(ModelMap model, HttpServletRequest request, 
 			@RequestParam(value = "name", required = false) String name){
 		

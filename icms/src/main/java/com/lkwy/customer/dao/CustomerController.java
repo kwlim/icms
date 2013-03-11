@@ -91,7 +91,7 @@ public class CustomerController {
 		return "customer/new";
 	}
 	
-	@RequestMapping("/list")
+	@RequestMapping(value={"/",""})
 	public String list(ModelMap model, HttpServletRequest request, 
 			@RequestParam(value = "name", required = false) String name){
 		

@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
-<commons:widget-header widgetLogo="barcode" widgetLabel="item.label" />
+<commons:widget-header widgetLogo="shopping-cart" widgetLabel="item.label" />
 
 <commons:notification-message/>
 

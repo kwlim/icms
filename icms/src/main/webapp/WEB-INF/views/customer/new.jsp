@@ -7,7 +7,7 @@
 	<c:set var="widgetLabel" value="customer.edit"/>
 </c:if>
 
-<commons:widget-header widgetLogo="barcode" widgetLabel="${ widgetLabel }" />
+<commons:widget-header widgetLogo="globe" widgetLabel="${ widgetLabel }" />
 
 <commons:notification-message/>
 
@@ -69,7 +69,7 @@
 
 function cancel(){
 	if(customer.id.value == ''){
-		document.location.href = "${pageContext.request.contextPath}/customer/list";
+		document.location.href = "${pageContext.request.contextPath}/customer/";
 	}else{
 		document.location.href = "${pageContext.request.contextPath}/customer/view/${customer.id}";
 	}

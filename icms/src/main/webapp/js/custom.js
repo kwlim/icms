@@ -118,9 +118,8 @@ $(document).ready(function(){
 			}
 			
 		} else {
-			
-			if($($(this))[0].href==String(window.location)) {
-				
+			var link = String($($(this))[0].href);
+			if($($(this))[0].href==String(window.location).substring(0, link.length)) {
 				$(this).parent().addClass('active');
 				
 			}

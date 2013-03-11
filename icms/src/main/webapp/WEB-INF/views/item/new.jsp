@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
-<commons:widget-header widgetLogo="barcode" widgetLabel="item.new" />
+<commons:widget-header widgetLogo="shopping-cart" widgetLabel="item.new" />
 
 <c:choose>
 	<c:when test="${ campaignForm.edit }">
@@ -117,7 +117,7 @@ function toggleNewBrand(){
 }
 
 function cancel(){
-	document.location.href = "${pageContext.request.contextPath}/item/list";
+	document.location.href = "${pageContext.request.contextPath}/item/";
 }
 
 </script>

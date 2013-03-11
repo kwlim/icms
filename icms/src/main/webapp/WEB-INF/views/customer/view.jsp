@@ -2,7 +2,7 @@
 
 <commons:header />
 
-<commons:widget-header widgetLogo="barcode" widgetLabel="customer.view" />
+<commons:widget-header widgetLogo="globe" widgetLabel="customer.view" />
 
 <ul class="nav tab-menu nav-tabs" id="myTab">
 	<li><a href="#details">Details</a></li>
@@ -62,7 +62,7 @@ function gotoEdit(){
 }
 
 function cancel(){
-	document.location.href = "${pageContext.request.contextPath}/customer/list";
+	document.location.href = "${pageContext.request.contextPath}/customer/";
 }
 
 </script>

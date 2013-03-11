@@ -22,7 +22,7 @@ import com.lkwy.category.service.ItemCategoryService;
 import com.lkwy.common.util.DisplayTagUtil;
 
 @Controller
-@RequestMapping("/item/category")
+@RequestMapping("/itemCategory")
 public class ItemCategoryController {
 	
 	@Autowired
@@ -65,7 +65,7 @@ public class ItemCategoryController {
 			redirectAttributes.addFlashAttribute("message", "itemcategory.edit.success.message");
 		}
 		
-		return "redirect:/item/category/list";
+		return "redirect:/itemCategory/list";
 	}
 	
 	@RequestMapping("delete")
@@ -77,10 +77,10 @@ public class ItemCategoryController {
             
             redirectAttributes.addFlashAttribute("message", "itemcategory.delete.success.message");
         }
-        return "redirect:/item/category/list";
+        return "redirect:/itemCategory/list";
 	}
 	
-	@RequestMapping("/list")
+	@RequestMapping(value={"/",""})
 	public String list(ModelMap model, HttpServletRequest request, @RequestParam(value = "name", required = false) String name){
 		
 		String id = "itemCategory";
