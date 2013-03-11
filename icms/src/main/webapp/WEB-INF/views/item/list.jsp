@@ -3,16 +3,7 @@
 <commons:header />
 <commons:widget-header widgetLogo="barcode" widgetLabel="item.label" />
 
-<c:if test="${!empty message}">
-	<div class="alert alert-success">
-		<fmt:message key='${message}' />
-	</div>
-</c:if>
-<c:if test="${!empty error}">
-	<div class="alert alert-error">
-		<fmt:message key='${error}' />
-	</div>
-</c:if>
+<commons:notification-message/>
 
 <form id="filterForm" method="GET" action="?" class="form-search">
 	<div class="filterContainer well">
@@ -21,10 +12,10 @@
 			<input id="name" name="name" class="input-medium" value="${name}" />
 		</span> 
 		<span class="filterCell"> 
-			<label for="group"><fmt:message key="item.category.label" /></label> 
-			<select name="categoryId">
+			<label for="group"><fmt:message key="vendor.label" /></label> 
+			<select name="vendorId">
 				<option value=""/>
-				<c:forEach var="category" items="${ allCategoryList }">
+				<c:forEach var="vendor" items="${ allCategoryList }">
 					<c:choose>
 						<c:when test="${ categoryId eq category.id }">
 							<option value="${ category.id }" selected="selected"><c:out value="${ category.name }"/></option>
@@ -96,6 +87,8 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
+	$(".datepicker").datepicker({dateFormat : 'dd/m/yy'});
+	
 	initSelectAll();
 });
 
