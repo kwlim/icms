@@ -71,15 +71,13 @@ public class VendorController {
 		if(StringUtils.isEmpty(vendor.getId())){
 			//new
 			redirectAttributes.addFlashAttribute("message", "vendor.new.success.message");
-			return "redirect:/vendor/list";
 		}
 		else{
 			//update
 			redirectAttributes.addFlashAttribute("message", "vendor.edit.success.message");
-			return "redirect:/vendor/view/" + vendor.getId();
 		}
 		
-		
+		return "redirect:/vendor/";
 	}
 	
 	@RequestMapping(value={"/",""})
@@ -113,7 +111,7 @@ public class VendorController {
             
             redirectAttributes.addFlashAttribute("message", "vendor.delete.success.message");
         }
-        return "redirect:/vendor/list";
+        return "redirect:/vendor/";
 	}
 
 }

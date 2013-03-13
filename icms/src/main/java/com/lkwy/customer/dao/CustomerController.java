@@ -37,7 +37,7 @@ public class CustomerController {
             
             redirectAttributes.addFlashAttribute("message", "customer.delete.success.message");
         }
-        return "redirect:/customer/list";
+        return "redirect:/customer/";
 	}
 	
 	@RequestMapping("/save/submit")
@@ -52,15 +52,13 @@ public class CustomerController {
 		if(StringUtils.isEmpty(customer.getId())){
 			//new
 			redirectAttributes.addFlashAttribute("message", "customer.new.success.message");
-			return "redirect:/customer/list";
 		}
 		else{
 			//update
 			redirectAttributes.addFlashAttribute("message", "customer.edit.success.message");
-			return "redirect:/customer/view/" + customer.getId();
 		}
 		
-		
+		return "redirect:/customer/";
 		
 	}
 	

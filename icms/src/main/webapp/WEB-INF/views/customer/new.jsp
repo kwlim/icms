@@ -68,12 +68,7 @@
 <script type="text/javascript">
 
 function cancel(){
-	if(customer.id.value == ''){
-		document.location.href = "${pageContext.request.contextPath}/customer/";
-	}else{
-		document.location.href = "${pageContext.request.contextPath}/customer/view/${customer.id}";
-	}
-		
+	document.location.href = "${pageContext.request.contextPath}/customer/";
 }
 
 </script>

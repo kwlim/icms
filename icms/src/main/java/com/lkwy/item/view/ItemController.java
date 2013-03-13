@@ -68,8 +68,17 @@ public class ItemController {
 		return "item/new";
 	}
 	
+	@RequestMapping("view/{id}")
+	public String viewItem(ModelMap model, @PathVariable("id") String id){
+		
+		Item item = itemService.getItemById(id);
+		model.addAttribute("item", item);
+		
+		return "item/view";
+	}
+	
 	@RequestMapping("edit/{id}")
-	public String editItemCategory(ModelMap model, @PathVariable("id") String id){
+	public String editItem(ModelMap model, @PathVariable("id") String id){
 		
 		Item item = itemService.getItemById(id);
 		model.addAttribute("item", item);
@@ -131,7 +140,7 @@ public class ItemController {
             return "item/new";
         }
 		
-		return "redirect:/item/list";
+		return "redirect:/item/";
 	}
 	
 
@@ -144,7 +153,7 @@ public class ItemController {
             
             redirectAttributes.addFlashAttribute("message", "item.delete.success.message");
         }
-        return "redirect:/item/list";
+        return "redirect:/item/";
 	}
 	
 	@RequestMapping(value={"/",""})
