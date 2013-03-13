@@ -151,7 +151,7 @@ public class UserAdminController {
         return invalid;
     }
     
-    @RequestMapping(value="list", method=RequestMethod.GET)
+    @RequestMapping(value={"/",""}, method=RequestMethod.GET)
     public String list(ModelMap model, HttpServletRequest request, 
             @RequestParam(value = "username", required = false) String username,
             @RequestParam(value = "firstname", required = false) String firstname,

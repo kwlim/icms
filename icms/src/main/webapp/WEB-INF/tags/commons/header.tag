@@ -44,9 +44,9 @@
 							</a>
 							<ul class="dropdown-menu">
 								<!-- <li><a href="${pageContext.request.contextPath}/item/category/list"><i class="halflings-icon white tags"></i> <fmt:message key="item.category.label"/></a></li> -->
-								<li><a href="${pageContext.request.contextPath}/billing/list" title=""><i class="halflings-icon white road"></i> <fmt:message key="billing.label"/></a></li>
-								<li><a href="${pageContext.request.contextPath}/group/list"><i class="halflings-icon white th"></i> <fmt:message key="user.group"/></a></li>
-								<li><a href="${pageContext.request.contextPath}/user/list"><i class="halflings-icon white eye-open"></i> <fmt:message key="user.label"/></a></li>
+								<li><a href="${pageContext.request.contextPath}/billing/" title=""><i class="halflings-icon white road"></i> <fmt:message key="billing.label"/></a></li>
+								<li><a href="${pageContext.request.contextPath}/group/"><i class="halflings-icon white th"></i> <fmt:message key="user.group"/></a></li>
+								<li><a href="${pageContext.request.contextPath}/user/"><i class="halflings-icon white eye-open"></i> <fmt:message key="user.label"/></a></li>
 							</ul>
 						</li>
 						<!-- start: User Dropdown -->
