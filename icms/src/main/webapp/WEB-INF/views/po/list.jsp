@@ -29,11 +29,11 @@
 		</span>
 		<span class="filterCell">
 			<label for="poDateFrom"><fmt:message key="po.date.from" /></label> 
-			<input id="poDateFrom" name="poDateFrom" class="datepicker" value="${poDateFrom}" />
+			<input id="poDateFrom" name="poDateFrom" class="datepicker" value='<fmt:formatDate value="${ poDateFrom }" pattern="dd/MM/yyyy"/>' />
 		</span> 
 		<span class="filterCell">
 			<label for="poDateTo"><fmt:message key="po.date.to" /></label> 
-			<input id="poDateTo" name="poDateTo" class="datepicker" value="${poDateTo}" />
+			<input id="poDateTo" name="poDateTo" class="datepicker" value="<fmt:formatDate value="${ poDateTo }" pattern="dd/MM/yyyy"/>" />
 		</span>
 		<span class="filterSubmit"> 
 			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />
@@ -76,7 +76,6 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-	$(".datepicker").datepicker({dateFormat : 'dd/m/yy'});
 	initSelectAll();
 });
 
