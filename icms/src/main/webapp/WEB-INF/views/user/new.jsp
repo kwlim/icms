@@ -152,7 +152,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-    $(".datepicker").datepicker({dateFormat : 'dd/m/yy'});
+    //$(".datepicker").datepicker({dateFormat : 'd-mm-y'});
 });
 
 function cancel(){

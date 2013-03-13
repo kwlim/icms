@@ -53,7 +53,8 @@
 		<display:column media="html" title="<input type='checkbox' id='selectall'/>" class="selectAll">
 			<input id="id" name="id" type="checkbox" value="${po.id}" />
 		</display:column>
-		<display:column titleKey="vendor.company.name" property="poNumber" sortable="true"/>
+		<display:column titleKey="po.number" property="poNumber" sortable="true"/>
+		<display:column titleKey="vendor.label" property="vendor.companyName" sortable="true"/>
 		<display:column titleKey="general.lastUpdatedDate" sortable="true">
 			<c:if test="${ po.modifiedDate != null }">
 				<fmt:formatDate value="${ po.modifiedDate }" pattern="dd/MM/yyyy hh:mm a" />
@@ -75,6 +76,7 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
+	$(".datepicker").datepicker({dateFormat : 'dd/m/yy'});
 	initSelectAll();
 });
 
