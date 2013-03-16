@@ -26,6 +26,18 @@ public class PurchaseOrderService {
 	@Autowired
 	IStockOrderRepository stockOrderRepo;
 	
+	public PurchaseOrder savePo(PurchaseOrder po){
+		return poRepo.save(po);
+	}
+	
+	public void deletePo(String id){
+		poRepo.delete(id); 
+	}
+	
+	public PurchaseOrder getPoById(String id){
+		return poRepo.findOne(id);
+	}
+	
 	public Page<PurchaseOrder> getPoByPoNumberDateVendor(String poNumber, Date dateFrom, Date dateTo, String vendorId, Pageable pageable){
 		String wildCardPoNumber = CommonUtil.addWildCard(poNumber);
 		Date processedDateFrom = CommonUtil.convertDateAsStartDate(dateFrom);

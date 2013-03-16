@@ -61,11 +61,11 @@
 			</c:if>
 		</display:column>
 		<display:column media="html"  titleKey="general.actions" sortable="false">
-			<c:url var="viewUrl" value="/vendor/view/${ po.id }"/>
+			<c:url var="viewUrl" value="/po/view/${ po.id }"/>
 			<a href="${ viewUrl }" class="btn btn-success" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
 				<i class="halflings-icon zoom-in halflings-icon"></i> 
 			</a>
-			<c:url var="editUrl" value="/vendor/edit/${ po.id }"/>
+			<c:url var="editUrl" value="/po/edit/${ po.id }"/>
 			<a href="${ editUrl }" class="btn btn-info" data-rel="tooltip" data-original-title="<fmt:message key='general.edit'/>">
 				<i class="halflings-icon edit halflings-icon" ></i>                                       
 			</a>
@@ -96,14 +96,14 @@ function initSelectAll(){
 }
 
 function newRecords(){
-	document.location.href = "${pageContext.request.contextPath}/vendor/new";
+	document.location.href = "${pageContext.request.contextPath}/po/new";
 }
 
 function deleteRecords() {
     if ($("[name=id]:checked").length > 0) {
         if (confirm('<fmt:message key="general.delete.confirmation"/>')) {
             $("#filterForm").attr("method", "POST");
-            $("#filterForm").attr("action", "${pageContext.request.contextPath}/vendor/delete");
+            $("#filterForm").attr("action", "${pageContext.request.contextPath}/po/delete");
             return true;
         }
     }

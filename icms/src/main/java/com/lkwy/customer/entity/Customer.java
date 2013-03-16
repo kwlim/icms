@@ -2,6 +2,7 @@ package com.lkwy.customer.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -20,6 +21,8 @@ public class Customer extends AbstractAuditablePersistable{
 	private String name;
 	private String contactNumber;
 	private String address;
+	
+	@Lob
 	private String remark;
 	
 	public String getCarPlateNumber() {

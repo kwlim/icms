@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -86,7 +87,7 @@ public class ItemController {
 		return "item/new";
 	}
 	
-	@RequestMapping("save/submit")
+	@RequestMapping(value="save/submit", method=RequestMethod.POST)
 	public String submitItem(ModelMap model, RedirectAttributes redirectAttributes, @Valid Item item, BindingResult result){
 		
 		if(result.hasErrors()){

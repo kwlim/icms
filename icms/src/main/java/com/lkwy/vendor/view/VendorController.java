@@ -1,4 +1,4 @@
-package com.lkwy.vendor.dao;
+package com.lkwy.vendor.view;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -16,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -59,7 +60,7 @@ public class VendorController {
 		return "vendor/new";
 	}
 	
-	@RequestMapping("/save/submit")
+	@RequestMapping(value="/save/submit", method=RequestMethod.POST)
 	public String submitVendor(ModelMap model, RedirectAttributes redirectAttributes, @Valid Vendor vendor, BindingResult result){
 		
 		if(result.hasErrors()){

@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -40,7 +41,7 @@ public class CustomerController {
         return "redirect:/customer/";
 	}
 	
-	@RequestMapping("/save/submit")
+	@RequestMapping(value="/save/submit", method=RequestMethod.POST)
 	public String submitCustomer(ModelMap model, RedirectAttributes redirectAttributes, @Valid Customer customer, BindingResult result){
 		
 		if(result.hasErrors()){
