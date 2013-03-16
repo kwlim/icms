@@ -17,8 +17,7 @@
 <form id="filterForm" method="GET" action="?" class="form-search">
 	<div class="filterContainer well">
 		<span class="filterCell"> 
-			<label for="name"><fmt:message key="general.name" /></label> 
-			<input id="name" name="name" class="input-medium" value="${name}" />
+			<input id="name" placeholder="<fmt:message key="general.name" />" name="name" class="input-medium" value="${name}" />
 		</span> 
 		<span> 
 			<input type="submit" value="<fmt:message key='general.search' />" />

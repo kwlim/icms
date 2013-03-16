@@ -8,14 +8,10 @@
 <form id="filterForm" method="GET" action="?" class="form-search">
 	<div class="filterContainer well">
 		<span class="filterCell">
-			<label for="name"><fmt:message key="item.nameOrCode" /></label> 
-			<input id="name" name="name" class="input-medium" value="${name}" />
-		</span> 
-		<span class="filterCell"> 
-			<label for="group"><fmt:message key="vendor.label" /></label> 
-			<select name="vendorId">
-				<option value=""/>
-				<c:forEach var="vendor" items="${ allCategoryList }">
+			<input id="name" placeholder="<fmt:message key="item.nameOrCode" />" name="name" class="input-medium" value="${name}" />
+			<select name="categoryId">
+				<option value="">Search by Category</option>
+				<c:forEach var="category" items="${ allCategoryList }">
 					<c:choose>
 						<c:when test="${ categoryId eq category.id }">
 							<option value="${ category.id }" selected="selected"><c:out value="${ category.name }"/></option>
@@ -26,11 +22,8 @@
 					</c:choose>
 				</c:forEach>
 			</select>
-		</span>
-		<span class="filterCell"> 
-			<label for="group"><fmt:message key="item.brand.label" /></label> 
 			<select name="brandId">
-				<option value=""/>
+				<option value="">Search by Brand</option>
 				<c:forEach var="brand" items="${ allBrandList }">
 					<c:choose>
 						<c:when test="${ brandId eq brand.id }">
@@ -42,7 +35,7 @@
 					</c:choose>
 				</c:forEach>
 			</select>
-		</span>
+		</span> 
 		<span class="filterSubmit"> 
 			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />
 		</span>

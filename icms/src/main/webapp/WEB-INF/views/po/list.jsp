@@ -8,13 +8,9 @@
 <form id="filterForm" method="GET" action="?" class="form-search">
 	<div class="filterContainer well">
 		<span class="filterCell">
-			<label for="poNumber"><fmt:message key="po.number" /></label> 
-			<input id="poNumber" name="poNumber" class="input-medium" value="${poNumber}" />
-		</span> 
-		<span class="filterCell"> 
-			<label for="group"><fmt:message key="vendor.label" /></label> 
+			<input id="poNumber" placeholder="<fmt:message key="po.number" />" name="poNumber" class="input-medium" value="${poNumber}" />
 			<select name="vendorId">
-				<option value=""/>
+				<option value="">Search by Vendor</option>
 				<c:forEach var="vendor" items="${ allVendorList }">
 					<c:choose>
 						<c:when test="${ vendorId eq vendor.id }">
@@ -26,15 +22,9 @@
 					</c:choose>
 				</c:forEach>
 			</select>
-		</span>
-		<span class="filterCell">
-			<label for="poDateFrom"><fmt:message key="po.date.from" /></label> 
-			<input id="poDateFrom" name="poDateFrom" class="datepicker" value='<fmt:formatDate value="${ poDateFrom }" pattern="dd/MM/yyyy"/>' />
+			<input id="poDateFrom" name="poDateFrom" class="datepicker" placeholder="<fmt:message key="po.date.from" />" value='<fmt:formatDate value="${ poDateFrom }" pattern="dd/MM/yyyy"/>' />
+			<input id="poDateTo" name="poDateTo" class="datepicker" placeholder="<fmt:message key="po.date.to" />" value="<fmt:formatDate value="${ poDateTo }" pattern="dd/MM/yyyy"/>" />
 		</span> 
-		<span class="filterCell">
-			<label for="poDateTo"><fmt:message key="po.date.to" /></label> 
-			<input id="poDateTo" name="poDateTo" class="datepicker" value="<fmt:formatDate value="${ poDateTo }" pattern="dd/MM/yyyy"/>" />
-		</span>
 		<span class="filterSubmit"> 
 			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />
 		</span>
@@ -55,6 +45,11 @@
 		</display:column>
 		<display:column titleKey="po.number" property="poNumber" sortable="true"/>
 		<display:column titleKey="vendor.label" property="vendor.companyName" sortable="true"/>
+		<display:column titleKey="po.price" sortable="true">
+			<c:if test="${ po.price != null }">
+				<fmt:formatNumber minFractionDigits="2" value="${ po.price }"/>
+			</c:if>
+		</display:column>
 		<display:column titleKey="general.lastUpdatedDate" sortable="true">
 			<c:if test="${ po.modifiedDate != null }">
 				<fmt:formatDate value="${ po.modifiedDate }" pattern="dd/MM/yyyy hh:mm a" />

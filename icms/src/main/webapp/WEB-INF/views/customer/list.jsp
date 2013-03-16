@@ -8,8 +8,7 @@
 <form id="filterForm" method="GET" action="?" class="form-search">
 	<div class="filterContainer well">
 		<span class="filterCell"> 
-			<label for="name"><fmt:message key="customer.carPlateNumberOrNameOrContact" /></label> 
-			<input id="name" name="name" class="input-medium" value="${name}" />
+			<input id="name" placeholder="<fmt:message key="customer.carPlateNumberOrNameOrContact" />" name="name" class="input-large" value="${name}" />
 		</span> 
 		<span class="filterSubmit"> 
 			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />

@@ -121,7 +121,7 @@ public class PurchaseOrderController {
 			@RequestParam(value="vendorId", required=false) String vendorId){
 		
 		String id = "po";
-        String sort = DisplayTagUtil.getListSort(id, request, new String[]{"", "poNumber", "vendor.companyName", "modifiedDate"}, "modifiedDate");
+        String sort = DisplayTagUtil.getListSort(id, request, new String[]{"", "poNumber", "vendor.companyName", "price", "modifiedDate"}, "modifiedDate");
         Boolean desc = DisplayTagUtil.getListDesc(id, request, false);
         Integer start = DisplayTagUtil.getListStart(id, request, null);
         
