@@ -3,7 +3,9 @@ package com.lkwy.item.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.lkwy.common.util.CommonUtil;
@@ -16,6 +18,11 @@ public class ItemService {
 	
 	@Autowired
 	IItemRepository itemRepo;
+	
+	public Page<Item> getItemByCategoryIdBrandId(String categoryId, String brandId){
+		Pageable pageable = new PageRequest(0, 50, Sort.Direction.ASC, "name");
+		return itemRepo.findAll(ItemSpecifications.byCategoryIdBrandId(categoryId, brandId), pageable);
+	}
 	
 	public Item getItemById(String id){
 		return itemRepo.findOne(id);

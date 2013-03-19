@@ -21,6 +21,12 @@ public class TestItemService extends AbstractTest{
 	ItemService itemService;
 	
 	@Test
+	public void testGetItemByCategoryIdBrandId(){
+		Page<Item> list = itemService.getItemByCategoryIdBrandId("2b68197d-da4f-450f-b112-df820b2a3d09", null);
+		LOGGER.debug("list size: {}", list.getTotalElements());
+	}
+	
+	@Test
 	public void testGetItemByNameCodeCategoryId(){
 		
 		Pageable pageable = new PageRequest(0, DisplayTagUtil.DEFAULT_PAGE_SIZE, Sort.Direction.ASC, "name");

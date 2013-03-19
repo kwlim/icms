@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -24,10 +25,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.common.collect.Lists;
+import com.lkwy.brand.entity.Brand;
+import com.lkwy.brand.service.BrandService;
+import com.lkwy.category.entity.ItemCategory;
+import com.lkwy.category.service.ItemCategoryService;
 import com.lkwy.common.util.DisplayTagUtil;
+import com.lkwy.item.entity.Item;
+import com.lkwy.item.service.ItemService;
 import com.lkwy.purchase.entity.PurchaseOrder;
+import com.lkwy.purchase.entity.StockOrder;
 import com.lkwy.purchase.service.PurchaseOrderService;
 import com.lkwy.vendor.entity.Vendor;
 import com.lkwy.vendor.service.VendorService;
@@ -42,9 +52,39 @@ public class PurchaseOrderController {
 	@Autowired
 	PurchaseOrderService poService;
 	
+	@Autowired
+	ItemCategoryService itemCatService;
+	
+	@Autowired
+	ItemService itemService;
+	
+	@Autowired
+	BrandService brandService;
+	
+	@ModelAttribute("allBrandList")
+	public List<Brand> getAllBrand(){
+		return brandService.getAllBrand();
+	}
+	
+	@ModelAttribute("allCategoryList")
+	public List<ItemCategory> getAllCategory(){
+		return itemCatService.getAll(new Sort(Direction.ASC, "name"));
+	}
+	
 	@ModelAttribute("allVendorList")
 	public List<Vendor> getAllVendor(){
 		return vendorService.getAllVendor();
+	}
+	
+	@RequestMapping("/json/getItemList")
+	public @ResponseBody List<Item> jsonGetItemList(String categoryId, String brandId){
+		
+		if(!StringUtils.isEmpty(categoryId) || !StringUtils.isEmpty(brandId)){
+			Page<Item> resultList = itemService.getItemByCategoryIdBrandId(categoryId, brandId);
+			return resultList.getContent();
+		}
+		
+		return Lists.newArrayList();
 	}
 	
 	protected boolean submittionHasErrors(ModelMap model, PurchaseOrder po, BindingResult result){
@@ -98,6 +138,9 @@ public class PurchaseOrderController {
 	public String editPo(ModelMap model, @PathVariable("id") String id){
 		PurchaseOrder po = poService.getPoById(id);
 		model.addAttribute("purchaseOrder", po);
+
+		StockOrder so = new StockOrder();
+		model.addAttribute("stockOrder", so);
 		
 		return "po/new";
 	}

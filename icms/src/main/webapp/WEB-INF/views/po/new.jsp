@@ -86,11 +86,70 @@
 
 </form:form>
 
+<commons:widget-footer />
+
+<commons:widget-header widgetLogo="barcode" widgetLabel="${ widgetLabel }" />
+
+<form:form class="form-horizontal" commandName="stockOrder" method="POST"
+	action="${pageContext.request.contextPath}/po/addItem">
+
+<div class="row-fluid">
+	<div class="span3">
+		<form:select path="item.category.id" onchange="javascript:reflectItem()" data-placeholder="Choose a Country">
+			<form:option value="">Filter by Category</form:option>
+			<form:options items="${ allCategoryList }" itemLabel="name" itemValue="id" />
+		</form:select>
+	</div>
+	<div class="span3">
+		<form:select path="item.brand.id" onchange="javascript:reflectItem()">
+			<form:option value="">Filter by Brand</form:option>
+			<form:options items="${ allBrandList }" itemLabel="name" itemValue="id" />
+		</form:select>
+	</div>
+	<div class="span3">
+		<form:select path="item.id">
+			<form:option value="">Please select an item</form:option>
+		</form:select>
+	</div>
+	<div class="span3">
+		<button>Submit</button>
+	</div>
+</div>
+
+</form:form>
+
+
+<commons:widget-footer />
+
+
 <script type="text/javascript">
+
+$(document).ready(function() {
+	
+});
+
+function reflectItem(){
+	//alert($("#item\\.category\\.id").val() + " | " + $("#item\\.brand\\.id").val());
+	$.getJSON(
+		"${pageContext.request.contextPath}/po/json/getItemList",
+		{
+			categoryId: $("#item\\.category\\.id").val(),
+			brandId: $("#item\\.brand\\.id").val()
+		},
+		function(json){
+			$("#item\\.id").empty();
+			$("#item\\.id").append('<option value="">Please select an item</option>');
+			for(var i=0; i<json.length; i++){
+				$("#item\\.id").append('<option value="'+json[i].id+'">'+json[i].name+'</option>');
+			}
+		}
+	);
+}
+
 function cancel(){
 	document.location.href = "${pageContext.request.contextPath}/po/";
 }
 </script>
 
-<commons:widget-footer />
+
 <commons:footer />
