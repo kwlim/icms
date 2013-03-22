@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
@@ -46,6 +48,8 @@ import com.lkwy.vendor.service.VendorService;
 @RequestMapping("/po")
 public class PurchaseOrderController {
 	
+	static final Logger LOGGER = LoggerFactory.getLogger(PurchaseOrderController.class);
+	
 	@Autowired
 	VendorService vendorService;
 	
@@ -76,6 +80,16 @@ public class PurchaseOrderController {
 		return vendorService.getAllVendor();
 	}
 	
+	@RequestMapping(value="/addItem", method=RequestMethod.POST)
+	public String addItem(ModelMap model, @Valid StockOrder stockOrder, BindingResult result){
+		
+		LOGGER.debug("{}|{}", stockOrder.getPurchaseOrder().getId(), stockOrder.getItem().getId());
+		
+		poService.saveStockOrder(stockOrder);
+		
+		return "redirect:/po/edit/"+stockOrder.getPurchaseOrder().getId();
+	}
+	
 	@RequestMapping("/json/getItemList")
 	public @ResponseBody List<Item> jsonGetItemList(String categoryId, String brandId){
 		
@@ -98,6 +112,26 @@ public class PurchaseOrderController {
 		}
 		
 		return submittionError;
+	}
+	
+	@RequestMapping("/deleteItem/{poId}/{soId}")
+	public String deletePoItem(ModelMap model, @PathVariable("poId") String poId, @PathVariable("soId") String soId){
+		
+		LOGGER.debug("deletePoItem|{}|{}", poId, soId);
+		poService.deleteStockOrder(soId);
+		
+		return "redirect:/po/edit/"+poId;
+	}
+	
+	@RequestMapping(value="/saveItem", method=RequestMethod.POST)
+	public String submitPoItems(ModelMap model, RedirectAttributes redirectAttributes, @Valid PurchaseOrder po, BindingResult result){
+		
+		for(StockOrder so: po.getStockOrderList()){
+			LOGGER.debug("saving po items: {}|{}|{}", new Object[]{so.getId(), so.getQuantity(), so.getUnitPrice()});
+			poService.saveStockOrder(so);
+		}
+		
+		return "redirect:/po/edit/"+po.getId();
 	}
 	
 	@RequestMapping(value="/save/submit", method=RequestMethod.POST)
@@ -138,8 +172,9 @@ public class PurchaseOrderController {
 	public String editPo(ModelMap model, @PathVariable("id") String id){
 		PurchaseOrder po = poService.getPoById(id);
 		model.addAttribute("purchaseOrder", po);
-
+		
 		StockOrder so = new StockOrder();
+		so.setPurchaseOrder(po);
 		model.addAttribute("stockOrder", so);
 		
 		return "po/new";
@@ -153,8 +188,6 @@ public class PurchaseOrderController {
 		
 		return "po/new";
 	}
-	
-	
 	
 	@RequestMapping(value={"/", ""})
 	public String list(ModelMap model, HttpServletRequest request, 

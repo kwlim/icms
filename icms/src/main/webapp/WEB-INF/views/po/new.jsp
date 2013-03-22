@@ -85,48 +85,112 @@
 	</div>
 
 </form:form>
-
 <commons:widget-footer />
 
-<commons:widget-header widgetLogo="barcode" widgetLabel="${ widgetLabel }" />
+<c:if test="${ !empty purchaseOrder.id }">
+<commons:widget-header widgetLogo="barcode" widgetLabel="po.addItem" />
 
 <form:form class="form-horizontal" commandName="stockOrder" method="POST"
 	action="${pageContext.request.contextPath}/po/addItem">
-
-<div class="row-fluid">
-	<div class="span3">
-		<form:select path="item.category.id" onchange="javascript:reflectItem()" data-placeholder="Choose a Country">
-			<form:option value="">Filter by Category</form:option>
-			<form:options items="${ allCategoryList }" itemLabel="name" itemValue="id" />
-		</form:select>
+	<form:hidden path="purchaseOrder.id"/>
+	
+	<div class="row-fluid">
+		<div class="span3">
+			<form:select path="item.category.id" onchange="javascript:reflectItem()" data-placeholder="Choose a Country">
+				<form:option value="">Filter by Category</form:option>
+				<form:options items="${ allCategoryList }" itemLabel="name" itemValue="id" />
+			</form:select>
+		</div>
+		<div class="span3">
+			<form:select path="item.brand.id" onchange="javascript:reflectItem()">
+				<form:option value="">Filter by Brand</form:option>
+				<form:options items="${ allBrandList }" itemLabel="name" itemValue="id" />
+			</form:select>
+		</div>
+		<div class="span3">
+			<form:select path="item.id">
+				<form:option value="">Please select an item</form:option>
+			</form:select>
+		</div>
+		<div class="span3">
+			<button>Add Item</button>
+		</div>
 	</div>
-	<div class="span3">
-		<form:select path="item.brand.id" onchange="javascript:reflectItem()">
-			<form:option value="">Filter by Brand</form:option>
-			<form:options items="${ allBrandList }" itemLabel="name" itemValue="id" />
-		</form:select>
-	</div>
-	<div class="span3">
-		<form:select path="item.id">
-			<form:option value="">Please select an item</form:option>
-		</form:select>
-	</div>
-	<div class="span3">
-		<button>Submit</button>
-	</div>
-</div>
-
 </form:form>
 
+<form:form class="form-horizontal" commandName="purchaseOrder" method="POST"
+	action="${pageContext.request.contextPath}/po/saveItem">
+	<form:hidden path="id"/>
+	
+	<div class="well well-small">
+	<div class="row-fluid">
+		<div class="span5">
+			<h3>Item Name</h3>
+		</div>
+		<div class="span2">
+			<h3>Unit</h3>
+		</div>
+		<div class="span2">
+			<h3>Unit Per Price</h3>
+		</div>
+		<div class="span1">
+			<div class="pull-right"><h3>Total</h3></div>
+		</div>
+		<div class="span2">
+			&nbsp;
+		</div>
+	</div>
+	</div>
+	
+	<c:forEach items="${ purchaseOrder.stockOrderList }" var="tempStockOrder" varStatus="status">
+	
+	<div class="row-fluid">
+		<div class="span5">
+			<form:hidden path="stockOrderList[${status.index }].id" />
+			<form:hidden path="stockOrderList[${status.index }].item.id" />
+			<form:hidden path="stockOrderList[${status.index }].purchaseOrder.id" />
+			<c:out value="${ tempStockOrder.item.name }"/> (<c:out value="${ tempStockOrder.item.code }"/>)
+		</div>
+		<div class="span2">
+			<form:input path="stockOrderList[${status.index }].quantity" cssClass="input-small" onchange="updateItemTotal('${ tempStockOrder.id }')"/>
+		</div>
+		<div class="span2">
+			<form:input path="stockOrderList[${status.index }].unitPrice" cssClass="input-small" onchange="updateItemTotal('${ tempStockOrder.id }')"/>
+		</div>
+		<div class="span1">
+			<div id="${ tempStockOrder.id }" class="pull-right">150.00</div>
+		</div>
+		<div class="span2">
+			<div class="pull-right">
+			<c:url var="delUrl" value="/po/deleteItem/${purchaseOrder.id}/${ tempStockOrder.id }"/>
+			<a href="${ delUrl }" class="btn btn-danger" data-rel="tooltip" data-original-title="<fmt:message key='general.delete'/>">
+				<i class="halflings-icon remove halflings-icon" ></i>
+			</a>
+			</div>
+		</div>
+	</div>
+	
+	</c:forEach>
+	
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary"><fmt:message key="general.submit"/></button>
+	</div>
+</form:form>
 
 <commons:widget-footer />
 
+
+</c:if>
 
 <script type="text/javascript">
 
 $(document).ready(function() {
 	
 });
+
+function updateItemTotal(soId){
+	//alert(soId);
+}
 
 function reflectItem(){
 	//alert($("#item\\.category\\.id").val() + " | " + $("#item\\.brand\\.id").val());

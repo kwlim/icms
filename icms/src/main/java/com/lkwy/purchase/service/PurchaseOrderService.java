@@ -14,6 +14,7 @@ import com.lkwy.purchase.dao.IPurchaseOrderRepository;
 import com.lkwy.purchase.dao.IStockOrderRepository;
 import com.lkwy.purchase.dao.PurchaseOrderSpecifications;
 import com.lkwy.purchase.entity.PurchaseOrder;
+import com.lkwy.purchase.entity.StockOrder;
 
 @Service
 public class PurchaseOrderService {
@@ -25,6 +26,14 @@ public class PurchaseOrderService {
 	
 	@Autowired
 	IStockOrderRepository stockOrderRepo;
+	
+	public void deleteStockOrder(String soId){
+		stockOrderRepo.delete(soId);
+	}
+	
+	public StockOrder saveStockOrder(StockOrder so){
+		return stockOrderRepo.save(so);
+	}
 	
 	public PurchaseOrder savePo(PurchaseOrder po){
 		return poRepo.save(po);
