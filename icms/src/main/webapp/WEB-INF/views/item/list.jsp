@@ -6,8 +6,8 @@
 <commons:notification-message/>
 
 <form id="filterForm" method="GET" action="?" class="form-search">
-	<div class="filterContainer well">
-		<span class="filterCell">
+	<div class="well">
+		<div class="pull-right">
 			<input id="name" placeholder="<fmt:message key="item.nameOrCode" />" name="name" class="input-medium" value="${name}" />
 			<select name="categoryId">
 				<option value="">Search by Category</option>
@@ -35,10 +35,8 @@
 					</c:choose>
 				</c:forEach>
 			</select>
-		</span> 
-		<span class="filterSubmit"> 
 			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />
-		</span>
+		</div>
 	</div>
 	<div class="control-group">
 		<button type="submit" class="btn btn-danger" onclick="return deleteRecords()">

@@ -15,13 +15,11 @@
 </c:if>
 
 <form id="filterForm" method="GET" action="?" class="form-search">
-	<div class="filterContainer well">
-		<span class="filterCell"> 
+	<div class="well">
+		<div class="pull-right">
 			<input id="name" placeholder="<fmt:message key="general.name" />" name="name" class="input-medium" value="${name}" />
-		</span> 
-		<span> 
 			<input type="submit" value="<fmt:message key='general.search' />" />
-		</span>
+		</div>
 	</div>
 	<div class="control-group">
 		<button type="submit" class="btn btn-danger" onclick="return deleteRecords()">

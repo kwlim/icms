@@ -6,8 +6,8 @@
 <commons:notification-message/>
 
 <form id="filterForm" method="GET" action="?" class="form-search">
-	<div class="filterContainer well">
-		<span class="filterCell">
+	<div class="well">
+		<div class="pull-right">
 			<input id="poNumber" placeholder="<fmt:message key="po.number" />" name="poNumber" class="input-medium" value="${poNumber}" />
 			<select name="vendorId">
 				<option value="">Search by Vendor</option>
@@ -24,10 +24,8 @@
 			</select>
 			<input id="poDateFrom" name="poDateFrom" class="datepicker" placeholder="<fmt:message key="po.date.from" />" value='<fmt:formatDate value="${ poDateFrom }" pattern="dd/MM/yyyy"/>' />
 			<input id="poDateTo" name="poDateTo" class="datepicker" placeholder="<fmt:message key="po.date.to" />" value="<fmt:formatDate value="${ poDateTo }" pattern="dd/MM/yyyy"/>" />
-		</span> 
-		<span class="filterSubmit"> 
 			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />
-		</span>
+		</div>
 	</div>
 	<div class="control-group">
 		<button type="submit" class="btn btn-danger" onclick="return deleteRecords()">

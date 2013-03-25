@@ -6,13 +6,11 @@
 <commons:notification-message/>
 
 <form id="filterForm" method="GET" action="?" class="form-search">
-	<div class="filterContainer well">
-		<span class="filterCell"> 
+	<div class="well">
+		<div class="pull-right">
 			<input id="name" placeholder="<fmt:message key="customer.carPlateNumberOrNameOrContact" />" name="name" class="input-large" value="${name}" />
-		</span> 
-		<span class="filterSubmit"> 
 			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />
-		</span>
+		</div>
 	</div>
 	<div class="control-group">
 		<button type="submit" class="btn btn-danger" onclick="return deleteRecords()">
