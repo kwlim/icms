@@ -66,7 +66,7 @@ public class ItemCategoryController {
 			redirectAttributes.addFlashAttribute("message", "itemcategory.edit.success.message");
 		}
 		
-		return "redirect:/itemCategory/list";
+		return "redirect:/itemCategory/";
 	}
 	
 	@RequestMapping("delete")
@@ -78,7 +78,7 @@ public class ItemCategoryController {
             
             redirectAttributes.addFlashAttribute("message", "itemcategory.delete.success.message");
         }
-        return "redirect:/itemCategory/list";
+        return "redirect:/itemCategory/";
 	}
 	
 	@RequestMapping(value={"/",""})

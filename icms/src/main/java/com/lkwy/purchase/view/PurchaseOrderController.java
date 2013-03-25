@@ -79,17 +79,7 @@ public class PurchaseOrderController {
 	public List<Vendor> getAllVendor(){
 		return vendorService.getAllVendor();
 	}
-	
-	@RequestMapping(value="/addItem", method=RequestMethod.POST)
-	public String addItem(ModelMap model, @Valid StockOrder stockOrder, BindingResult result){
-		
-		LOGGER.debug("{}|{}", stockOrder.getPurchaseOrder().getId(), stockOrder.getItem().getId());
-		
-		poService.saveStockOrder(stockOrder);
-		
-		return "redirect:/po/edit/"+stockOrder.getPurchaseOrder().getId();
-	}
-	
+
 	@RequestMapping("/json/getItemList")
 	public @ResponseBody List<Item> jsonGetItemList(String categoryId, String brandId){
 		
@@ -99,6 +89,33 @@ public class PurchaseOrderController {
 		}
 		
 		return Lists.newArrayList();
+	}
+	
+	@RequestMapping(value="/addItem", method=RequestMethod.POST)
+	public String addItem(ModelMap model, @Valid StockOrder stockOrder, BindingResult result){
+		
+		//if no item is selected.
+		if(stockOrder.getItem() == null || StringUtils.isEmpty(stockOrder.getItem().getId())){
+			
+			PurchaseOrder po = poService.getPoById(stockOrder.getPurchaseOrder().getId());
+			model.addAttribute("purchaseOrder", po);
+			
+			stockOrder.setPurchaseOrder(po);
+			model.addAttribute("stockOrder", stockOrder);
+			
+			if(StringUtils.isNotEmpty(stockOrder.getItem().getCategory().getId()) || StringUtils.isNotEmpty(stockOrder.getItem().getBrand().getId())){
+				Page<Item> resultList = itemService.getItemByCategoryIdBrandId(stockOrder.getItem().getCategory().getId(), stockOrder.getItem().getBrand().getId());
+				model.addAttribute("validationReloadFailItemList", resultList.getContent());
+			}
+			
+			result.rejectValue("item.id", "NotNull.purchaseOrder.item");
+			return "po/new";
+		}
+		
+		LOGGER.debug("{}|{}", stockOrder.getPurchaseOrder().getId(), stockOrder.getItem().getId());
+		poService.saveStockOrder(stockOrder);
+		
+		return "redirect:/po/edit/"+stockOrder.getPurchaseOrder().getId();
 	}
 	
 	protected boolean submittionHasErrors(ModelMap model, PurchaseOrder po, BindingResult result){
@@ -126,6 +143,17 @@ public class PurchaseOrderController {
 	@RequestMapping(value="/saveItem", method=RequestMethod.POST)
 	public String submitPoItems(ModelMap model, RedirectAttributes redirectAttributes, @Valid PurchaseOrder po, BindingResult result){
 		
+		if(result.hasErrors()){
+			
+			model.addAttribute("purchaseOrder", po);
+			
+			StockOrder so = new StockOrder();
+			so.setPurchaseOrder(po);
+			model.addAttribute("stockOrder", so);
+			
+			return "po/new";
+		}
+		
 		for(StockOrder so: po.getStockOrderList()){
 			LOGGER.debug("saving po items: {}|{}|{}", new Object[]{so.getId(), so.getQuantity(), so.getUnitPrice()});
 			poService.saveStockOrder(so);
@@ -139,13 +167,21 @@ public class PurchaseOrderController {
 		
 		if(submittionHasErrors(model, po, result)){
 			model.addAttribute("purchaseOrder", po);
+			
+			PurchaseOrder dbPo = poService.getPoById(po.getId());
+			po.setStockOrderList(dbPo.getStockOrderList());
+			
+			StockOrder so = new StockOrder();
+			so.setPurchaseOrder(po);
+			model.addAttribute("stockOrder", so);
 			return "po/new";
 		}
 		
-		poService.savePo(po);
+		PurchaseOrder savedPo = poService.savePo(po);
 		if(StringUtils.isEmpty(po.getId())){
 			//new
 			redirectAttributes.addFlashAttribute("message", "po.new.success.message");
+			return "redirect:/po/edit/"+savedPo.getId();
 		}
 		else{
 			//update
@@ -170,14 +206,18 @@ public class PurchaseOrderController {
 	
 	@RequestMapping("/edit/{id}")
 	public String editPo(ModelMap model, @PathVariable("id") String id){
+		initExistingPo(model, id);
+		
+		return "po/new";
+	}
+	
+	public void initExistingPo(ModelMap model, String id){
 		PurchaseOrder po = poService.getPoById(id);
 		model.addAttribute("purchaseOrder", po);
 		
 		StockOrder so = new StockOrder();
 		so.setPurchaseOrder(po);
 		model.addAttribute("stockOrder", so);
-		
-		return "po/new";
 	}
 	
 	@RequestMapping("/new")
