@@ -1,9 +1,10 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
-<commons:widget-header widgetLogo="shopping-cart" widgetLabel="item.label" />
 
 <commons:notification-message/>
+
+<commons:widget-header widgetLogo="shopping-cart" widgetLabel="item.label" />
 
 <form id="filterForm" method="GET" action="?" class="form-search">
 	<div class="well">

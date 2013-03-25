@@ -1,18 +1,10 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
-<commons:widget-header widgetLogo="tags" widgetLabel="item.category.label"/>
 
-<c:if test="${!empty message}">
-	<div class="alert alert-success">
-		<fmt:message key='${message}' />
-	</div>
-</c:if>
-<c:if test="${!empty error}">
-	<div class="alert alert-error">
-		<fmt:message key='${error}' />
-	</div>
-</c:if>
+<commons:notification-message/>
+
+<commons:widget-header widgetLogo="tags" widgetLabel="item.category.label"/>
 
 <form id="filterForm" method="GET" action="?" class="form-search">
 	<div class="well">

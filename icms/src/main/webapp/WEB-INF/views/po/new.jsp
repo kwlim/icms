@@ -7,9 +7,9 @@
 	<c:set var="widgetLabel" value="po.edit"/>
 </c:if>
 
-<commons:widget-header widgetLogo="barcode" widgetLabel="${ widgetLabel }" />
-
 <commons:notification-message/>
+
+<commons:widget-header widgetLogo="barcode" widgetLabel="${ widgetLabel }" />
 
 <form:form class="form-horizontal" commandName="purchaseOrder" method="POST"
 	action="${pageContext.request.contextPath}/po/save/submit">
@@ -107,9 +107,10 @@
 				<form:options items="${ allBrandList }" itemLabel="name" itemValue="id" />
 			</form:select>
 		</div>
-		<div class="span3">
+		<div class="span3 control-group <form:errors path="item.id" cssClass="error">error</form:errors>">
 			<form:select path="item.id">
 				<form:option value="">Please select an item</form:option>
+				<form:options items="${ validationReloadFailItemList }" itemLabel="name" itemValue="id" />
 			</form:select>
 		</div>
 		<div class="span3">
@@ -121,6 +122,11 @@
 <form:form class="form-horizontal" commandName="purchaseOrder" method="POST"
 	action="${pageContext.request.contextPath}/po/saveItem">
 	<form:hidden path="id"/>
+	<form:hidden path="vendor.id"/>
+	<form:hidden path="poNumber"/>
+	<form:hidden path="poDate"/>
+	<form:hidden path="price"/>
+	<form:hidden path="remark"/>
 	
 	<div class="well well-small">
 	<div class="row-fluid">
@@ -131,7 +137,7 @@
 			<h3>Unit</h3>
 		</div>
 		<div class="span2">
-			<h3>Unit Per Price</h3>
+			<h3>Price Per Unit</h3>
 		</div>
 		<div class="span1">
 			<div class="pull-right"><h3>Total</h3></div>
@@ -149,13 +155,17 @@
 			<form:hidden path="stockOrderList[${status.index }].id" />
 			<form:hidden path="stockOrderList[${status.index }].item.id" />
 			<form:hidden path="stockOrderList[${status.index }].purchaseOrder.id" />
+			<form:hidden path="stockOrderList[${status.index }].item.name" />
+			<form:hidden path="stockOrderList[${status.index }].item.code" />
 			<c:out value="${ tempStockOrder.item.name }"/> (<c:out value="${ tempStockOrder.item.code }"/>)
 		</div>
-		<div class="span2">
+		<div class="span2 control-group <form:errors path="stockOrderList[${status.index }].quantity" cssClass="error">error</form:errors>">
 			<form:input path="stockOrderList[${status.index }].quantity" cssClass="input-small" onchange="updateItemTotal('${ tempStockOrder.id }')"/>
+			<form:errors path="stockOrderList[${status.index }].quantity" cssClass="help-inline"/>
 		</div>
-		<div class="span2">
+		<div class="span2 control-group <form:errors path="stockOrderList[${status.index }].unitPrice" cssClass="error">error</form:errors>">
 			<form:input path="stockOrderList[${status.index }].unitPrice" cssClass="input-small" onchange="updateItemTotal('${ tempStockOrder.id }')"/>
+			<form:errors path="stockOrderList[${status.index }].unitPrice" cssClass="help-inline"/>
 		</div>
 		<div class="span1">
 			<div id="${ tempStockOrder.id }" class="pull-right">150.00</div>

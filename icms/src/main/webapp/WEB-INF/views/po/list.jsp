@@ -1,9 +1,10 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
-<commons:widget-header widgetLogo="barcode" widgetLabel="po.label" />
 
 <commons:notification-message/>
+
+<commons:widget-header widgetLogo="barcode" widgetLabel="po.label" />
 
 <form id="filterForm" method="GET" action="?" class="form-search">
 	<div class="well">
