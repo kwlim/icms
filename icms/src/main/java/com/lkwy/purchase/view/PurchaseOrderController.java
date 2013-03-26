@@ -154,9 +154,11 @@ public class PurchaseOrderController {
 			return "po/new";
 		}
 		
-		for(StockOrder so: po.getStockOrderList()){
-			LOGGER.debug("saving po items: {}|{}|{}", new Object[]{so.getId(), so.getQuantity(), so.getUnitPrice()});
-			poService.saveStockOrder(so);
+		if(po.getStockOrderList() != null){
+			for(StockOrder so: po.getStockOrderList()){
+				LOGGER.debug("saving po items: {}|{}|{}", new Object[]{so.getId(), so.getQuantity(), so.getUnitPrice()});
+				poService.saveStockOrder(so);
+			}
 		}
 		
 		return "redirect:/po/edit/"+po.getId();

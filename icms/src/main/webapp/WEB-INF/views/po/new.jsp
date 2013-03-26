@@ -80,7 +80,7 @@
 		</div>
 	</div>
 	<div class="form-actions">
-		<button type="submit" class="btn btn-primary"><fmt:message key="general.submit"/></button>
+		<button type="submit" class="btn btn-primary"><fmt:message key="general.save"/></button>
 		<button type="button" class="btn" onclick="cancel()"><fmt:message key="general.cancel"/></button>
 	</div>
 
@@ -148,6 +148,17 @@
 	</div>
 	</div>
 	
+	<c:choose>
+	<c:when test="${ empty purchaseOrder.stockOrderList }">
+	<div class="row-fluid">
+		<div class="span12 text-center">
+			No item found.
+		</div>
+	</div>
+	</c:when>
+	<c:otherwise>
+	
+	
 	<c:forEach items="${ purchaseOrder.stockOrderList }" var="tempStockOrder" varStatus="status">
 	
 	<div class="row-fluid">
@@ -160,20 +171,20 @@
 			<c:out value="${ tempStockOrder.item.name }"/> (<c:out value="${ tempStockOrder.item.code }"/>)
 		</div>
 		<div class="span2 control-group <form:errors path="stockOrderList[${status.index }].quantity" cssClass="error">error</form:errors>">
-			<form:input path="stockOrderList[${status.index }].quantity" cssClass="input-small" onchange="updateItemTotal('${ tempStockOrder.id }')"/>
+			<form:input path="stockOrderList[${status.index }].quantity" cssClass="input-small" onchange="updateItemTotal()"/>
 			<form:errors path="stockOrderList[${status.index }].quantity" cssClass="help-inline"/>
 		</div>
 		<div class="span2 control-group <form:errors path="stockOrderList[${status.index }].unitPrice" cssClass="error">error</form:errors>">
-			<form:input path="stockOrderList[${status.index }].unitPrice" cssClass="input-small" onchange="updateItemTotal('${ tempStockOrder.id }')"/>
+			<form:input path="stockOrderList[${status.index }].unitPrice" cssClass="input-small" onchange="updateItemTotal()"/>
 			<form:errors path="stockOrderList[${status.index }].unitPrice" cssClass="help-inline"/>
 		</div>
 		<div class="span1">
-			<div id="${ tempStockOrder.id }" class="pull-right">150.00</div>
+			<div id="total${ status.index }" class="pull-right">150.00</div>
 		</div>
 		<div class="span2">
 			<div class="pull-right">
 			<c:url var="delUrl" value="/po/deleteItem/${purchaseOrder.id}/${ tempStockOrder.id }"/>
-			<a href="${ delUrl }" class="btn btn-danger" data-rel="tooltip" data-original-title="<fmt:message key='general.delete'/>">
+			<a href="${ delUrl }" class="btn btn-danger" data-rel="tooltip" data-original-title="<fmt:message key='general.delete'/>" onclick="return deleteRecords()">
 				<i class="halflings-icon remove halflings-icon" ></i>
 			</a>
 			</div>
@@ -181,25 +192,49 @@
 	</div>
 	
 	</c:forEach>
+	<div class="row-fluid">
+		<div class="span5"></div>
+		<div class="span2"></div>
+		<div class="span2"><h3>Grand Total</h3></div>
+		<div class="span1">
+			<div id="grandTotal" class="pull-right">300.00</div>
+		</div>
+		<div class="span2"></div>
+	</div>
+	
+	</c:otherwise>
+	</c:choose>
 	
 	<div class="form-actions">
-		<button type="submit" class="btn btn-primary"><fmt:message key="general.submit"/></button>
+		<button type="submit" class="btn btn-primary"><fmt:message key="general.save"/></button>
+		<button type="button" class="btn" onclick="cancel()"><fmt:message key="general.cancel"/></button>
 	</div>
 </form:form>
 
 <commons:widget-footer />
-
 
 </c:if>
 
 <script type="text/javascript">
 
 $(document).ready(function() {
-	
+	updateItemTotal();
 });
 
-function updateItemTotal(soId){
-	//alert(soId);
+function updateItemTotal(){
+	var totalItems = ${fn:length(purchaseOrder.stockOrderList)};
+	var grandTotal = 0;
+	for(var i=0; i < totalItems; i++){
+		var itemsQuantity = "#stockOrderList"+i+"\\.quantity";
+		var itemsUnitPrice = "#stockOrderList"+i+"\\.unitPrice";
+		var totalItemPrice = '#total'+i;
+		
+		var totalFloat = $(itemsQuantity).val() * $(itemsUnitPrice).val();
+		grandTotal += totalFloat;
+		$(totalItemPrice).html(totalFloat.toFixed(2));
+		//alert($(itemsQuantity).val() + "|" + $(itemsUnitPrice).val() + "|" + $(totalItemPrice).html());
+	}
+	$("#grandTotal").html(grandTotal.toFixed(2));
 }
 
 function reflectItem(){
@@ -218,6 +253,14 @@ function reflectItem(){
 			}
 		}
 	);
+}
+
+function deleteRecords() {
+    if (confirm('<fmt:message key="general.delete.confirmation"/>')) {
+    	return true;
+    }
+    
+    return false;
 }
 
 function cancel(){
