@@ -10,10 +10,10 @@
 
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>logs/webapp.log</file>
+		<file>${catalina.home}/logs/webapp.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- daily rollover -->
-			<fileNamePattern>logs/webapp.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>${catalina.home}/logs/webapp.%d{yyyy-MM-dd}.log</fileNamePattern>
 
 			<!-- keep 30 days' worth of history -->
 			<maxHistory>30</maxHistory>
