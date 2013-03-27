@@ -6,7 +6,7 @@
 <c:if test="${widgetLogo == null }">
 	<c:set var="widgetLogo" value="align-justify"/>
 </c:if>
-	<div class="row-fluid sortable">		
+	<div class="row-fluid ">		
 		<div class="box span12">
 			<div class="box-header" data-original-title>
 				<h2>
