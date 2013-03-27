@@ -34,7 +34,11 @@ public class JobOrder extends AbstractAuditablePersistable{
 	
 	@OneToOne
 	private Customer customer;
-
+	
+	private Double price;
+	
+	private Float discount;
+	
 	public String getJobNumber() {
 		return jobNumber;
 	}
@@ -74,4 +78,21 @@ public class JobOrder extends AbstractAuditablePersistable{
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Float getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Float discount) {
+		this.discount = discount;
+	}
+	
 }

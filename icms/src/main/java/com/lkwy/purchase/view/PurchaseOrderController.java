@@ -171,7 +171,9 @@ public class PurchaseOrderController {
 			model.addAttribute("purchaseOrder", po);
 			
 			PurchaseOrder dbPo = poService.getPoById(po.getId());
-			po.setStockOrderList(dbPo.getStockOrderList());
+			if(dbPo != null && dbPo.getStockOrderList() != null){
+				po.setStockOrderList(dbPo.getStockOrderList());
+			}
 			
 			StockOrder so = new StockOrder();
 			so.setPurchaseOrder(po);

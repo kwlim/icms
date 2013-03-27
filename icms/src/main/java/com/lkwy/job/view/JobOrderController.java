@@ -16,7 +16,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -27,22 +26,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.common.collect.Lists;
-import com.lkwy.brand.entity.Brand;
-import com.lkwy.brand.service.BrandService;
-import com.lkwy.category.entity.ItemCategory;
-import com.lkwy.category.service.ItemCategoryService;
 import com.lkwy.common.util.DisplayTagUtil;
-import com.lkwy.item.entity.Item;
-import com.lkwy.item.service.ItemService;
+import com.lkwy.customer.entity.Customer;
+import com.lkwy.customer.service.CustomerService;
+import com.lkwy.job.entity.JobOrder;
 import com.lkwy.job.service.JobOrderService;
-import com.lkwy.purchase.entity.PurchaseOrder;
-import com.lkwy.purchase.entity.StockOrder;
-import com.lkwy.vendor.entity.Vendor;
-import com.lkwy.vendor.service.VendorService;
 
 @Controller
 @RequestMapping("/jo")
@@ -51,49 +41,73 @@ public class JobOrderController {
 	static final Logger LOGGER = LoggerFactory.getLogger(JobOrderController.class);
 	
 	@Autowired
-	VendorService vendorService;
+	JobOrderService jobService;
 	
 	@Autowired
-	JobOrderService poService;
+	CustomerService customerService;
 	
-	@Autowired
-	ItemCategoryService itemCatService;
-	
-	@Autowired
-	ItemService itemService;
-	
-	@Autowired
-	BrandService brandService;
-	
-	@ModelAttribute("allBrandList")
-	public List<Brand> getAllBrand(){
-		return brandService.getAllBrand();
+	@ModelAttribute("allCustomerList")
+	public List<Customer> getAllCustomer(){
+		return customerService.getAllCustomer();
 	}
 	
-	@ModelAttribute("allCategoryList")
-	public List<ItemCategory> getAllCategory(){
-		return itemCatService.getAll(new Sort(Direction.ASC, "name"));
-	}
-	
-	@ModelAttribute("allVendorList")
-	public List<Vendor> getAllVendor(){
-		return vendorService.getAllVendor();
-	}
-
-	@RequestMapping("/json/getItemList")
-	public @ResponseBody List<Item> jsonGetItemList(String categoryId, String brandId){
+	@RequestMapping(value="/save/submit", method=RequestMethod.POST)
+	public String submitPo(ModelMap model, RedirectAttributes redirectAttributes, @Valid JobOrder jo, BindingResult result){
 		
-		if(!StringUtils.isEmpty(categoryId) || !StringUtils.isEmpty(brandId)){
-			Page<Item> resultList = itemService.getItemByCategoryIdBrandId(categoryId, brandId);
-			return resultList.getContent();
+		if(submittionHasErrors(model, jo, result)){
+			model.addAttribute("jobOrder", jo);
+			
+			return "jo/new";
 		}
 		
-		return Lists.newArrayList();
+		JobOrder savedJo = jobService.saveJo(jo);
+		if(StringUtils.isEmpty(jo.getId())){
+			//new
+			redirectAttributes.addFlashAttribute("message", "jo.new.success.message");
+			return "redirect:/jo/edit/"+savedJo.getId();
+		}
+		else{
+			//update
+			redirectAttributes.addFlashAttribute("message", "jo.edit.success.message");
+		}
+		
+		return "redirect:/jo/";
+		
+	}
+	
+	protected boolean submittionHasErrors(ModelMap model, JobOrder job, BindingResult result){
+		boolean submittionError = false;
+		
+		submittionError = result.hasErrors();
+		
+		if(job.getCustomer() == null || StringUtils.isEmpty(job.getCustomer().getId())){
+			submittionError = true;
+			result.rejectValue("customer.id", "NotNull.jo.customer");
+		}
+		
+		return submittionError;
+	}
+	
+	@RequestMapping("/edit/{id}")
+	public String editPo(ModelMap model, @PathVariable("id") String id){
+		JobOrder job = jobService.getJoById(id);
+		model.addAttribute("jobOrder", job);
+		
+		return "jo/new";
+	}
+	
+	@RequestMapping("/new")
+	public String newJobOrder(ModelMap model){
+		
+		JobOrder job = new JobOrder();
+		model.addAttribute("jobOrder", job);
+		
+		return "jo/new";
 	}
 	
 	@RequestMapping(value={"/", ""})
 	public String list(ModelMap model, HttpServletRequest request, 
-			@RequestParam(value="joNumber", required=false) String joNumber, 
+			@RequestParam(value="joNumberCustomer", required=false) String joNumberCustomer, 
 			@RequestParam(value="joDateFrom", required=false) Date joDateFrom,
 			@RequestParam(value="joDateTo", required=false) Date joDateTo){
 		
@@ -102,19 +116,19 @@ public class JobOrderController {
         Boolean desc = DisplayTagUtil.getListDesc(id, request, false);
         Integer start = DisplayTagUtil.getListStart(id, request, null);
         
-        model.addAttribute("joNumber", joNumber);
+        model.addAttribute("joNumberCustomer", joNumberCustomer);
         model.addAttribute("joDateFrom", joDateFrom);
         model.addAttribute("joDateTo", joDateTo);
         model.addAttribute("id", id);
         
-//        Pageable pageable = new PageRequest(start, DisplayTagUtil.DEFAULT_PAGE_SIZE, (desc != null && desc)?Sort.Direction.DESC:Sort.Direction.ASC, sort);
-//        
-//        Page<PurchaseOrder> page = poService.getPoByPoNumberDateVendor(poNumber, null, null, vendorId, pageable);
-//        
-//        model.put("rows", page);
-//        model.put("size", (int)page.getTotalElements());
-//		
-		return "po/list";
+        Pageable pageable = new PageRequest(start, DisplayTagUtil.DEFAULT_PAGE_SIZE, (desc != null && desc)?Sort.Direction.DESC:Sort.Direction.ASC, sort);
+        
+        Page<JobOrder> page = jobService.getJobOrderByJobNumberCarPlateJobDateRange(joNumberCustomer, joDateFrom, joDateTo, pageable);
+        
+        model.put("rows", page);
+        model.put("size", (int)page.getTotalElements());
+		
+		return "jo/list";
 	}
 	
 	@InitBinder
