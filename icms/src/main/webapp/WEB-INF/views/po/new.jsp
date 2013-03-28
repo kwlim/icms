@@ -60,25 +60,17 @@
 			</div>
 		</div>
 		<div class="span6">
-			<div class="control-group ">
-				<label class="control-label" for="price">
-					<fmt:message key="po.price"/>
+			<div class="control-group">
+				<label class="control-label" for="remark"> 
+					<fmt:message key="general.remark" />
 				</label>
 				<div class="controls">
-					<form:input path="price" />
+					<form:textarea path="remark" class="input-xlarge" rows="3" />
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<div class="control-group">
-		<label class="control-label" for="remark">
-			<fmt:message key="general.remark"/>
-		</label>
-		<div class="controls">
-			<form:textarea path="remark" class="input-xlarge" rows="3"/>
-		</div>
-	</div>
 	<div class="form-actions">
 		<button type="submit" class="btn btn-primary"><fmt:message key="general.save"/></button>
 		<button type="button" class="btn" onclick="cancel()"><fmt:message key="general.cancel"/></button>
@@ -96,7 +88,7 @@
 	
 	<div class="row-fluid">
 		<div class="span3">
-			<form:select path="item.category.id" onchange="javascript:reflectItem()" data-placeholder="Choose a Country">
+			<form:select path="item.category.id" onchange="javascript:reflectItem()">
 				<form:option value="">Filter by Category</form:option>
 				<form:options items="${ allCategoryList }" itemLabel="name" itemValue="id" />
 			</form:select>
@@ -234,11 +226,15 @@ function updateItemTotal(){
 		$(totalItemPrice).html(totalFloat.toFixed(2));
 		//alert($(itemsQuantity).val() + "|" + $(itemsUnitPrice).val() + "|" + $(totalItemPrice).html());
 	}
+	
+	if(grandTotal != '' || grandTotal != 'NaN'){
+		$("#price").val(grandTotal);
+	}
 	$("#grandTotal").html(grandTotal.toFixed(2));
 }
 
 function reflectItem(){
-	//alert($("#item\\.category\\.id").val() + " | " + $("#item\\.brand\\.id").val());
+	
 	$.getJSON(
 		"${pageContext.request.contextPath}/po/json/getItemList",
 		{

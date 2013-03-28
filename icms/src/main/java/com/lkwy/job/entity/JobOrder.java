@@ -9,6 +9,7 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -26,7 +27,7 @@ public class JobOrder extends AbstractAuditablePersistable{
 	
 	@Lob
 	private String remark;
-	
+	@NotNull
 	private Date jobDate;
 	
 	@OneToMany(mappedBy="jobOrder", cascade=CascadeType.ALL)

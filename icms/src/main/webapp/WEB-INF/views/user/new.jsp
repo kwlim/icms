@@ -72,12 +72,13 @@
 		</div>
 	</div>
 	
-	<div class="control-group">
+	<div class="control-group <form:errors path="email" cssClass="error">error</form:errors>">
 		<label class="control-label" for="email">
 			<fmt:message key="user.email"/>
 		</label>
 		<div class="controls">
 			<form:input path="email" />
+			<form:errors path="email" cssClass="help-inline"/>
 		</div>
 	</div>
 	

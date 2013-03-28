@@ -154,11 +154,15 @@ public class PurchaseOrderController {
 			return "po/new";
 		}
 		
-		if(po.getStockOrderList() != null){
+		if(po.getStockOrderList() != null && !po.getStockOrderList().isEmpty()){
 			for(StockOrder so: po.getStockOrderList()){
 				LOGGER.debug("saving po items: {}|{}|{}", new Object[]{so.getId(), so.getQuantity(), so.getUnitPrice()});
 				poService.saveStockOrder(so);
 			}
+			
+			PurchaseOrder dbPo = poService.getPoById(po.getId());
+			dbPo.setPrice(po.getPrice());
+			poService.savePo(dbPo);
 		}
 		
 		return "redirect:/po/edit/"+po.getId();
@@ -181,7 +185,20 @@ public class PurchaseOrderController {
 			return "po/new";
 		}
 		
-		PurchaseOrder savedPo = poService.savePo(po);
+		PurchaseOrder savedPo = null;
+		if(StringUtils.isEmpty(po.getId())){
+			savedPo = poService.savePo(po);
+		}else{
+			
+			PurchaseOrder dbPo = poService.getPoById(po.getId());
+			dbPo.setVendor(po.getVendor());
+			dbPo.setPoDate(po.getPoDate());
+			dbPo.setPoNumber(po.getPoNumber());
+			dbPo.setRemark(po.getRemark());
+			
+			savedPo = poService.savePo(dbPo);
+		}
+		
 		if(StringUtils.isEmpty(po.getId())){
 			//new
 			redirectAttributes.addFlashAttribute("message", "po.new.success.message");

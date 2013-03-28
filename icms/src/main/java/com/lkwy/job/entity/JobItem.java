@@ -21,9 +21,8 @@ public class JobItem  extends AbstractAuditablePersistable{
 	private Item item;
 	
 	private Float stockPrice;
-	private Float markup;
-	private Float price;
 	private Integer unit;
+	private Float markup;
 	private Float labour;
 	public JobOrder getJobOrder() {
 		return jobOrder;
@@ -48,12 +47,6 @@ public class JobItem  extends AbstractAuditablePersistable{
 	}
 	public void setMarkup(Float markup) {
 		this.markup = markup;
-	}
-	public Float getPrice() {
-		return price;
-	}
-	public void setPrice(Float price) {
-		this.price = price;
 	}
 	public Integer getUnit() {
 		return unit;

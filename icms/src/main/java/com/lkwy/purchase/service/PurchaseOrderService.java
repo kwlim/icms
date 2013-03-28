@@ -1,12 +1,15 @@
 package com.lkwy.purchase.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.lkwy.common.util.CommonUtil;
@@ -26,6 +29,15 @@ public class PurchaseOrderService {
 	
 	@Autowired
 	IStockOrderRepository stockOrderRepo;
+	
+	public StockOrder getLatestStockItem(String itemId){
+		Pageable pageable = new PageRequest(0, 1, Sort.Direction.DESC, "purchaseOrder.poDate");
+		List<StockOrder> stockOrderList = stockOrderRepo.findByItem_Id(itemId, pageable);
+		if(stockOrderList != null && !stockOrderList.isEmpty()){
+			return stockOrderList.iterator().next();
+		}
+		return null;
+	}
 	
 	public void deleteStockOrder(String soId){
 		stockOrderRepo.delete(soId);

@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import com.lkwy.common.AbstractTest;
 import com.lkwy.common.util.DisplayTagUtil;
 import com.lkwy.purchase.entity.PurchaseOrder;
+import com.lkwy.purchase.entity.StockOrder;
 
 public class TestPurchaseOrderService extends AbstractTest{
 	
@@ -21,6 +22,14 @@ public class TestPurchaseOrderService extends AbstractTest{
 	
 	@Autowired
 	PurchaseOrderService poService;
+	
+	@Test
+	public void testGetLatestStockItem(){
+		
+		StockOrder storkOrder = poService.getLatestStockItem("a6585d72-f984-4bc2-8092-058af3436d3e");
+		LOGGER.debug("storkOrder.unitPrice={}|poDate:{}", storkOrder.getUnitPrice(), storkOrder.getPurchaseOrder().getPoDate());
+		
+	}
 	
 	@Test
 	public void testGetPoByPoNumberDateVendor(){

@@ -43,15 +43,15 @@ public class JobOrderService {
 		return jobItemRepo.save(so);
 	}
 	
-	public JobOrder saveJo(JobOrder jo){
+	public JobOrder saveJob(JobOrder jo){
 		return joRepo.save(jo);
 	}
 	
-	public void deleteJo(String id){
+	public void deleteJob(String id){
 		joRepo.delete(id); 
 	}
 	
-	public JobOrder getJoById(String id){
+	public JobOrder getJobById(String id){
 		return joRepo.findOne(id);
 	}
 
