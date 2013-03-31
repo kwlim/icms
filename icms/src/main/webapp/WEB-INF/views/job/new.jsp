@@ -104,7 +104,7 @@
 			</form:select>
 		</div>
 		<div class="span3">
-			<button>Add Item</button>
+			<button class="btn btn-primary">Add Item</button>
 		</div>
 	</div>
 </form:form>

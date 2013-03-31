@@ -1,6 +1,9 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
+
+<commons:notification-message/>
+
 <commons:widget-header widgetLogo="shopping-cart" widgetLabel="item.view" />
 
 <ul class="nav tab-menu nav-tabs" id="myTab">
@@ -9,7 +12,61 @@
 </ul>
 <div id="myTabContent" class="tab-content">	
 	<div class="tab-pane" id="details">	
-		<commons:notification-message/>
+		<div class="row-fluid">
+			<div class="span3">
+				<div class="control-group">
+					<label class="control-label">
+						<h3><fmt:message key="item.code"/></h3>
+					</label>
+					<div class="controls">
+						<c:out value="${ item.code }"/>
+					</div>
+				</div>
+			</div>
+			<div class="span3">
+				<div class="control-group">
+					<label class="control-label" >
+						<h3><fmt:message key="general.name"/></h3>
+					</label>
+					<div class="controls">
+						<c:out value="${ item.name }"/>
+					</div>
+				</div>
+			</div>
+			<div class="span3">
+				<div class="control-group ">
+					<label class="control-label" >
+						<h3><fmt:message key="item.category.label"/></h3>
+					</label>
+					<div class="controls">
+						<c:out value="${ item.name }"/>
+					</div>
+				</div>
+			</div>
+			<div class="span3">
+				<div class="control-group">
+					<label class="control-label" >
+						<h3><fmt:message key="item.brand.label"/></h3>
+					</label>
+					<div class="controls">
+						<c:out value="${ item.brand.name }"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="control-group ">
+					<label class="control-label" >
+						<h3><fmt:message key="general.remark"/></h3>
+					</label>
+					<div class="controls">
+						<c:out value="${ item.remark }"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%-- 
 		<table class="table table-bordered table-striped">
 			<tr>
 				<td><fmt:message key="item.code"/></td>
@@ -54,7 +111,7 @@
 					<button type="button" class="btn" onclick="cancel();"><fmt:message key="general.cancel"/></button>
 				</td>
 			</tr>
-		</table>
+		</table> --%>
 	</div>
 	<div class="tab-pane" id="history">
 		fedfew	

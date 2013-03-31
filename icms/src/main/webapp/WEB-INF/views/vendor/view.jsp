@@ -2,6 +2,8 @@
 
 <commons:header />
 
+<commons:notification-message/>
+
 <commons:widget-header widgetLogo="barcode" widgetLabel="vendor.view" />
 
 <ul class="nav tab-menu nav-tabs" id="myTab">
@@ -10,46 +12,72 @@
 </ul>
 <div id="myTabContent" class="tab-content">	
 	<div class="tab-pane" id="details">	
-		<commons:notification-message/>
-		<table class="table table-bordered table-striped">
-			<tr>
-				<td><fmt:message key="vendor.company.name"/></td>
-				<td>
-					<label class="radio">${vendor.companyName }</label>
-				</td>
-			</tr>
-			<tr>
-				<td><fmt:message key="vendor.contact.person"/></td>
-				<td>
-					<label class="radio">${vendor.contactPerson }</label>
-				</td>
-			</tr>
-			<tr>
-				<td><fmt:message key="vendor.contact.number"/></td>
-				<td>
-					<label class="radio">${vendor.contactNumber }</label>
-				</td>
-			</tr>
-			<tr>
-				<td><fmt:message key="vendor.address"/></td>
-				<td>
-					<label class="radio">${vendor.address }</label>
-				</td>
-			</tr>
-			<tr>
-				<td><fmt:message key="general.remark"/></td>
-				<td>
-					<label class="radio">${vendor.remark }</label>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>
-					<button type="button" class="btn btn-primary"  onclick="gotoEdit();"><fmt:message key="general.edit"/></button>
-					<button type="button" class="btn" onclick="cancel();"><fmt:message key="general.cancel"/></button>
-				</td>
-			</tr>
-		</table>
+		<div class="row-fluid">
+			<div class="span3">
+				<div class="control-group">
+					<label class="control-label">
+						<h3><fmt:message key="vendor.company.name"/></h3>
+					</label>
+					<div class="controls">
+						<c:out value="${ vendor.companyName }"/>
+					</div>
+				</div>
+			</div>
+			<div class="span3">
+				<div class="control-group">
+					<label class="control-label" >
+						<h3><fmt:message key="vendor.contact.person"/></h3>
+					</label>
+					<div class="controls">
+						<c:out value="${ vendor.contactPerson }"/>
+					</div>
+				</div>
+			</div>
+			<div class="span3">
+				<div class="control-group ">
+					<label class="control-label" >
+						<h3><fmt:message key="vendor.contact.number"/></h3>
+					</label>
+					<div class="controls">
+						<c:out value="${ vendor.contactNumber }"/>
+					</div>
+				</div>
+			</div>
+			<div class="span3">
+				<div class="control-group">
+					<label class="control-label" >
+						<h3><fmt:message key="vendor.office.number"/></h3>
+					</label>
+					<div class="controls">
+						<c:out value="${ vendor.officeNumber }"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row-fluid">
+			<div class="span6">
+				<div class="control-group ">
+					<label class="control-label" >
+						<h3><fmt:message key="vendor.address"/></h3>
+					</label>
+					<div class="controls">
+						<c:out value="${ vendor.address }"/>
+					</div>
+				</div>
+			</div>
+			<div class="span6">
+				<div class="control-group ">
+					<label class="control-label" >
+						<h3><fmt:message key="general.remark"/></h3>
+					</label>
+					<div class="controls">
+						<c:out value="${ vendor.remark }"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 	</div>
 	<div class="tab-pane" id="history">
 		fedfew	
