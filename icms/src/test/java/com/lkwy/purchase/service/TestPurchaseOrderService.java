@@ -2,6 +2,7 @@ package com.lkwy.purchase.service;
 
 import java.util.Date;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import com.lkwy.common.AbstractTest;
+import com.lkwy.common.util.CommonUtil;
 import com.lkwy.common.util.DisplayTagUtil;
 import com.lkwy.purchase.entity.PurchaseOrder;
 import com.lkwy.purchase.entity.StockOrder;
@@ -22,6 +24,18 @@ public class TestPurchaseOrderService extends AbstractTest{
 	
 	@Autowired
 	PurchaseOrderService poService;
+	
+	@Test
+	public void testgetSumStockOrderQuantityByItemIdAndPoDateRange(){
+		
+		DateTime firstDayOfMonth = new DateTime(2013, 4, 1, 0, 0, 0);
+		DateTime lastDayOfMonth = firstDayOfMonth.dayOfMonth().withMaximumValue();
+		Date lastDayOfMonthEndDate = CommonUtil.convertDateAsEndDate(lastDayOfMonth.toDate());
+		
+		Long sum = poService.getSumStockOrderQuantityByItemIdAndPoDateRange("a6585d72-f984-4bc2-8092-058af3436d3e", firstDayOfMonth.toDate(), lastDayOfMonthEndDate);
+		LOGGER.debug("sum = {}", sum);
+		
+	}
 	
 	@Test
 	public void testGetLatestStockItem(){

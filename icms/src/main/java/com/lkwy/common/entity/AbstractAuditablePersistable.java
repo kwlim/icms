@@ -31,8 +31,10 @@ public class AbstractAuditablePersistable extends AbstractPersistable{
 	
     @PrePersist
     public void onPrePersist(){
-        createdDate = new Date();
-        modifiedDate = new Date();
+    	if(createdDate != null){
+    		createdDate = new Date();
+    	}
+    	modifiedDate = new Date();
         createdBy = UserUtil.getLoginUsername();
         modifiedBy = UserUtil.getLoginUsername();
     }

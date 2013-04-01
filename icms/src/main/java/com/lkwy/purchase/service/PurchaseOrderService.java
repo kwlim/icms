@@ -30,6 +30,14 @@ public class PurchaseOrderService {
 	@Autowired
 	IStockOrderRepository stockOrderRepo;
 	
+	public Long getSumStockOrderQuantityByItemIdAndPoDateRange(String itemId, Date dateFrom, Date dateTo){
+		return stockOrderRepo.sumByItemIdAndPoDateRange(itemId, dateFrom, dateTo);
+	}
+	
+	public List<StockOrder> getStockOrderByItemIdAndPoDateRange(String itemId, Date dateFrom, Date dateTo){
+		return stockOrderRepo.findByItemIdAndPoDateRange(itemId, dateFrom, dateTo);
+	}
+	
 	public StockOrder getLatestStockItem(String itemId){
 		Pageable pageable = new PageRequest(0, 1, Sort.Direction.DESC, "purchaseOrder.poDate");
 		List<StockOrder> stockOrderList = stockOrderRepo.findByItem_Id(itemId, pageable);

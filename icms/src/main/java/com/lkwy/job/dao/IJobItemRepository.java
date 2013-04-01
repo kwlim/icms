@@ -1,15 +1,19 @@
 package com.lkwy.job.dao;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.lkwy.job.entity.JobItem;
-import com.lkwy.job.entity.JobOrder;
 
 public interface IJobItemRepository extends JpaRepository<JobItem, String>{
-
 	
+	@Query("SELECT SUM(ji.unit) FROM JobItem ji WHERE ji.item.id = ?1 AND ji.jobOrder.jobDate >= ?2 AND ji.jobOrder.jobDate <= ?3 ")
+	public Long sumByItemIdAndPoDateRange(String itemId, Date dateFrom, Date dateTo);
+	
+	@Query("SELECT ji FROM JobItem ji WHERE ji.item.id = ?1 AND ji.jobOrder.jobDate >= ?2 AND ji.jobOrder.jobDate <= ?3 ")
+	public List<JobItem> findByItemIdAndPoDateRange(String itemId, Date dateFrom, Date dateTo);
 	
 }

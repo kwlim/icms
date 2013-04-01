@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.common.collect.Lists;
 import com.lkwy.brand.entity.Brand;
 import com.lkwy.brand.service.BrandService;
 import com.lkwy.category.entity.ItemCategory;
@@ -34,6 +36,8 @@ import com.lkwy.category.service.ItemCategoryService;
 import com.lkwy.common.util.DisplayTagUtil;
 import com.lkwy.item.entity.Item;
 import com.lkwy.item.service.ItemService;
+import com.lkwy.stock.entity.StockCheck;
+import com.lkwy.stock.service.StockCheckService;
 
 @Controller
 @RequestMapping("/item")
@@ -50,6 +54,24 @@ public class ItemController {
 	@Autowired
 	BrandService brandService;
 	
+	@Autowired
+	StockCheckService stockCheckService;
+	
+	@ModelAttribute("scTypeBringForward")
+	public int getStockCheckTypeBringForward(){
+		return StockCheck.STOCK_CHECK_TYPE.BRING_FORWARD.getValue();
+	}
+	
+	@ModelAttribute("scTypePurchase")
+	public int getStockCheckTypePurchase(){
+		return StockCheck.STOCK_CHECK_TYPE.PURCHASE.getValue();
+	}
+	
+	@ModelAttribute("scTypeSold")
+	public int getStockCheckTypeSold(){
+		return StockCheck.STOCK_CHECK_TYPE.JOB.getValue();
+	}
+	
 	@ModelAttribute("allBrandList")
 	public List<Brand> getAllBrand(){
 		return brandService.getAllBrand();
@@ -58,6 +80,15 @@ public class ItemController {
 	@ModelAttribute("allCategoryList")
 	public List<ItemCategory> getAllCategory(){
 		return itemCatService.getAll(new Sort(Direction.ASC, "name"));
+	}
+	
+	@ModelAttribute("monthList")
+	public List<Integer> getMonthList(){
+		List<Integer> monthList = Lists.newArrayList();
+		for(int i=1; i<=12; i++){
+			monthList.add(i);
+		}
+		return monthList;
 	}
 	
 	@RequestMapping("new")
@@ -69,11 +100,32 @@ public class ItemController {
 		return "item/new";
 	}
 	
+	
+	
 	@RequestMapping("view/{id}")
-	public String viewItem(ModelMap model, @PathVariable("id") String id){
+	public String viewItem(ModelMap model, 
+			@PathVariable("id") String id,
+			@RequestParam(value="monthFrom", required=false) Integer monthFrom,
+			@RequestParam(value="yearFrom", required=false) Integer yearFrom,
+			@RequestParam(value="monthTo", required=false) Integer monthTo,
+			@RequestParam(value="yearTo", required=false) Integer yearTo){
 		
 		Item item = itemService.getItemById(id);
 		model.addAttribute("item", item);
+		
+		if(monthFrom == null && yearFrom == null){
+			DateTime now = new DateTime();
+			monthFrom = now.getMonthOfYear();
+			yearFrom = now.getYear();
+		}
+		
+		List<StockCheck> stockCheckList = stockCheckService.getStockCheckListForItemOnDateRange(id, monthFrom, yearFrom, monthTo, yearTo);
+		model.addAttribute("stockCheckList", stockCheckList);
+		
+		model.addAttribute("monthFrom", monthFrom);
+		model.addAttribute("yearFrom", yearFrom);
+		model.addAttribute("monthTo", monthTo);
+		model.addAttribute("yearTo", yearTo);
 		
 		return "item/view";
 	}

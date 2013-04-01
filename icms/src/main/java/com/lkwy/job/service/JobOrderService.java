@@ -1,6 +1,7 @@
 package com.lkwy.job.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,14 @@ public class JobOrderService {
 	
 	@Autowired
 	IJobItemRepository jobItemRepo;
+	
+	public Long getSumItemUnitByItemIdAndPoDateRange(String itemId, Date dateFrom, Date dateTo){
+		return jobItemRepo.sumByItemIdAndPoDateRange(itemId, dateFrom, dateTo);
+	}
+	
+	public List<JobItem> getJobItemByItemIdAndPoDateRange(String itemId, Date dateFrom, Date dateTo){ 
+		return jobItemRepo.findByItemIdAndPoDateRange(itemId, dateFrom, dateTo);
+	}
 	
 	public Page<JobOrder> getJobOrderByJobNumberCarPlateJobDateRange(String jobNumberOrCarPlate, Date dateFrom, Date dateTo, Pageable pageable){
 		String wildCardJobNumberOrCarPlate = CommonUtil.addWildCard(jobNumberOrCarPlate);
