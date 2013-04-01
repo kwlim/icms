@@ -12,11 +12,10 @@ import org.springframework.data.domain.Sort;
 import com.lkwy.category.entity.ItemCategory;
 import com.lkwy.common.AbstractTest;
 import com.lkwy.common.util.DisplayTagUtil;
-import com.lkwy.sample.data.dao.TestISampleEntityObjectRepository;
 
 public class TestItemCategoryService extends AbstractTest{
 	
-	static final Logger LOGGER = LoggerFactory.getLogger(TestISampleEntityObjectRepository.class);
+	static final Logger LOGGER = LoggerFactory.getLogger(TestItemCategoryService.class);
 	
 	@Autowired
 	ItemCategoryService itemCatService;
