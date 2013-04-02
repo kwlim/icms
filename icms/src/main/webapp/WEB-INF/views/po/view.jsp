@@ -71,8 +71,8 @@
 				<tr >
 					<td><c:out value="${ stockItem.item.name }"/> (<c:out value="${ stockItem.item.code }"/>)</td>
 					<td id="qty"><c:out value="${ stockItem.quantity }"/></td>
-					<td id="unitPrice"><c:out value="${ stockItem.unitPrice }"/></td>
-					<td id="total"><c:out value="${ stockItem.unitPrice *stockItem.quantity }"/></td>
+					<td id="unitPrice"><fmt:formatNumber minFractionDigits="2" value="${ stockItem.unitPrice }"/></td>
+					<td id="total"><fmt:formatNumber minFractionDigits="2" value="${ stockItem.unitPrice *stockItem.quantity }"/></td>
 				</tr>
 			</c:forEach>
 				<tr >
