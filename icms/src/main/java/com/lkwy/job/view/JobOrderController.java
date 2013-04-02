@@ -222,7 +222,7 @@ public class JobOrderController {
 	}
 	
 	@RequestMapping("/edit/{id}")
-	public String editPo(ModelMap model, @PathVariable("id") String id){
+	public String editJob(ModelMap model, @PathVariable("id") String id){
 		JobOrder job = jobService.getJobById(id);
 		model.addAttribute("jobOrder", job);
 		
@@ -233,6 +233,16 @@ public class JobOrderController {
 		getJobItemLatestStockPrice(job.getJobItemList());
 		
 		return "job/new";
+	}
+	
+	@RequestMapping("/view/{id}")
+	public String viewJob(ModelMap model, @PathVariable("id") String id){
+		JobOrder job = jobService.getJobById(id);
+		model.addAttribute("jobOrder", job);
+		
+		model.addAttribute("jobItemList", job.getJobItemList());
+		
+		return "job/view";
 	}
 	
 	public void getJobItemLatestStockPrice(List<JobItem> jobItemList){

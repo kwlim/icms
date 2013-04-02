@@ -247,9 +247,10 @@ function updateItemTotal(){
 		
 		var totalFloat = $(itemsUnit).val() * $(itemsStockPrice).val();
 		
-		if($(itemsLabour).val() != ''){
-			totalFloat += parseFloat($(itemsLabour).val());
+		if($(itemsMarkup).val() != ''){
+			totalFloat += parseFloat($(itemsMarkup).val());
 		}
+		
 		if($(itemsLabour).val() != ''){
 			totalFloat += parseFloat($(itemsLabour).val());
 		}
