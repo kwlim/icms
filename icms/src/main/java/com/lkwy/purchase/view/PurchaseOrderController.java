@@ -232,6 +232,15 @@ public class PurchaseOrderController {
 		return "po/new";
 	}
 	
+	@RequestMapping("/view/{id}")
+	public String viewPo(ModelMap model, @PathVariable("id") String id){
+		PurchaseOrder po = poService.getPoById(id);
+		model.addAttribute("purchase", po);
+
+        model.addAttribute("stockList", po.getStockOrderList());
+		return "po/view";
+	}
+	
 	public void initExistingPo(ModelMap model, String id){
 		PurchaseOrder po = poService.getPoById(id);
 		model.addAttribute("purchaseOrder", po);
