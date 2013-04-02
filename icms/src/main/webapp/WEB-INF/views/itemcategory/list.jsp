@@ -10,7 +10,7 @@
 	<div class="well">
 		<div class="pull-right">
 			<input id="name" placeholder="<fmt:message key="general.name" />" name="name" class="input-medium" value="${name}" />
-			<input type="submit" value="<fmt:message key='general.search' />" />
+			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />
 		</div>
 	</div>
 	<div class="control-group">
@@ -35,8 +35,8 @@
 		</display:column>
 		<display:column media="html"  titleKey="general.actions" sortable="false">
 			<c:url var="editUrl" value="/itemCategory/edit/${ itemCategory.id }"/>
-			<a class="btn btn-success" href="${ editUrl }" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
-				<i class="halflings-icon zoom-in halflings-icon"></i> 
+			<a class="btn btn-info" href="${ editUrl }" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
+				<i class="halflings-icon edit halflings-icon" ></i> 
 			</a>
 		</display:column>
 	</display:table>
