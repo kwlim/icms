@@ -17,6 +17,31 @@ import com.lkwy.vendor.entity.Vendor;
 
 public class PurchaseOrderSpecifications {
 	
+	public static Specification<PurchaseOrder> byVendorIdAndDateRange(final String vendorId, final Date dateFrom, final Date dateTo){
+		return new Specification<PurchaseOrder>(){
+
+			@Override
+			public Predicate toPredicate(Root<PurchaseOrder> root,
+					CriteriaQuery<?> query, CriteriaBuilder cb) {
+				
+				Predicate p = cb.conjunction();
+				
+				Join<PurchaseOrder, Vendor> joinVendor = root.join(PurchaseOrder_.vendor);
+				p = cb.and(p, cb.equal(joinVendor.get("id"), vendorId));
+				
+				if(dateFrom != null){
+					p = cb.and(p, cb.greaterThanOrEqualTo(root.get(PurchaseOrder_.poDate), dateFrom));
+				}
+				if(dateTo != null){
+					p = cb.and(p, cb.lessThanOrEqualTo(root.get(PurchaseOrder_.poDate), dateTo));
+				}
+				
+				return p;
+			}
+			
+		};
+	}
+	
 	public static Specification<PurchaseOrder> byLikePoNumberPoDateVendorId(final String poNumber, final Date dateFrom, final Date dateTo, final String vendorId){
 		return new Specification<PurchaseOrder>(){
 

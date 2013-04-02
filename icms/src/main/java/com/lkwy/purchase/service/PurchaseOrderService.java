@@ -30,6 +30,12 @@ public class PurchaseOrderService {
 	@Autowired
 	IStockOrderRepository stockOrderRepo;
 	
+	public Page<PurchaseOrder> getPoByVendorIdAndDateRange(String vendorId, Date dateFrom, Date dateTo, Pageable pageable){
+		Date processedDateFrom = CommonUtil.convertDateAsStartDate(dateFrom);
+		Date processedDateTo = CommonUtil.convertDateAsEndDate(dateTo);
+		return poRepo.findAll(PurchaseOrderSpecifications.byVendorIdAndDateRange(vendorId, processedDateFrom, processedDateTo), pageable);
+	}
+	
 	public Long getSumStockOrderQuantityByItemIdAndPoDateRange(String itemId, Date dateFrom, Date dateTo){
 		return stockOrderRepo.sumByItemIdAndPoDateRange(itemId, dateFrom, dateTo);
 	}
