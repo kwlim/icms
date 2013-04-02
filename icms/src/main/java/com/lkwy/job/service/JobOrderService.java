@@ -28,6 +28,10 @@ public class JobOrderService {
 	@Autowired
 	IJobItemRepository jobItemRepo;
 	
+	public Page<JobOrder> getJobOrderByCustomerIdAndDateRange(String customerId, Date dateFrom, Date dateTo, Pageable pageable){
+		return joRepo.findAll(JobOrderSpecifications.byCustomerIdAndDateRange(customerId, dateFrom, dateTo), pageable);
+	}
+	
 	public Long getSumItemUnitByItemIdAndPoDateRange(String itemId, Date dateFrom, Date dateTo){
 		return jobItemRepo.sumByItemIdAndPoDateRange(itemId, dateFrom, dateTo);
 	}

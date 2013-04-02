@@ -18,6 +18,31 @@ import com.lkwy.job.entity.JobOrder_;
 
 public class JobOrderSpecifications {
 	
+	public static Specification<JobOrder> byCustomerIdAndDateRange(final String customerId, final Date dateFrom, final Date dateTo){
+		return new Specification<JobOrder>(){
+
+			@Override
+			public Predicate toPredicate(Root<JobOrder> root,
+					CriteriaQuery<?> query, CriteriaBuilder cb) {
+				
+				Predicate p = cb.conjunction();
+				
+				Join<JobOrder, Customer> joinCustomer = root.join(JobOrder_.customer);
+				p = cb.and(p, cb.equal(joinCustomer.get("id"), customerId));
+				
+				if(dateFrom != null){
+					p = cb.and(p, cb.greaterThanOrEqualTo(root.get(JobOrder_.jobDate), dateFrom));
+				}
+				if(dateTo != null){
+					p = cb.and(p, cb.lessThanOrEqualTo(root.get(JobOrder_.jobDate), dateTo));
+				}
+				
+				return p;
+			}
+			
+		};
+	}
+	
 	public static Specification<JobOrder> byLikePoNumberPoDateVendorId(final String jobNumberOrCarPlate, final Date dateFrom, final Date dateTo){
 		return new Specification<JobOrder>(){
 

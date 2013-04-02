@@ -6,74 +6,105 @@
 
 <commons:widget-header widgetLogo="globe" widgetLabel="customer.view" />
 
-<ul class="nav tab-menu nav-tabs" id="myTab">
-	<li><a href="#details">Details</a></li>
-	<li><a href="#history">History</a></li>
-</ul>
-<div id="myTabContent" class="tab-content">	
-	<div class="tab-pane" id="details">	
-		
-		<div class="row-fluid">
-			<div class="span4">
-				<div class="control-group">
-					<label class="control-label">
-						<h3><fmt:message key="customer.carPlateNumber"/></h3>
-					</label>
-					<div class="controls">
-						<c:out value="${ customer.carPlateNumber }"/>
-					</div>
-				</div>
-			</div>
-			<div class="span4">
-				<div class="control-group">
-					<label class="control-label" >
-						<h3><fmt:message key="general.name"/></h3>
-					</label>
-					<div class="controls">
-						<c:out value="${ customer.name }"/>
-					</div>
-				</div>
-			</div>
-			<div class="span4">
-				<div class="control-group ">
-					<label class="control-label" >
-						<h3><fmt:message key="customer.contact.number"/></h3>
-					</label>
-					<div class="controls">
-						<c:out value="${ customer.contactNumber }"/>
-					</div>
-				</div>
-			</div>
+<div class="row-fluid">
+	<div class="span4">
+		<div class="control-group">
+			<label class="control-label">
+				<h3>
+					<fmt:message key="customer.carPlateNumber" />
+				</h3>
+			</label>
 		</div>
-		
-		<div class="row-fluid">
-			<div class="span6">
-				<div class="control-group ">
-					<label class="control-label" >
-						<h3><fmt:message key="customer.address"/></h3>
-					</label>
-					<div class="controls">
-						<c:out value="${ customer.address }"/>
-					</div>
-				</div>
-			</div>
-			<div class="span6">
-				<div class="control-group ">
-					<label class="control-label" >
-						<h3><fmt:message key="general.remark"/></h3>
-					</label>
-					<div class="controls">
-						<c:out value="${ customer.remark }"/>
-					</div>
-				</div>
-			</div>
+		<div class="controls">
+			<c:out value="${ customer.carPlateNumber }" />
 		</div>
-		
 	</div>
-	<div class="tab-pane" id="history">
-		fedfew	
+	<div class="span4">
+		<div class="control-group">
+			<label class="control-label">
+				<h3>
+					<fmt:message key="general.name" />
+				</h3>
+			</label>
+			<div class="controls">
+				<c:out value="${ customer.name }" />
+			</div>
+		</div>
+	</div>
+	<div class="span4">
+		<div class="control-group ">
+			<label class="control-label">
+				<h3>
+					<fmt:message key="customer.contact.number" />
+				</h3>
+			</label>
+			<div class="controls">
+				<c:out value="${ customer.contactNumber }" />
+			</div>
+		</div>
 	</div>
 </div>
+
+<div class="row-fluid">
+	<div class="span6">
+		<div class="control-group ">
+			<label class="control-label">
+				<h3>
+					<fmt:message key="customer.address" />
+				</h3>
+			</label>
+			<div class="controls">
+				<c:out value="${ customer.address }" />
+			</div>
+		</div>
+	</div>
+	<div class="span6">
+		<div class="control-group ">
+			<label class="control-label">
+				<h3>
+					<fmt:message key="general.remark" />
+				</h3>
+			</label>
+			<div class="controls">
+				<c:out value="${ customer.remark }" />
+			</div>
+		</div>
+	</div>
+</div>
+
+<commons:widget-footer />
+
+<commons:widget-header widgetLogo="globe" widgetLabel="customer.view" />
+
+<form id="filterForm" method="GET" action="?" class="form-search">
+	<div class="well">
+		<div class="pull-right">
+			<input id="dateFrom" name="dateFrom" class="datepicker" placeholder="<fmt:message key="general.date.from" />" value='<fmt:formatDate value="${ dateFrom }" pattern="dd/MM/yyyy"/>' />
+			<input id="dateTo" name="dateTo" class="datepicker" placeholder="<fmt:message key="general.date.to" />" value="<fmt:formatDate value="${ dateTo }" pattern="dd/MM/yyyy"/>" />
+			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />
+		</div>
+	</div>
+
+	<display:table id="${id}" name="${rows}" size="${size}" pagesize="10"
+		export="false" class="table table-striped table-bordered table-condensed"
+		requestURI="?" sort="external" partialList="true">
+		<display:column titleKey="job.number" property="jobNumber" sortable="false"/>
+		<display:column titleKey="job.price" sortable="false">
+			<c:if test="${ job.price != null }">
+				<fmt:formatNumber minFractionDigits="2" value="${ job.price }"/>
+			</c:if>
+		</display:column>
+		<display:column titleKey="job.jobDate" sortable="false">
+			<c:if test="${ job.jobDate != null }">
+				<fmt:formatDate value="${ job.jobDate }" pattern="dd/MM/yyyy" />
+			</c:if>
+		</display:column>
+	</display:table>
+	
+</form>
+
+<commons:widget-footer />
+
 <script type="text/javascript">
 
 function gotoEdit(){
@@ -86,5 +117,5 @@ function cancel(){
 
 </script>
 
-<commons:widget-footer />
+
 <commons:footer />

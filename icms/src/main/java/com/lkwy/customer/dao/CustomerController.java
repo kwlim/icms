@@ -1,10 +1,14 @@
 package com.lkwy.customer.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +16,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +27,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.lkwy.common.util.DisplayTagUtil;
 import com.lkwy.customer.entity.Customer;
 import com.lkwy.customer.service.CustomerService;
+import com.lkwy.job.entity.JobOrder;
+import com.lkwy.job.service.JobOrderService;
 
 @Controller
 @RequestMapping("/customer")
@@ -28,6 +36,9 @@ public class CustomerController {
 	
 	@Autowired
 	CustomerService customerService;
+	
+	@Autowired
+	JobOrderService jobService;
 	
 	@RequestMapping("delete")
 	public String deleteCustomer(ModelMap model, RedirectAttributes redirectAttributes, @RequestParam(value = "id", required = false) String[] ids){
@@ -73,10 +84,25 @@ public class CustomerController {
 	}
 	
 	@RequestMapping("/view/{id}")
-	public String viewCustomer(ModelMap model, @PathVariable("id") String id){
-
+	public String viewCustomer(ModelMap model, HttpServletRequest request,
+			@PathVariable("id") String id,
+			@RequestParam(value="dateFrom", required=false) Date dateFrom,
+			@RequestParam(value="dateTo", required=false) Date dateTo){
+		
 		Customer customer = customerService.getCustomerById(id);
 		model.addAttribute("customer", customer);
+		
+		String tableId = "job";
+        Integer start = DisplayTagUtil.getListStart(id, request, null);
+		Pageable pageable = new PageRequest(start, DisplayTagUtil.DEFAULT_PAGE_SIZE, Sort.Direction.DESC, "jobDate");
+        
+        Page<JobOrder> page = jobService.getJobOrderByCustomerIdAndDateRange(id, dateFrom, dateTo, pageable);
+		
+        model.addAttribute("dateFrom", dateFrom);
+		model.addAttribute("dateTo", dateTo);
+        model.put("rows", page);
+        model.put("size", (int)page.getTotalElements());
+		model.addAttribute("id", tableId);
 		
 		return "customer/view";
 	}
@@ -111,5 +137,12 @@ public class CustomerController {
 		
 		return "customer/list";
 	}
-
+	
+	@InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
+	
 }
