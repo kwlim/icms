@@ -4,7 +4,7 @@
 
 <commons:notification-message/>
 
-<commons:widget-header widgetLogo="barcode" widgetLabel="vendor.view" />
+<commons:widget-header widgetLogo="barcode" widgetLabel="vendor.view.details" />
 
 		<div class="row-fluid">
 			<div class="span3">
@@ -74,7 +74,7 @@
 		
 <commons:widget-footer />
 
-<commons:widget-header widgetLogo="barcode" widgetLabel="vendor.view" />
+<commons:widget-header widgetLogo="barcode" widgetLabel="vendor.view.history" />
 
 <form id="filterForm" method="GET" action="?" class="form-search">
 	<div class="well">

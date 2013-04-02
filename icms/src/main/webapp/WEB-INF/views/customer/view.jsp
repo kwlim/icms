@@ -4,7 +4,7 @@
 
 <commons:notification-message/>
 
-<commons:widget-header widgetLogo="globe" widgetLabel="customer.view" />
+<commons:widget-header widgetLogo="globe" widgetLabel="customer.view.details" />
 
 <div class="row-fluid">
 	<div class="span4">
@@ -74,7 +74,7 @@
 
 <commons:widget-footer />
 
-<commons:widget-header widgetLogo="globe" widgetLabel="customer.view" />
+<commons:widget-header widgetLogo="globe" widgetLabel="customer.view.history" />
 
 <form id="filterForm" method="GET" action="?" class="form-search">
 	<div class="well">
