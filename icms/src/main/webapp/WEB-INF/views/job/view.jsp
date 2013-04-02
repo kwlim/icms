@@ -71,11 +71,11 @@
 			<c:forEach var="jobItem" items="${ jobItemList }" varStatus="status">
 				<tr >
 					<td><c:out value="${ jobItem.item.name }"/> (<c:out value="${ jobItem.item.code }"/>)</td>
-					<td id="stockPrice"><c:out value="${ jobItem.stockPrice }"/></td>
+					<td id="stockPrice"><fmt:formatNumber minFractionDigits="2" value="${ jobItem.stockPrice }"/></td>
 					<td id="unit"><c:out value="${ jobItem.unit }"/></td>
-					<td id="markup"><c:out value="${ jobItem.markup }"/></td>
-					<td id="labour"><c:out value="${ jobItem.labour }"/></td>
-					<td id="total"><c:out value="${ (jobItem.stockPrice * jobItem.unit) +  jobItem.markup + jobItem.labour}"/></td>
+					<td id="markup"><fmt:formatNumber minFractionDigits="2" value="${ jobItem.markup }"/></td>
+					<td id="labour"><fmt:formatNumber minFractionDigits="2" value="${ jobItem.labour }"/></td>
+					<td id="total"><fmt:formatNumber minFractionDigits="2" value="${ (jobItem.stockPrice * jobItem.unit) +  jobItem.markup + jobItem.labour}"/></td>
 				</tr>
 			</c:forEach>
 				<tr >
