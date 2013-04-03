@@ -145,7 +145,7 @@ $(document).ready(function(){
 	//sparkline_charts();
 	//charts();
 	//calendars();
-	growlLikeNotifications();
+	//growlLikeNotifications();
 	widthFunctions();
 	
 	/*if(jQuery.browser.version.substring(0, 2) == "8.") {
@@ -159,7 +159,7 @@ $(document).ready(function(){
 	}*/
 	
 	//chart();
-	messageLike();
+	//messageLike();
 	
 	//setInterval(tempStats, 3000);
 	//tempStats();

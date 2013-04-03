@@ -88,7 +88,10 @@
 	<display:table id="${id}" name="${rows}" size="${size}" pagesize="10"
 		export="false" class="table table-striped table-bordered table-condensed"
 		requestURI="?" sort="external" partialList="true">
-		<display:column titleKey="job.number" property="jobNumber" sortable="false"/>
+		<display:column titleKey="job.number" sortable="false">
+			<a class="iframe" href="${pageContext.request.contextPath}/job/view/${job.id}"><i class="fa-icon-fullscreen"></i></a>
+			<c:out value="${ job.jobNumber }"/>
+		</display:column>
 		<display:column titleKey="job.price" sortable="false">
 			<c:if test="${ job.price != null }">
 				<fmt:formatNumber minFractionDigits="2" value="${ job.price }"/>
@@ -105,7 +108,13 @@
 
 <commons:widget-footer />
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/colorbox.css" type="text/css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.colorbox-min.js"></script>
 <script type="text/javascript">
+
+$(document).ready(function() {
+	$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+});
 
 function gotoEdit(){
 	document.location.href = "${pageContext.request.contextPath}/customer/edit/${customer.id}";

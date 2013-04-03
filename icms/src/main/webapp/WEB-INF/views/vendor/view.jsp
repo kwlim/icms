@@ -6,72 +6,84 @@
 
 <commons:widget-header widgetLogo="barcode" widgetLabel="vendor.view.details" />
 
-		<div class="row-fluid">
-			<div class="span3">
-				<div class="control-group">
-					<label class="control-label">
-						<h3><fmt:message key="vendor.company.name"/></h3>
-					</label>
-					<div class="controls">
-						<c:out value="${ vendor.companyName }"/>
-					</div>
-				</div>
-			</div>
-			<div class="span3">
-				<div class="control-group">
-					<label class="control-label" >
-						<h3><fmt:message key="vendor.contact.person"/></h3>
-					</label>
-					<div class="controls">
-						<c:out value="${ vendor.contactPerson }"/>
-					</div>
-				</div>
-			</div>
-			<div class="span3">
-				<div class="control-group ">
-					<label class="control-label" >
-						<h3><fmt:message key="vendor.contact.number"/></h3>
-					</label>
-					<div class="controls">
-						<c:out value="${ vendor.contactNumber }"/>
-					</div>
-				</div>
-			</div>
-			<div class="span3">
-				<div class="control-group">
-					<label class="control-label" >
-						<h3><fmt:message key="vendor.office.number"/></h3>
-					</label>
-					<div class="controls">
-						<c:out value="${ vendor.officeNumber }"/>
-					</div>
-				</div>
+<div class="row-fluid">
+	<div class="span3">
+		<div class="control-group">
+			<label class="control-label">
+				<h3>
+					<fmt:message key="vendor.company.name" />
+				</h3>
+			</label>
+			<div class="controls">
+				<c:out value="${ vendor.companyName }" />
 			</div>
 		</div>
-		
-		<div class="row-fluid">
-			<div class="span6">
-				<div class="control-group ">
-					<label class="control-label" >
-						<h3><fmt:message key="vendor.address"/></h3>
-					</label>
-					<div class="controls">
-						<c:out value="${ vendor.address }"/>
-					</div>
-				</div>
-			</div>
-			<div class="span6">
-				<div class="control-group ">
-					<label class="control-label" >
-						<h3><fmt:message key="general.remark"/></h3>
-					</label>
-					<div class="controls">
-						<c:out value="${ vendor.remark }"/>
-					</div>
-				</div>
+	</div>
+	<div class="span3">
+		<div class="control-group">
+			<label class="control-label">
+				<h3>
+					<fmt:message key="vendor.contact.person" />
+				</h3>
+			</label>
+			<div class="controls">
+				<c:out value="${ vendor.contactPerson }" />
 			</div>
 		</div>
-		
+	</div>
+	<div class="span3">
+		<div class="control-group ">
+			<label class="control-label">
+				<h3>
+					<fmt:message key="vendor.contact.number" />
+				</h3>
+			</label>
+			<div class="controls">
+				<c:out value="${ vendor.contactNumber }" />
+			</div>
+		</div>
+	</div>
+	<div class="span3">
+		<div class="control-group">
+			<label class="control-label">
+				<h3>
+					<fmt:message key="vendor.office.number" />
+				</h3>
+			</label>
+			<div class="controls">
+				<c:out value="${ vendor.officeNumber }" />
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span6">
+		<div class="control-group ">
+			<label class="control-label">
+				<h3>
+					<fmt:message key="vendor.address" />
+				</h3>
+			</label>
+			<div class="controls">
+				<c:out value="${ vendor.address }" />
+			</div>
+		</div>
+	</div>
+	<div class="span6">
+		<div class="control-group ">
+			<label class="control-label">
+				<h3>
+					<fmt:message key="general.remark" />
+				</h3>
+			</label>
+			<div class="controls">
+				<c:out value="${ vendor.remark }" />
+			</div>
+		</div>
+	</div>
+</div>
+
 <commons:widget-footer />
 
 <commons:widget-header widgetLogo="barcode" widgetLabel="vendor.view.history" />
@@ -88,7 +100,10 @@
 	<display:table id="${id}" name="${rows}" size="${size}" pagesize="10"
 		export="false" class="table table-striped table-bordered table-condensed"
 		requestURI="?" sort="external" partialList="true">
-		<display:column titleKey="po.number" property="poNumber" sortable="false"/>
+		<display:column titleKey="po.number" sortable="false">
+			<a class="iframe" href="${pageContext.request.contextPath}/po/view/${po.id}"><i class="fa-icon-fullscreen"></i></a>
+			<c:out value="${ po.poNumber }"/>
+		</display:column>
 		<display:column titleKey="po.price" sortable="false">
 			<c:if test="${ po.price != null }">
 				<fmt:formatNumber minFractionDigits="2" value="${ po.price }"/>
@@ -105,7 +120,13 @@
 
 <commons:widget-footer />
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/colorbox.css" type="text/css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.colorbox-min.js"></script>
 <script type="text/javascript">
+
+$(document).ready(function() {
+	$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+});
 
 function gotoEdit(){
 	document.location.href = "${pageContext.request.contextPath}/vendor/edit/${vendor.id}";
