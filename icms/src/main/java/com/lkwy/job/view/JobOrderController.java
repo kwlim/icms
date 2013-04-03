@@ -235,6 +235,18 @@ public class JobOrderController {
 		return "job/new";
 	}
 	
+	@RequestMapping("/popupview/{id}")
+	public String popupViewJob(ModelMap model, @PathVariable("id") String id){
+		JobOrder job = jobService.getJobById(id);
+		model.addAttribute("jobOrder", job);
+		
+		model.addAttribute("jobItemList", job.getJobItemList());
+		
+		model.addAttribute("popup", true);
+		
+		return "job/view";
+	}
+	
 	@RequestMapping("/view/{id}")
 	public String viewJob(ModelMap model, @PathVariable("id") String id){
 		JobOrder job = jobService.getJobById(id);

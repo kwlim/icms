@@ -89,7 +89,7 @@
 		export="false" class="table table-striped table-bordered table-condensed"
 		requestURI="?" sort="external" partialList="true">
 		<display:column titleKey="job.number" sortable="false">
-			<a class="iframe" href="${pageContext.request.contextPath}/job/view/${job.id}"><i class="fa-icon-fullscreen"></i></a>
+			<a class="iframe" href="${pageContext.request.contextPath}/job/popupview/${job.id}"><i class="fa-icon-fullscreen"></i></a>
 			<c:out value="${ job.jobNumber }"/>
 		</display:column>
 		<display:column titleKey="job.price" sortable="false">

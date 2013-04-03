@@ -79,7 +79,7 @@ public class PurchaseOrderController {
 	public List<Vendor> getAllVendor(){
 		return vendorService.getAllVendor();
 	}
-
+	
 	@RequestMapping("/json/getItemList")
 	public @ResponseBody List<Item> jsonGetItemList(String categoryId, String brandId){
 		
@@ -230,6 +230,18 @@ public class PurchaseOrderController {
 		initExistingPo(model, id);
 		
 		return "po/new";
+	}
+	
+	@RequestMapping("/popupview/{id}")
+	public String popupViewPo(ModelMap model, @PathVariable("id") String id){
+		PurchaseOrder po = poService.getPoById(id);
+		model.addAttribute("purchase", po);
+
+        model.addAttribute("stockList", po.getStockOrderList());
+        
+        model.addAttribute("popup", true);
+        
+		return "po/view";
 	}
 	
 	@RequestMapping("/view/{id}")

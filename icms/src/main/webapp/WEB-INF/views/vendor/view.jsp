@@ -101,7 +101,7 @@
 		export="false" class="table table-striped table-bordered table-condensed"
 		requestURI="?" sort="external" partialList="true">
 		<display:column titleKey="po.number" sortable="false">
-			<a class="iframe" href="${pageContext.request.contextPath}/po/view/${po.id}"><i class="fa-icon-fullscreen"></i></a>
+			<a class="iframe" href="${pageContext.request.contextPath}/po/popupview/${po.id}"><i class="fa-icon-fullscreen"></i></a>
 			<c:out value="${ po.poNumber }"/>
 		</display:column>
 		<display:column titleKey="po.price" sortable="false">

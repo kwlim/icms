@@ -1,6 +1,14 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
-<commons:header />
+<c:choose>
+	<c:when test="${ popup }">
+		<commons:popupheader title="View Puchase Oder"/>
+	</c:when>
+	<c:otherwise>
+		<commons:header />
+	</c:otherwise>
+</c:choose>
+
 
 <c:set var="widgetLabel" value="po.view"/>
 
@@ -77,7 +85,7 @@
 			</c:forEach>
 				<tr >
 					<td  colspan="3" style="text-align: right;"><b>Grand Total</b></td>
-					<td colspan="1"><b><c:out value="${ purchase.price }"/></b></td>
+					<td colspan="1"><b><fmt:formatNumber minFractionDigits="2" value="${ purchase.price }"/></b></td>
 				</tr>
 		</tbody>
 		
@@ -95,5 +103,12 @@
 
 </script>
 
+<c:choose>
+	<c:when test="${ popup }">
+		<commons:popupfooter />
+	</c:when>
+	<c:otherwise>
+		<commons:footer />
+	</c:otherwise>
+</c:choose>
 
-<commons:footer />
