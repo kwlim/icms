@@ -118,7 +118,12 @@
 		<c:forEach var="stockCheck" items="${ stockCheckList }" varStatus="status">
 			<tr >
 				<td><fmt:formatDate value="${ stockCheck.date }" pattern="dd/MM/yyyy" /></td>
-				<td><c:out value="${ stockCheck.description }"/></td>
+				<td>
+					<c:out value="${ stockCheck.description }"/>
+					<c:if test="${ stockCheck.type == scTypePurchase }">
+						@RM <fmt:formatNumber minFractionDigits="2" value="${ stockCheck.price }"/>
+					</c:if>
+				</td>
 				<td><c:if test="${ stockCheck.type == scTypeBringForward }"><c:out value="${ stockCheck.unit }"/></c:if></td>
 				<td><c:if test="${ stockCheck.type == scTypePurchase }"><c:out value="${ stockCheck.unit }"/></c:if></td>
 				<td><c:if test="${ stockCheck.type == scTypeSold }"><c:out value="${ stockCheck.unit }"/></c:if></td>

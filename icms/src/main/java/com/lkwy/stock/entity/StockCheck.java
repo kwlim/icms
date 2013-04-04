@@ -26,10 +26,20 @@ public class StockCheck implements Serializable{
 	
 	private static final long serialVersionUID = -583946663364785339L;
 	
+	private Date date;
+	private Item item;
+	private Integer unit;
+	private int type;
+	
+	private String description;
+	private String parentId;
+	private Double price;
+	
 	public StockCheck() {
 		
 	}
 	
+	//for bring forward
 	public StockCheck(Date date, Item item, Integer unit, int type, String description) {
 		this.date = date;
 		this.item = item;
@@ -38,23 +48,26 @@ public class StockCheck implements Serializable{
 		this.description = description;
 	}
 	
-	public StockCheck(Date date, Item item, Integer unit, int type, String description, String parentId) {
+	//for job order, purchase order
+	public StockCheck(Date date, Item item, Integer unit, int type, String description, String parentId, Double price) {
 		this.date = date;
 		this.item = item;
 		this.unit = unit;
 		this.type = type;
 		this.description = description;
 		this.parentId = parentId;
+		this.price = price;
 	}
 	
-	private Date date;
-	private Item item;
-	private Integer unit;
-	private int type;
 	
-	private String description;
-	private String parentId;
-	
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
 	public Item getItem() {
 		return item;
 	}

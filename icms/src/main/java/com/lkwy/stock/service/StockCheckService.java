@@ -149,7 +149,7 @@ public class StockCheckService {
 				desc.append(so.getPurchaseOrder().getPoNumber());
 				desc.append(")");
 				transactionStockCheckList
-					.add(new StockCheck(so.getPurchaseOrder().getPoDate(), so.getItem(), so.getQuantity(), StockCheck.STOCK_CHECK_TYPE.PURCHASE.getValue(), desc.toString(), so.getPurchaseOrder().getId()));
+					.add(new StockCheck(so.getPurchaseOrder().getPoDate(), so.getItem(), so.getQuantity(), StockCheck.STOCK_CHECK_TYPE.PURCHASE.getValue(), desc.toString(), so.getPurchaseOrder().getId(), (double)so.getUnitPrice().floatValue()));
 			}
 		}
 		
@@ -158,7 +158,7 @@ public class StockCheckService {
 				StringBuilder desc = new StringBuilder("Job Order (");
 				desc.append(jo.getJobOrder().getJobNumber());
 				desc.append(")");
-				transactionStockCheckList.add(new StockCheck(jo.getJobOrder().getJobDate(), jo.getItem(), jo.getUnit(), StockCheck.STOCK_CHECK_TYPE.JOB.getValue(), desc.toString(), jo.getJobOrder().getId()));
+				transactionStockCheckList.add(new StockCheck(jo.getJobOrder().getJobDate(), jo.getItem(), jo.getUnit(), StockCheck.STOCK_CHECK_TYPE.JOB.getValue(), desc.toString(), jo.getJobOrder().getId(), (double)jo.getStockPrice().floatValue()));
 			}
 		}
 		

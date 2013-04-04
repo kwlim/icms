@@ -89,7 +89,6 @@
 		export="false" class="table table-striped table-bordered table-condensed"
 		requestURI="?" sort="external" partialList="true">
 		<display:column titleKey="job.number" sortable="false">
-			<a class="iframe" href="${pageContext.request.contextPath}/job/popupview/${job.id}"><i class="fa-icon-fullscreen"></i></a>
 			<c:out value="${ job.jobNumber }"/>
 		</display:column>
 		<display:column titleKey="job.price" sortable="false">
@@ -101,6 +100,12 @@
 			<c:if test="${ job.jobDate != null }">
 				<fmt:formatDate value="${ job.jobDate }" pattern="dd/MM/yyyy" />
 			</c:if>
+		</display:column>
+		<display:column media="html"  titleKey="general.actions" sortable="false" class="tableAction">
+			<c:url var="viewUrl" value="/job/popupview/${ job.id }"/>
+			<a href="${ viewUrl }" class="btn btn-success iframe" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
+				<i class="halflings-icon zoom-in halflings-icon"></i> 
+			</a>
 		</display:column>
 	</display:table>
 	

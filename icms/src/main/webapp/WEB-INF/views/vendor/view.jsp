@@ -101,7 +101,6 @@
 		export="false" class="table table-striped table-bordered table-condensed"
 		requestURI="?" sort="external" partialList="true">
 		<display:column titleKey="po.number" sortable="false">
-			<a class="iframe" href="${pageContext.request.contextPath}/po/popupview/${po.id}"><i class="fa-icon-fullscreen"></i></a>
 			<c:out value="${ po.poNumber }"/>
 		</display:column>
 		<display:column titleKey="po.price" sortable="false">
@@ -113,6 +112,12 @@
 			<c:if test="${ po.poDate != null }">
 				<fmt:formatDate value="${ po.poDate }" pattern="dd/MM/yyyy" />
 			</c:if>
+		</display:column>
+		<display:column media="html"  titleKey="general.actions" sortable="false" class="tableAction">
+			<c:url var="viewUrl" value="/po/popupview/${ po.id }"/>
+			<a href="${ viewUrl }" class="btn btn-success iframe" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
+				<i class="halflings-icon zoom-in halflings-icon"></i> 
+			</a>
 		</display:column>
 	</display:table>
 	
