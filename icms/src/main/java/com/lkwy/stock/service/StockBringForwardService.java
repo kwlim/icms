@@ -18,6 +18,10 @@ public class StockBringForwardService {
 	@Autowired
 	IStockBringForwardRepository stockBfRepo;
 	
+	public StockBringForward getStockBringForwardById(String id){
+		return stockBfRepo.findOne(id);
+	}
+	
 	public StockBringForward saveStockBringForward(StockBringForward stockBringForward){
 		return stockBfRepo.save(stockBringForward);
 	}

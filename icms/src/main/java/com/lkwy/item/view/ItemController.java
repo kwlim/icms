@@ -100,8 +100,6 @@ public class ItemController {
 		return "item/new";
 	}
 	
-	
-	
 	@RequestMapping("view/{id}")
 	public String viewItem(ModelMap model, 
 			@PathVariable("id") String id,
@@ -112,11 +110,15 @@ public class ItemController {
 		
 		Item item = itemService.getItemById(id);
 		model.addAttribute("item", item);
+		DateTime now = new DateTime();
 		
 		if(monthFrom == null && yearFrom == null){
-			DateTime now = new DateTime();
 			monthFrom = now.getMonthOfYear();
 			yearFrom = now.getYear();
+		}
+		if(monthTo == null && yearTo == null){
+			monthTo = now.getMonthOfYear();
+			yearTo = now.getYear();
 		}
 		
 		List<StockCheck> stockCheckList = stockCheckService.getStockCheckListForItemOnDateRange(id, monthFrom, yearFrom, monthTo, yearTo);
@@ -137,6 +139,34 @@ public class ItemController {
 		model.addAttribute("item", item);
 		
 		return "item/new";
+	}
+	
+	@RequestMapping("recalculatebf/{itemId}/{bfId}")
+	public String recalculateItemBringForward(ModelMap model, 
+			RedirectAttributes redirectAttributes,
+			@PathVariable("itemId") String itemId,
+			@PathVariable("bfId") String bfId,
+			@RequestParam(value="monthFrom", required=false) Integer monthFrom,
+			@RequestParam(value="yearFrom", required=false) Integer yearFrom,
+			@RequestParam(value="monthTo", required=false) Integer monthTo,
+			@RequestParam(value="yearTo", required=false) Integer yearTo){
+		
+		stockCheckService.regenerateStockBringForward(bfId);
+		
+		redirectAttributes.addFlashAttribute("message", "item.recalculatebf.success.message");
+		
+		StringBuilder redirect = new StringBuilder("redirect:/item/view/");
+		redirect.append(itemId);
+		if(monthFrom != null)
+			redirect.append("?monthFrom").append(monthFrom);
+		if(yearFrom != null)
+			redirect.append("?yearFrom").append(yearFrom);
+		if(monthTo != null)
+			redirect.append("?monthTo").append(monthTo);
+		if(yearTo != null)
+			redirect.append("?yearTo").append(yearTo);
+		
+		return redirect.toString();
 	}
 	
 	@RequestMapping(value="save/submit", method=RequestMethod.POST)
@@ -196,7 +226,6 @@ public class ItemController {
 		return "redirect:/item/";
 	}
 	
-
 	@RequestMapping("delete")
     public String deleteItem(ModelMap model, RedirectAttributes redirectAttributes, @RequestParam(value = "id", required = false) String[] ids){
 		if(ids !=  null && ids.length > 0){

@@ -40,12 +40,13 @@ public class StockCheck implements Serializable{
 	}
 	
 	//for bring forward
-	public StockCheck(Date date, Item item, Integer unit, int type, String description) {
+	public StockCheck(Date date, Item item, Integer unit, int type, String description, String parentId) {
 		this.date = date;
 		this.item = item;
 		this.unit = unit;
 		this.type = type;
 		this.description = description;
+		this.parentId = parentId;
 	}
 	
 	//for job order, purchase order

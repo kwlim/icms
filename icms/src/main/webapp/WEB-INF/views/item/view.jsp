@@ -112,6 +112,7 @@
 				<th class="header" style="width: 5em;">BF</th>
 				<th class="header" style="width: 5em;">Purchase</th>
 				<th class="header" style="width: 5em;">Sold</th>
+				<th class="header" style="width: 4em">Action</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -127,6 +128,28 @@
 				<td><c:if test="${ stockCheck.type == scTypeBringForward }"><c:out value="${ stockCheck.unit }"/></c:if></td>
 				<td><c:if test="${ stockCheck.type == scTypePurchase }"><c:out value="${ stockCheck.unit }"/></c:if></td>
 				<td><c:if test="${ stockCheck.type == scTypeSold }"><c:out value="${ stockCheck.unit }"/></c:if></td>
+				<td>
+					<c:choose>
+						<c:when test="${ stockCheck.type == scTypePurchase }">
+							<c:url var="viewUrl" value="/po/popupview/${ stockCheck.parentId }"/>
+							<a href="${ viewUrl }" class="btn btn-success iframe" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
+								<i class="halflings-icon zoom-in"></i> 
+							</a>
+						</c:when>
+						<c:when test="${ stockCheck.type == scTypeSold }">
+							<c:url var="viewUrl" value="/job/popupview/${ stockCheck.parentId }"/>
+							<a href="${ viewUrl }" class="btn btn-success iframe" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
+								<i class="halflings-icon zoom-in"></i> 
+							</a>
+						</c:when>
+						<c:when test="${ stockCheck.type == scTypeBringForward }">
+							<a href="javascript:regenerateBf('${ stockCheck.parentId }')" class="btn btn-success" data-rel="tooltip" data-original-title="<fmt:message key='item.bf.recalculate'/>">
+								<i class="halflings-icon refresh"></i>
+							</a>
+						</c:when>
+					</c:choose>
+					
+				</td>
 			</tr>
 		</c:forEach>
 		</tbody>
@@ -143,7 +166,19 @@
 
 <commons:widget-footer />
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/colorbox.css" type="text/css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.colorbox-min.js"></script>
 <script type="text/javascript">
+
+$(document).ready(function() {
+	$(".iframe").colorbox({iframe:true, width:"80%", height:"80%", rel: "nofollow"});
+});
+
+function regenerateBf(bfId){
+	$("#filterForm").attr("action", "${pageContext.request.contextPath}/item/recalculatebf/${item.id}/"+bfId);
+	$("#filterForm").submit();
+	return true;
+}
 
 function gotoEdit(){
 	document.location.href = "${pageContext.request.contextPath}/item/edit/${item.id}";

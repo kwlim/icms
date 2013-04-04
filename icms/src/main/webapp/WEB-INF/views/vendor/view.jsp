@@ -116,7 +116,7 @@
 		<display:column media="html"  titleKey="general.actions" sortable="false" class="tableAction">
 			<c:url var="viewUrl" value="/po/popupview/${ po.id }"/>
 			<a href="${ viewUrl }" class="btn btn-success iframe" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
-				<i class="halflings-icon zoom-in halflings-icon"></i> 
+				<i class="halflings-icon zoom-in"></i> 
 			</a>
 		</display:column>
 	</display:table>
@@ -130,7 +130,7 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-	$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+	$(".iframe").colorbox({iframe:true, width:"80%", height:"80%", rel: "nofollow"});
 });
 
 function gotoEdit(){

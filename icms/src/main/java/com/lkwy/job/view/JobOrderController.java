@@ -87,16 +87,20 @@ public class JobOrderController {
 	
 	
 	@RequestMapping("/deleteItem/{jobOrderId}/{jobItemId}")
-	public String deleteJobItem(ModelMap model, @PathVariable("jobOrderId") String jobOrderId, @PathVariable("jobItemId") String jobItemId){
+	public String deleteJobItem(ModelMap model, RedirectAttributes redirectAttributes, 
+			@PathVariable("jobOrderId") String jobOrderId, @PathVariable("jobItemId") String jobItemId){
 		
 		LOGGER.debug("deleteJobItem|{}|{}", jobOrderId, jobItemId);
 		jobService.deleteJobItem(jobItemId);
+		
+		redirectAttributes.addFlashAttribute("message", "job.item.delete.success.message");
 		
 		return "redirect:/job/edit/"+jobOrderId;
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public String deletePo(ModelMap model, RedirectAttributes redirectAttributes, @RequestParam(value = "id", required = false) String[] ids){
+	public String deletePo(ModelMap model, RedirectAttributes redirectAttributes, 
+			@RequestParam(value = "id", required = false) String[] ids){
 		if(ids !=  null && ids.length > 0){
             for(String id: ids){
                 jobService.deleteJob(id);
@@ -131,6 +135,8 @@ public class JobOrderController {
 			dbJobOrder.setDiscount(job.getDiscount());
 			dbJobOrder.setPrice(job.getPrice());
 			jobService.saveJob(dbJobOrder);
+			
+			redirectAttributes.addFlashAttribute("message", "job.item.update.success.message");
 		}
 		
 		return "redirect:/job/edit/"+job.getId();
@@ -187,7 +193,8 @@ public class JobOrderController {
 	}
 	
 	@RequestMapping(value="/addItem", method=RequestMethod.POST)
-	public String addItem(ModelMap model, @Valid JobItem jobItem, BindingResult result){
+	public String addItem(ModelMap model, RedirectAttributes redirectAttributes, 
+			@Valid JobItem jobItem, BindingResult result){
 		
 		//if no item is selected.
 		if(jobItem.getItem() == null || StringUtils.isEmpty(jobItem.getItem().getId())){
@@ -220,6 +227,8 @@ public class JobOrderController {
 		jobItem.setUnit(1);
 		
 		jobService.saveJobItem(jobItem);
+		
+		redirectAttributes.addFlashAttribute("message", "job.item.add.success.message");
 		
 		return "redirect:/job/edit/"+jobItem.getJobOrder().getId();
 	}

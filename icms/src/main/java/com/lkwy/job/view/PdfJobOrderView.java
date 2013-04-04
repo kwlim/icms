@@ -11,8 +11,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractPdfView;
 
 import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
-import com.lowagie.text.PageSize;
+import com.lowagie.text.HeaderFooter;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfWriter;
@@ -33,13 +34,20 @@ public class PdfJobOrderView extends AbstractPdfView{
 		
 		LOGGER.debug("buildPdfDocument");
 		
-		document.setPageSize(PageSize.A4.rotate());
-		document.newPage();
-		
 		this.document = document;
 		
 		document.add(new Paragraph("TEST", titleFont));
 		
 	}
+	
+	public void createHeader() throws DocumentException{
+		
+		HeaderFooter header = new HeaderFooter(new Paragraph("HEADER", titleFont), true);
+		document.add(header);
+		
+	}
 
+	public void createFooter(){
+		
+	}
 }

@@ -15,10 +15,10 @@
 	</div>
 	<div class="control-group">
 		<button type="submit" class="btn btn-danger" onclick="return deleteRecords()">
-			<i class="halflings-icon trash halflings-icon"></i> <fmt:message key="general.delete"/>
+			<i class="halflings-icon trash"></i> <fmt:message key="general.delete"/>
 		</button>
 		<button type="button" class="btn btn-info" onclick="newRecords()">
-			<i class="halflings-icon edit halflings-icon"></i>  <fmt:message key="general.new"/>
+			<i class="halflings-icon edit"></i>  <fmt:message key="general.new"/>
 		</button>
 	</div>
 	<display:table id="${id}" name="${rows}" size="${size}" pagesize="10"
@@ -39,11 +39,11 @@
 		<display:column media="html"  titleKey="general.actions" sortable="false" class="tableAction">
 			<c:url var="viewUrl" value="/vendor/view/${ vendor.id }"/>
 			<a href="${ viewUrl }" class="btn btn-success" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
-				<i class="halflings-icon zoom-in halflings-icon"></i> 
+				<i class="halflings-icon zoom-in"></i> 
 			</a>
 			<c:url var="editUrl" value="/vendor/edit/${ vendor.id }"/>
 			<a href="${ editUrl }" class="btn btn-info" data-rel="tooltip" data-original-title="<fmt:message key='general.edit'/>">
-				<i class="halflings-icon edit halflings-icon" ></i>                                       
+				<i class="halflings-icon edit" ></i>                                       
 			</a>
 		</display:column>
 	</display:table>

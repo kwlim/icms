@@ -64,6 +64,16 @@ public class StockCheckService {
 		return balance;
 	}
 	
+	public void regenerateStockBringForward(String bfId){
+		
+		StockBringForward bf = stockBfService.getStockBringForwardById(bfId);
+		DateTime bfDateTime = new DateTime(bf.getBfDate());
+		DateTime lastMonth = bfDateTime.minusMonths(1);
+		Long balance = getStockBalanceForItem(bf.getItem().getId(), lastMonth.getMonthOfYear(), lastMonth.getYear());
+		bf.setUnit(balance.intValue());
+		
+		stockBfService.saveStockBringForward(bf);
+	}
 	
 	public StockBringForward generateStockBringForward(String itemId, int month, int year){
 		DateTime firstDayOfMonth = new DateTime(year, month, 1, 0, 0);
@@ -140,7 +150,7 @@ public class StockCheckService {
 			StringBuilder desc = new StringBuilder("Balance from last month (");
 			desc.append(monthYearFormat.format(lastMonth.toDate()));
 			desc.append(")");
-			stockCheckList.add(new StockCheck(stockBf.getBfDate(), stockBf.getItem(), stockBf.getUnit(), StockCheck.STOCK_CHECK_TYPE.BRING_FORWARD.getValue(), desc.toString()));
+			stockCheckList.add(new StockCheck(stockBf.getBfDate(), stockBf.getItem(), stockBf.getUnit(), StockCheck.STOCK_CHECK_TYPE.BRING_FORWARD.getValue(), desc.toString(), stockBf.getId()));
 		}
 		
 		if(stockOrderList != null && !stockOrderList.isEmpty()){

@@ -92,7 +92,8 @@ public class PurchaseOrderController {
 	}
 	
 	@RequestMapping(value="/addItem", method=RequestMethod.POST)
-	public String addItem(ModelMap model, @Valid StockOrder stockOrder, BindingResult result){
+	public String addItem(ModelMap model, RedirectAttributes redirectAttributes,
+			@Valid StockOrder stockOrder, BindingResult result){
 		
 		//if no item is selected.
 		if(stockOrder.getItem() == null || StringUtils.isEmpty(stockOrder.getItem().getId())){
@@ -115,6 +116,8 @@ public class PurchaseOrderController {
 		LOGGER.debug("{}|{}", stockOrder.getPurchaseOrder().getId(), stockOrder.getItem().getId());
 		poService.saveStockOrder(stockOrder);
 		
+		redirectAttributes.addFlashAttribute("message", "po.item.add.success.message");
+		
 		return "redirect:/po/edit/"+stockOrder.getPurchaseOrder().getId();
 	}
 	
@@ -132,10 +135,13 @@ public class PurchaseOrderController {
 	}
 	
 	@RequestMapping("/deleteItem/{poId}/{soId}")
-	public String deletePoItem(ModelMap model, @PathVariable("poId") String poId, @PathVariable("soId") String soId){
+	public String deletePoItem(ModelMap model, RedirectAttributes redirectAttributes, 
+			@PathVariable("poId") String poId, @PathVariable("soId") String soId){
 		
 		LOGGER.debug("deletePoItem|{}|{}", poId, soId);
 		poService.deleteStockOrder(soId);
+		
+		redirectAttributes.addFlashAttribute("message", "po.item.delete.success.message");
 		
 		return "redirect:/po/edit/"+poId;
 	}
@@ -163,6 +169,8 @@ public class PurchaseOrderController {
 			PurchaseOrder dbPo = poService.getPoById(po.getId());
 			dbPo.setPrice(po.getPrice());
 			poService.savePo(dbPo);
+			
+			redirectAttributes.addFlashAttribute("message", "po.item.update.success.message");
 		}
 		
 		return "redirect:/po/edit/"+po.getId();
