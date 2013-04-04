@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.lkwy.brand.entity.Brand;
@@ -82,6 +83,8 @@ public class JobOrderController {
 	public List<Customer> getAllCustomer(){
 		return customerService.getAllCustomer();
 	}
+	
+	
 	
 	@RequestMapping("/deleteItem/{jobOrderId}/{jobItemId}")
 	public String deleteJobItem(ModelMap model, @PathVariable("jobOrderId") String jobOrderId, @PathVariable("jobItemId") String jobItemId){
@@ -257,6 +260,16 @@ public class JobOrderController {
 		return "job/view";
 	}
 	
+	@RequestMapping("/print/{id}")
+	public ModelAndView printJob(ModelMap model, @PathVariable("id") String id){
+		JobOrder job = jobService.getJobById(id);
+		model.addAttribute("jobOrder", job);
+		
+		model.addAttribute("jobItemList", job.getJobItemList());
+		
+		return new ModelAndView("pdfJobOrderView", model);
+	}
+	
 	public void getJobItemLatestStockPrice(List<JobItem> jobItemList){
 		if(jobItemList != null && !jobItemList.isEmpty()){
 			
@@ -279,8 +292,8 @@ public class JobOrderController {
 			@RequestParam(value="joDateTo", required=false) Date jobDateTo){
 		
 		String id = "job";
-        String sort = DisplayTagUtil.getListSort(id, request, new String[]{"", "joNumber", "modifiedDate"}, "modifiedDate");
-        Boolean desc = DisplayTagUtil.getListDesc(id, request, false);
+        String sort = DisplayTagUtil.getListSort(id, request, new String[]{"", "joNumber", "customer.carPlateNumber", "price", "jobDate", "modifiedDate"}, "jobDate");
+        Boolean desc = DisplayTagUtil.getListDesc(id, request, true);
         Integer start = DisplayTagUtil.getListStart(id, request, null);
         
         model.addAttribute("jobNumberCustomer", jobNumberCustomer);

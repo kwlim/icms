@@ -2,6 +2,7 @@
 
 <%@ attribute name="widgetLogo" required="false" %>
 <%@ attribute name="widgetLabel" required="true" %>
+<%@ attribute name="includeAction" required="false" %>
 
 <c:if test="${widgetLogo == null }">
 	<c:set var="widgetLogo" value="align-justify"/>
@@ -14,5 +15,10 @@
 					<span class="break"></span>
 					<fmt:message key="${widgetLabel}"/>
 				</h2>
+				<c:if test="${ ! empty includeAction }">
+					<div class="box-icon">
+						<jsp:include page="${ includeAction }" flush="true"/>
+					</div>
+				</c:if>
 			</div>
 			<div class="box-content">

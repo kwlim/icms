@@ -34,9 +34,16 @@
 		<displaytag-version>1.2</displaytag-version>
 		<cloud-foundry-version>0.8.1</cloud-foundry-version>
 		<jackson-mapper-version>1.9.12</jackson-mapper-version>
+		<itext-version>4.2.0</itext-version>
 	</properties>
 
 	<dependencies>
+		
+		<dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>${itext-version}</version>
+        </dependency>
 		
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>

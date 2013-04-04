@@ -33,7 +33,7 @@
 				<fmt:formatDate value="${ group.modifiedDate }" pattern="dd MMM yyyy hh:mm a" />
 			</c:if>
 		</display:column>
-		<display:column media="html"  titleKey="general.actions" sortable="false">
+		<display:column media="html"  titleKey="general.actions" sortable="false" class="tableAction">
 			<c:url var="editUrl" value="/group/edit/${ group.id }"/>
 			<a class="btn btn-success" href="${ editUrl }" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
 				<i class="halflings-icon zoom-in halflings-icon"></i> 

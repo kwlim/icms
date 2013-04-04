@@ -49,12 +49,17 @@
 				<fmt:formatNumber minFractionDigits="2" value="${ po.price }"/>
 			</c:if>
 		</display:column>
-		<display:column titleKey="general.lastUpdatedDate" sortable="true">
-			<c:if test="${ po.modifiedDate != null }">
-				<fmt:formatDate value="${ po.modifiedDate }" pattern="dd/MM/yyyy hh:mm a" />
+		<display:column titleKey="po.date" sortable="true">
+			<c:if test="${ po.poDate != null }">
+				<fmt:formatDate value="${ po.poDate }" pattern="dd MMM yyyy" />
 			</c:if>
 		</display:column>
-		<display:column media="html"  titleKey="general.actions" sortable="false">
+		<display:column titleKey="general.lastUpdatedDate" sortable="true">
+			<c:if test="${ po.modifiedDate != null }">
+				<fmt:formatDate value="${ po.modifiedDate }" pattern="dd MMM yyyy hh:mm a" />
+			</c:if>
+		</display:column>
+		<display:column media="html"  titleKey="general.actions" sortable="false" class="tableAction">
 			<c:url var="viewUrl" value="/po/view/${ po.id }"/>
 			<a href="${ viewUrl }" class="btn btn-success" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
 				<i class="halflings-icon zoom-in halflings-icon"></i> 

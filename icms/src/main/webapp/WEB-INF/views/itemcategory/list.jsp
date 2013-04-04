@@ -33,7 +33,7 @@
 				<fmt:formatDate value="${ itemCategory.modifiedDate }" pattern="dd MMM yyyy hh:mm a" />
 			</c:if>
 		</display:column>
-		<display:column media="html"  titleKey="general.actions" sortable="false">
+		<display:column media="html"  titleKey="general.actions" sortable="false" class="tableAction">
 			<c:url var="editUrl" value="/itemCategory/edit/${ itemCategory.id }"/>
 			<a class="btn btn-info" href="${ editUrl }" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
 				<i class="halflings-icon edit halflings-icon" ></i> 

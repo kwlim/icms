@@ -44,7 +44,7 @@
 					<h3><fmt:message key="po.date"/></h3>
 				</label>
 				<div class="controls">
-					<c:out value="${ purchase.poDate }"/>
+					<fmt:formatDate value="${ purchase.poDate }" pattern="dd MMM yyyy" />
 				</div>
 			</div>
 		</div>

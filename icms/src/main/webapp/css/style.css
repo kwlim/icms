@@ -3530,3 +3530,7 @@ ul.messagesList li span.date {
 .selectAll {
 	width: 5px
 }
+
+.tableAction {
+	width: 90px
+}

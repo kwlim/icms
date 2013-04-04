@@ -36,12 +36,17 @@
 				<fmt:formatNumber minFractionDigits="2" value="${ job.price }"/>
 			</c:if>
 		</display:column>
-		<display:column titleKey="general.lastUpdatedDate" sortable="true">
-			<c:if test="${ job.modifiedDate != null }">
-				<fmt:formatDate value="${ job.modifiedDate }" pattern="dd/MM/yyyy hh:mm a" />
+		<display:column titleKey="job.jobDate" sortable="true">
+			<c:if test="${ job.jobDate != null }">
+				<fmt:formatDate value="${ job.jobDate }" pattern="dd MMM yyyy" />
 			</c:if>
 		</display:column>
-		<display:column media="html"  titleKey="general.actions" sortable="false">
+		<display:column titleKey="general.lastUpdatedDate" sortable="true">
+			<c:if test="${ job.modifiedDate != null }">
+				<fmt:formatDate value="${ job.modifiedDate }" pattern="dd MMM yyyy hh:mm a" />
+			</c:if>
+		</display:column>
+		<display:column media="html"  titleKey="general.actions" sortable="false" class="tableAction">
 			<c:url var="viewUrl" value="/job/view/${ job.id }"/>
 			<a href="${ viewUrl }" class="btn btn-success" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
 				<i class="halflings-icon zoom-in halflings-icon"></i> 

@@ -33,10 +33,10 @@
 		<display:column titleKey="vendor.office.number" property="officeNumber" sortable="true"/>
 		<display:column titleKey="general.lastUpdatedDate" sortable="true">
 			<c:if test="${ vendor.modifiedDate != null }">
-				<fmt:formatDate value="${ vendor.modifiedDate }" pattern="dd/MM/yyyy hh:mm a" />
+				<fmt:formatDate value="${ vendor.modifiedDate }" pattern="dd MMM yyyy hh:mm a" />
 			</c:if>
 		</display:column>
-		<display:column media="html"  titleKey="general.actions" sortable="false">
+		<display:column media="html"  titleKey="general.actions" sortable="false" class="tableAction">
 			<c:url var="viewUrl" value="/vendor/view/${ vendor.id }"/>
 			<a href="${ viewUrl }" class="btn btn-success" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
 				<i class="halflings-icon zoom-in halflings-icon"></i> 

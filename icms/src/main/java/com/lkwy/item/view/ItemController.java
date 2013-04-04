@@ -216,7 +216,7 @@ public class ItemController {
 			@RequestParam(value = "brandId", required = false) String brandId){
 		
 		String id = "item";
-        String sort = DisplayTagUtil.getListSort(id, request, new String[]{"", "code", "name", "brand", "modifiedDate"}, "code");
+        String sort = DisplayTagUtil.getListSort(id, request, new String[]{"", "code", "name", "category.name", "brand.name", "modifiedDate"}, "code");
         Boolean desc = DisplayTagUtil.getListDesc(id, request, false);
         Integer start = DisplayTagUtil.getListStart(id, request, null);
         

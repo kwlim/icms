@@ -112,7 +112,7 @@ public class VendorController {
 			@RequestParam(value = "name", required = false) String name){
 		
 		String id = "vendor";
-        String sort = DisplayTagUtil.getListSort(id, request, new String[]{"", "companyName", "contactPerson", "contactNumber", "modifiedDate"}, "companyName");
+        String sort = DisplayTagUtil.getListSort(id, request, new String[]{"", "companyName", "contactPerson", "contactNumber", "officeNumber", "modifiedDate"}, "companyName");
         Boolean desc = DisplayTagUtil.getListDesc(id, request, false);
         Integer start = DisplayTagUtil.getListStart(id, request, null);
         

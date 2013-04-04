@@ -279,8 +279,8 @@ public class PurchaseOrderController {
 			@RequestParam(value="vendorId", required=false) String vendorId){
 		
 		String id = "po";
-        String sort = DisplayTagUtil.getListSort(id, request, new String[]{"", "poNumber", "vendor.companyName", "price", "modifiedDate"}, "modifiedDate");
-        Boolean desc = DisplayTagUtil.getListDesc(id, request, false);
+        String sort = DisplayTagUtil.getListSort(id, request, new String[]{"", "poNumber", "vendor.companyName", "price", "poDate", "modifiedDate"}, "poDate");
+        Boolean desc = DisplayTagUtil.getListDesc(id, request, true);
         Integer start = DisplayTagUtil.getListStart(id, request, null);
         
         model.addAttribute("poNumber", poNumber);

@@ -12,7 +12,7 @@
 <c:set var="widgetLabel" value="job.view"/>
 
 
-<commons:widget-header widgetLogo="barcode" widgetLabel="${ widgetLabel }" />
+<commons:widget-header widgetLogo="barcode" widgetLabel="${ widgetLabel }" includeAction="print.jsp"/>
 
 	<div id="myTabContent" class="tab-content">	
 		<div class="row-fluid">
@@ -42,7 +42,7 @@
 						<h3><fmt:message key="job.jobDate"/></h3>
 					</label>
 					<div class="controls">
-						<c:out value="${ jobOrder.jobDate }"/>
+						<fmt:formatDate value="${ jobOrder.jobDate }" pattern="dd MMM yyyy" />
 					</div>
 				</div>
 			</div>
