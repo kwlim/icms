@@ -396,7 +396,7 @@ function template_functions(){
 	});
 
 	/* ---------- Tooltip ---------- */
-	$('[rel="tooltip"],[data-rel="tooltip"]').tooltip({"placement":"bottom",delay: { show: 400, hide: 200 }});
+	$('[rel="tooltip"],[data-rel="tooltip"]').tooltip({"placement":"bottom",delay: { show: 200, hide: 0 }});
 
 	/* ---------- Popover ---------- */
 	$('[rel="popover"],[data-rel="popover"]').popover();

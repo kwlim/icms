@@ -36,7 +36,9 @@ public class PdfJobOrderView extends AbstractPdfView{
 		
 		this.document = document;
 		
-		document.add(new Paragraph("TEST", titleFont));
+		createHeader();
+		
+		document.add(new Paragraph("BODY", titleFont));
 		
 	}
 	

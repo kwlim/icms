@@ -23,8 +23,8 @@
 					</c:choose>
 				</c:forEach>
 			</select>
-			<input id="poDateFrom" name="poDateFrom" class="datepicker" placeholder="<fmt:message key="po.date.from" />" value='<fmt:formatDate value="${ poDateFrom }" pattern="dd/MM/yyyy"/>' />
-			<input id="poDateTo" name="poDateTo" class="datepicker" placeholder="<fmt:message key="po.date.to" />" value="<fmt:formatDate value="${ poDateTo }" pattern="dd/MM/yyyy"/>" />
+			<input id="poDateFrom" name="poDateFrom" class="datepicker input-small" placeholder="<fmt:message key="po.date.from" />" value='<fmt:formatDate value="${ poDateFrom }" pattern="dd/MM/yyyy"/>' />
+			<input id="poDateTo" name="poDateTo" class="datepicker input-small" placeholder="<fmt:message key="po.date.to" />" value="<fmt:formatDate value="${ poDateTo }" pattern="dd/MM/yyyy"/>" />
 			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />
 		</div>
 	</div>

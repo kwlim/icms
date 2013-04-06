@@ -17,13 +17,14 @@
 	<security:http pattern="/login*" security="none"/>
 	
 	<security:http use-expressions="true"  access-denied-page="/unauthorized">
+		<!-- <security:intercept-url pattern="/**" access="permitAll" /> -->
+		
 		<!-- the order here very important: from specific to general -->	
-		<!-- <security:intercept-url pattern="/secure/**" access="hasRole('admin')"/> -->
+		<security:intercept-url pattern="/**" access="isAuthenticated()"/>
 		
-		<security:intercept-url pattern="/**" access="permitAll" />
-		
-		<security:form-login login-page="/login" authentication-failure-url="/login?login_error=1" default-target-url="/"/>
-		<security:logout logout-url="/logout" logout-success-url="/"/>
+		<security:form-login login-page="/login" always-use-default-target="true"
+			default-target-url="/dashboard/" authentication-failure-url="/login?login_error=1" />
+		<security:logout logout-url="/logout" logout-success-url="/login"/>
 	</security:http>
 	
 	<beans:bean id='localAuthenticationProvider' class='com.lkwy.security.service.LocalAuthenticationProvider'/>
@@ -31,4 +32,5 @@
 	<security:authentication-manager>
 		<security:authentication-provider ref="localAuthenticationProvider"/>
 	</security:authentication-manager>
+	
 </beans:beans>

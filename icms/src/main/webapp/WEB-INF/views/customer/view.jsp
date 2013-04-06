@@ -74,13 +74,13 @@
 
 <commons:widget-footer />
 
-<commons:widget-header widgetLogo="globe" widgetLabel="customer.view.history" />
+<commons:widget-header widgetLogo="globe" widgetLabel="customer.view.history" includeAction="newJob.jsp"/>
 
 <form id="filterForm" method="GET" action="?" class="form-search">
 	<div class="well">
 		<div class="pull-right">
-			<input id="dateFrom" name="dateFrom" class="datepicker" placeholder="<fmt:message key="general.date.from" />" value='<fmt:formatDate value="${ dateFrom }" pattern="dd/MM/yyyy"/>' />
-			<input id="dateTo" name="dateTo" class="datepicker" placeholder="<fmt:message key="general.date.to" />" value="<fmt:formatDate value="${ dateTo }" pattern="dd/MM/yyyy"/>" />
+			<input id="dateFrom" name="dateFrom" class="datepicker input-small" placeholder="<fmt:message key="general.date.from" />" value='<fmt:formatDate value="${ dateFrom }" pattern="dd/MM/yyyy"/>' />
+			<input id="dateTo" name="dateTo" class="datepicker input-small" placeholder="<fmt:message key="general.date.to" />" value="<fmt:formatDate value="${ dateTo }" pattern="dd/MM/yyyy"/>" />
 			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />
 		</div>
 	</div>

@@ -4,7 +4,7 @@
 	<div id="sidebar-left" class="span1">
 		<div class="nav-collapse sidebar-nav">
 			<ul class="nav nav-tabs nav-stacked main-menu">
-				<li><a href="${pageContext.request.contextPath}/dashboard"><i class="fa-icon-dashboard"></i><span class="hidden-tablet"> Dashboard</span></a></li>	
+				<li><a href="${pageContext.request.contextPath}/dashboard/"><i class="fa-icon-dashboard"></i><span class="hidden-tablet"> Dashboard</span></a></li>	
 				<li><a href="${pageContext.request.contextPath}/customer/"><i class="fa-icon-globe"></i><span class="hidden-tablet"> <fmt:message key="customer.label"/></span></a></li>
 				<li><a href="${pageContext.request.contextPath}/itemCategory/"><i class="fa-icon-tags"></i><span class="hidden-tablet"> <fmt:message key="item.category.label"/></span></a></li>
 				<li><a href="${pageContext.request.contextPath}/item/"><i class="fa-icon-shopping-cart"></i><span class="hidden-tablet"> <fmt:message key="item.label"/></span></a></li>

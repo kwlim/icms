@@ -286,9 +286,16 @@ public class JobOrderController {
 	}
 	
 	@RequestMapping("/new")
-	public String newJobOrder(ModelMap model){
+	public String newJobOrder(ModelMap model, @RequestParam(value="customerId", required=false) String customerId){
 		
 		JobOrder job = new JobOrder();
+		job.setJobDate(new Date());
+		
+		if(StringUtils.isNotEmpty(customerId)){
+			Customer customer = customerService.getCustomerById(customerId);
+			job.setCustomer(customer);
+		}
+		
 		model.addAttribute("jobOrder", job);
 		
 		return "job/new";

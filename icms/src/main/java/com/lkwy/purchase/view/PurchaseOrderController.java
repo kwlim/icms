@@ -271,9 +271,16 @@ public class PurchaseOrderController {
 	}
 	
 	@RequestMapping("/new")
-	public String newPo(ModelMap model){
+	public String newPo(ModelMap model, @RequestParam(value="vendorId", required=false) String vendorId){
 		
 		PurchaseOrder po = new PurchaseOrder();
+		po.setPoDate(new Date());
+		
+		if(StringUtils.isNotEmpty(vendorId)){
+			Vendor vendor = vendorService.getVendorById(vendorId);
+			po.setVendor(vendor);
+		}
+		
 		model.addAttribute("purchaseOrder", po);
 		
 		return "po/new";
@@ -299,7 +306,7 @@ public class PurchaseOrderController {
         
         Pageable pageable = new PageRequest(start, DisplayTagUtil.DEFAULT_PAGE_SIZE, (desc != null && desc)?Sort.Direction.DESC:Sort.Direction.ASC, sort);
         
-        Page<PurchaseOrder> page = poService.getPoByPoNumberDateVendor(poNumber, null, null, vendorId, pageable);
+        Page<PurchaseOrder> page = poService.getPoByPoNumberDateVendor(poNumber, poDateFrom, poDateTo, vendorId, pageable);
         
         model.put("rows", page);
         model.put("size", (int)page.getTotalElements());

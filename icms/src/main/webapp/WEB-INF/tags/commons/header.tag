@@ -31,7 +31,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="index.html"><span><fmt:message key="general.app.name"/></span></a>
+				<a class="brand" href="${pageContext.request.contextPath}/dashboard/"><span><fmt:message key="general.app.name"/></span></a>
 								
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
@@ -43,23 +43,25 @@
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
-								<!-- <li><a href="${pageContext.request.contextPath}/item/category/list"><i class="halflings-icon white tags"></i> <fmt:message key="item.category.label"/></a></li> -->
 								<li><a href="${pageContext.request.contextPath}/billing/" title=""><i class="halflings-icon white road"></i> <fmt:message key="billing.label"/></a></li>
 								<li><a href="${pageContext.request.contextPath}/group/"><i class="halflings-icon white th"></i> <fmt:message key="user.group"/></a></li>
 								<li><a href="${pageContext.request.contextPath}/user/"><i class="halflings-icon white eye-open"></i> <fmt:message key="user.label"/></a></li>
 							</ul>
 						</li>
 						<!-- start: User Dropdown -->
+						<sec:authorize access="isAuthenticated()">
 						<li class="dropdown">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-								<i class="halflings-icon white user"></i> Kit Yee Loh
+								<i class="halflings-icon white user"></i> <c:out value="${ pageContext['request'].userPrincipal.principal.fullname }"/>
 								<span class="caret"></span>
 							</a>
+							
 							<ul class="dropdown-menu">
-								<li><a href="#"><i class="halflings-icon white user"></i> Profile</a></li>
+								<li><a href="${ pageContext.request.contextPath }/profile"><i class="halflings-icon white user"></i> Profile</a></li>
 								<li><a href="${ pageContext.request.contextPath }/logout"><i class="halflings-icon white off"></i> Logout</a></li>
 							</ul>
 						</li>
+						</sec:authorize>
 						<!-- end: User Dropdown -->
 					</ul>
 				</div>

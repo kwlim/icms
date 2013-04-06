@@ -62,7 +62,7 @@ public class User extends AbstractAuditablePersistable{
     
     public String getFullname(){
     	StringBuilder fullname = new StringBuilder(firstname);
-    	fullname.append(lastname);
+    	fullname.append(" ").append(lastname);
     	return fullname.toString();
     }
     
