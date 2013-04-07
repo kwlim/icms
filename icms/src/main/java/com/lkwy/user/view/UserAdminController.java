@@ -119,7 +119,7 @@ public class UserAdminController {
                 return "user/new";
             }
 
-            return "redirect:/user/list";
+            return "redirect:/user";
         }
     }
     
@@ -128,6 +128,13 @@ public class UserAdminController {
         
         if(result.hasErrors()){
             invalid = true;
+        }
+        
+        if(StringUtils.isNotEmpty(userForm.getEmail())){
+        	if(userService.checkDuplicateEmail(userForm.getEmail(), userForm.getId())){
+        		invalid = true;
+                result.rejectValue("email", "Duplicate.userDTO.email");
+            }
         }
         
         if(!userForm.isEdit()){

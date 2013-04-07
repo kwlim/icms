@@ -168,7 +168,8 @@ public class StockCheckService {
 				StringBuilder desc = new StringBuilder("Job Order (");
 				desc.append(jo.getJobOrder().getJobNumber());
 				desc.append(")");
-				transactionStockCheckList.add(new StockCheck(jo.getJobOrder().getJobDate(), jo.getItem(), jo.getUnit(), StockCheck.STOCK_CHECK_TYPE.JOB.getValue(), desc.toString(), jo.getJobOrder().getId(), (double)jo.getStockPrice().floatValue()));
+				transactionStockCheckList
+					.add(new StockCheck(jo.getJobOrder().getJobDate(), jo.getItem(), jo.getUnit(), StockCheck.STOCK_CHECK_TYPE.JOB.getValue(), desc.toString(), jo.getJobOrder().getId(), (double)jo.getStockPrice().floatValue()));
 			}
 		}
 		

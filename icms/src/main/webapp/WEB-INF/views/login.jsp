@@ -2,8 +2,6 @@
 
 <commons:header-login/>
 
-
-
 <div class="login-box"> 
 	<c:if test="${not empty param.login_error}">
 	<div class="alert alert-error">
@@ -12,8 +10,7 @@
 	</c:if>
 	
 	<div class="icons">
-		<a href="index.html"><i class="halflings-icon home"></i></a>
-		<a href="#"><i class="halflings-icon cog"></i></a>
+		<h2>ICMS</h2>
 	</div>
 	<h2>Login to your account</h2>
 	<form class="form-horizontal" action="${ pageContext.request.contextPath }/j_spring_security_check"  method="post">		
@@ -29,9 +26,9 @@
 		</div>
 		<div class="clearfix"></div>
 		
-		<label class="remember" for="remember"><input type="checkbox" id="remember" />Remember me</label>
-
-		<div class="button-login">	
+		<!-- <label class="remember" for="remember"><input type="checkbox" id="remember" />Remember me</label> -->
+		
+		<div class="button-login">
 			<button type="submit" class="btn btn-primary"><fmt:message key="general.login" /></button>
 		</div>
 		<div class="clearfix"></div>

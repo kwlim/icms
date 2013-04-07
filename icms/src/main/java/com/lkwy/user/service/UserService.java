@@ -35,6 +35,18 @@ public class UserService {
 	@Autowired
 	private GroupService groupService;
 	
+	public boolean checkDuplicateEmail(String email, String userId){
+		if(countUserByEmailAndNotUserId(email, userId) > 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public Long countUserByEmailAndNotUserId(String email, String userId){
+		return userRepo.countByEmailAndNotUserId(email, userId);
+	}
+	
 	public Page<User> getUserByUsernameFirstnameLastnameGroup(String username, String firstname, String lastname, String groupId, Pageable page){
 		String usernameWc = CommonUtil.addWildCard(username);
 		String firstnameWc = CommonUtil.addWildCard(firstname);

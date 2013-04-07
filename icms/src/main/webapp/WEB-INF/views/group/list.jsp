@@ -35,8 +35,8 @@
 		</display:column>
 		<display:column media="html"  titleKey="general.actions" sortable="false" class="tableAction">
 			<c:url var="editUrl" value="/group/edit/${ group.id }"/>
-			<a class="btn btn-success" href="${ editUrl }" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
-				<i class="halflings-icon zoom-in"></i> 
+			<a class="btn btn-info" href="${ editUrl }" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
+				<i class="halflings-icon edit"></i> 
 			</a>
 		</display:column>
 	</display:table>

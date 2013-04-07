@@ -93,6 +93,13 @@ static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
             valid = false;
         }
         
+        if(StringUtils.isNotEmpty(profileForm.getEmail())){
+        	if(userService.checkDuplicateEmail(profileForm.getEmail(), profileForm.getId())){
+        		valid = false;
+                result.rejectValue("email", "Duplicate.userDTO.email");
+            }
+        }
+        
         if(StringUtils.isNotEmpty(profileForm.getPassword())){
             
             if(StringUtils.isEmpty(profileForm.getRetypePassword())){

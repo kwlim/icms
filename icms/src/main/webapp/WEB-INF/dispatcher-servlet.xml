@@ -17,10 +17,11 @@
 
 	<!-- resources exclusions from servlet mapping -->
 	<mvc:resources mapping="/css/**" location="/css/" />
-	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/font/**" location="/font/" />
+	<mvc:resources mapping="/img/**" location="/img/" />
 	<mvc:resources mapping="/js/**" location="/js/" />
 	<mvc:resources mapping="/favicon.ico" location="/favicon.ico" />
-
+	
 	<!-- The BeanNameViewResolver is used to pick up the visits view name (below). 
 		It has the order property set to 1, which means that this will be the first 
 		view resolver to be used after the delegating content negotiating view resolver. -->

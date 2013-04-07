@@ -1,21 +1,10 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
 
 <commons:header />
-<commons:widget-header widgetLogo="eye-open" widgetLabel="Users"/>
 
-<fmt:message key='user.profile' var="pageModule"/>
-<fmt:message key='user.profile.update' var="pageTitle"/>
+<commons:notification-message/>
 
-<c:if test="${!empty message}">
-	<div class="alert alert-success">
-		<fmt:message key='${message}' />
-	</div>
-</c:if>
-<c:if test="${!empty error}">
-	<div class="alert alert-error">
-		<fmt:message key='${error}' />
-	</div>
-</c:if>
+<commons:widget-header widgetLogo="eye-open" widgetLabel="user.profile"/>
 
 <form:form class="form-horizontal" commandName="userProfileDTO" method="POST"
 	action="${pageContext.request.contextPath}/profile">
@@ -75,6 +64,7 @@
 	<div class="control-group <form:errors path="email" cssClass="error">error</form:errors>">
 		<label class="control-label" for="email">
 			<fmt:message key="user.email"/>
+			<span class="mandatory"><fmt:message key="general.mandatory"/></span>
 		</label>
 		<div class="controls">
 			<form:input path="email" />

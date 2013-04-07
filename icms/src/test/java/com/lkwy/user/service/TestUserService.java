@@ -29,6 +29,12 @@ public class TestUserService extends AbstractTest{
 	GroupService groupService;
 	
 	@Test
+	public void testcountUserByEmail(){
+		long count = userService.countUserByEmailAndNotUserId("admin2@email.com", "ad0a2b67-ab6a-48c3-b663-2f6e945e62c9");
+		LOGGER.debug("count = {}", count);
+	}
+	
+	@Test
 	public void testGetActiveUserByUsername(){
 		User user = userService.getActiveUserByUsername("admin3");
 		LOGGER.debug("user = " + user);

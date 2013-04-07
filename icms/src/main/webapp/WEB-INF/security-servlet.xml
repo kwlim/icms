@@ -11,9 +11,10 @@
         http://www.springframework.org/schema/security 
         http://www.springframework.org/schema/security/spring-security.xsd">
 	
-	<security:http pattern="/js/**" security="none" />
-	<security:http pattern="/images/**" security="none" />
 	<security:http pattern="/css/**" security="none" />
+	<security:http pattern="/font*" security="none"/>
+	<security:http pattern="/img/**" security="none" />
+	<security:http pattern="/js/**" security="none" />
 	<security:http pattern="/login*" security="none"/>
 	
 	<security:http use-expressions="true"  access-denied-page="/unauthorized">

@@ -121,6 +121,14 @@ public class SecurityManager {
         
     }
     
+    public boolean resetPassword(String username, String email){
+    	boolean result = true;
+    	
+    	
+    	
+    	return result;
+    }
+    
     protected List<PermissionDTO> convertPermissionListToDTO(List<GroupPermission> permissionList){
         
         List<PermissionDTO> permissionDtoList = Lists.newArrayList();

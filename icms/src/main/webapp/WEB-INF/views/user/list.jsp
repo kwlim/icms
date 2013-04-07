@@ -45,6 +45,7 @@
 		<display:column titleKey="general.name" property="username" sortable="true"/>
 		<display:column titleKey="user.firstname" property="firstname" sortable="true"/>
 		<display:column titleKey="user.lastname" property="lastname" sortable="true"/>
+		<display:column titleKey="user.email" property="email" sortable="true"/>
 		<display:column titleKey="user.group" property="group.name" sortable="true"/>
 		<display:column titleKey="user.status" sortable="true">
 			<c:choose>
@@ -63,8 +64,8 @@
 		</display:column>
 		<display:column media="html"  titleKey="general.actions" sortable="false" class="tableAction">
 			<c:url var="editUrl" value="/user/edit/${ user.id }"/>
-			<a class="btn btn-success" href="${ editUrl }" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
-				<i class="halflings-icon zoom-in"></i> 
+			<a class="btn btn-info" href="${ editUrl }" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
+				<i class="halflings-icon edit"></i> 
 			</a>
 		</display:column>
 	</display:table>

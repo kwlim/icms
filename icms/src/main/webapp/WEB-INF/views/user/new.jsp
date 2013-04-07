@@ -75,6 +75,7 @@
 	<div class="control-group <form:errors path="email" cssClass="error">error</form:errors>">
 		<label class="control-label" for="email">
 			<fmt:message key="user.email"/>
+			<span class="mandatory"><fmt:message key="general.mandatory"/></span>
 		</label>
 		<div class="controls">
 			<form:input path="email" />
