@@ -15,6 +15,41 @@ public class TestCommonUtil {
 	static final Logger LOGGER = LoggerFactory.getLogger(TestCommonUtil.class);
 	
 	@Test
+	public void testconvertNumberToStringCode_illegalargument(){
+		int value = 1;
+		try{
+			String code = CommonUtil.convertNumberToStringCode(0, value);
+			LOGGER.debug("{}", code);
+			Assert.assertTrue(false);
+		}
+		catch(IllegalArgumentException e){
+			LOGGER.error("", e);
+			Assert.assertTrue(true);
+		}
+	}
+	
+	@Test
+	public void testconvertNumberToStringCode(){
+		int value = 1;
+		String code = CommonUtil.convertNumberToStringCode(1, value);
+		LOGGER.debug("{}", code);
+	}
+	
+	@Test
+	public void testconvertNumberToStringCode_2(){
+		int value = 1;
+		String code = CommonUtil.convertNumberToStringCode(5, value);
+		LOGGER.debug("{}", code);
+	}
+
+	@Test
+	public void testconvertNumberToStringCode_singleParam(){
+		int value = 100;
+		String code = CommonUtil.convertNumberToStringCode(value);
+		LOGGER.debug("{}", code);
+	}
+	
+	@Test
 	public void testAddWildCard(){
 		String name = null;
 		String result = CommonUtil.addWildCard(name);
