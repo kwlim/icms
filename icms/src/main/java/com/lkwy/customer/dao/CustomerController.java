@@ -2,11 +2,14 @@ package com.lkwy.customer.dao;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
@@ -22,8 +25,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.common.collect.Lists;
+import com.lkwy.common.entity.AutoCompleteDTO;
 import com.lkwy.common.util.DisplayTagUtil;
 import com.lkwy.customer.entity.Customer;
 import com.lkwy.customer.service.CustomerService;
@@ -34,11 +40,27 @@ import com.lkwy.job.service.JobOrderService;
 @RequestMapping("/customer")
 public class CustomerController {
 	
+	static final Logger LOGGER = LoggerFactory.getLogger(CustomerController.class);
+	
 	@Autowired
 	CustomerService customerService;
 	
 	@Autowired
 	JobOrderService jobService;
+	
+	@RequestMapping("/json/list")
+	public @ResponseBody List<AutoCompleteDTO> jsonGetCustomer(String carPlateNumber){
+		
+		List<AutoCompleteDTO> acList = Lists.newArrayList();
+		List<Customer> customerList =customerService.getCustomerByLikeCarPlateNumber(carPlateNumber); 
+		for(Customer customer: customerList){
+			acList.add(new AutoCompleteDTO(customer.getId(), customer.getCarPlateNumber()));
+		}
+		
+		LOGGER.debug("jsonGetCustomer|{}|", carPlateNumber, acList.size());
+		
+		return acList;
+	}
 	
 	@RequestMapping("delete")
 	public String deleteCustomer(ModelMap model, RedirectAttributes redirectAttributes, @RequestParam(value = "id", required = false) String[] ids){

@@ -9,6 +9,7 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -39,6 +40,9 @@ public class JobOrder extends AbstractAuditablePersistable{
 	private Double price;
 	
 	private Float discount;
+
+	@Transient
+	private String autoCompleteCarPlateNumber;
 	
 	public String getJobNumber() {
 		return jobNumber;
@@ -96,4 +100,12 @@ public class JobOrder extends AbstractAuditablePersistable{
 		this.discount = discount;
 	}
 	
+	public String getAutoCompleteCarPlateNumber() {
+		return autoCompleteCarPlateNumber;
+	}
+	
+	public void setAutoCompleteCarPlateNumber(String autoCompleteCarPlateNumber) {
+		this.autoCompleteCarPlateNumber = autoCompleteCarPlateNumber;
+	}
+		
 }

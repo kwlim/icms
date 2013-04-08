@@ -24,10 +24,8 @@
 					<span class="mandatory"><fmt:message key="general.mandatory"/></span>
 				</label>
 				<div class="controls">
-					<form:select path="customer.id">
-						<form:option value=""></form:option>
-						<form:options items="${ allCustomerList }" itemLabel="carPlateNumber" itemValue="id"/>
-					</form:select>
+					<form:input path="autoCompleteCarPlateNumber"/>
+					<form:hidden path="customer.id" />
 					<div><form:errors path="customer.id" cssClass="help-inline"/></div>
 				</div>
 			</div>
@@ -229,11 +227,39 @@
 <commons:widget-footer />
 </c:if>
 
+
 <script type="text/javascript">
 
 $(document).ready(function() {
 	updateItemTotal();
+	initCustomerAutoComplete();
 });
+
+function initCustomerAutoComplete(){
+	$('#autoCompleteCarPlateNumber').autocomplete({
+	    source: function (request, response) {
+	        $.getJSON("${pageContext.request.contextPath}/customer/json/list",
+	        	{
+					carPlateNumber: $("#autoCompleteCarPlateNumber").val()
+				},
+	        	function (data) {
+	            	response($.map(data, function (value, key) {
+	            		return {
+		                    label: value.data,
+		                    value: value.data,
+		                    id: value.value
+	                	};
+	            	}));
+	        	}
+			);
+	    },
+	    minLength: 2,
+	    delay: 100,
+	    select: function( event, ui ) {
+	        $('#customer\\.id').val(ui.item.id);
+	    },
+	});
+}
 
 function updateItemTotal(){
 	var totalItems = ${fn:length(jobOrder.jobItemList)};

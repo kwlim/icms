@@ -25,6 +25,14 @@ public class Customer extends AbstractAuditablePersistable{
 	@Lob
 	private String remark;
 	
+	public Customer() {
+		
+	}
+	
+	public Customer(String carPlateNumber) {
+		this.carPlateNumber = carPlateNumber;
+	}
+	
 	public String getCarPlateNumber() {
 		return carPlateNumber;
 	}

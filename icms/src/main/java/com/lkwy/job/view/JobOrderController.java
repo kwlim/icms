@@ -152,6 +152,20 @@ public class JobOrderController {
 		}
 		
 		JobOrder savedJob = null;
+		
+		//if customer id is empty but autocompletecustomercarplate is not then create new customer
+		if(StringUtils.isEmpty(job.getCustomer().getId()) && StringUtils.isNotEmpty(job.getAutoCompleteCarPlateNumber())){
+			//search is there any existing customer, if yes then use it
+			Customer customer = customerService.getCustomerByCarPlateNumber(job.getAutoCompleteCarPlateNumber());
+			if(customer == null){
+				//create new and assign to job
+				customerService.saveCustomer(new Customer(job.getAutoCompleteCarPlateNumber()));
+			}
+			else{
+				job.setCustomer(customer);
+			}
+		}
+		
 		if(StringUtils.isEmpty(job.getId())){
 			savedJob = jobService.saveJob(job);
 		}else{
@@ -184,7 +198,7 @@ public class JobOrderController {
 		
 		submittionError = result.hasErrors();
 		
-		if(job.getCustomer() == null || StringUtils.isEmpty(job.getCustomer().getId())){
+		if(job.getCustomer() == null || (StringUtils.isEmpty(job.getCustomer().getId()) && StringUtils.isEmpty(job.getAutoCompleteCarPlateNumber()))){
 			submittionError = true;
 			result.rejectValue("customer.id", "NotNull.job.customer");
 		}
@@ -236,13 +250,14 @@ public class JobOrderController {
 	@RequestMapping("/edit/{id}")
 	public String editJob(ModelMap model, @PathVariable("id") String id){
 		JobOrder job = jobService.getJobById(id);
+		job.setAutoCompleteCarPlateNumber(job.getCustomer().getCarPlateNumber());
 		model.addAttribute("jobOrder", job);
 		
 		JobItem jobItem = new JobItem();
 		jobItem.setJobOrder(job);
 		model.addAttribute("jobItem", jobItem);
 		
-		getJobItemLatestStockPrice(job.getJobItemList());
+		
 		
 		return "job/new";
 	}
@@ -279,12 +294,6 @@ public class JobOrderController {
 		return new ModelAndView("pdfJobOrderView", model);
 	}
 	
-	public void getJobItemLatestStockPrice(List<JobItem> jobItemList){
-		if(jobItemList != null && !jobItemList.isEmpty()){
-			
-		}
-	}
-	
 	@RequestMapping("/new")
 	public String newJobOrder(ModelMap model, @RequestParam(value="customerId", required=false) String customerId){
 		
@@ -294,6 +303,7 @@ public class JobOrderController {
 		if(StringUtils.isNotEmpty(customerId)){
 			Customer customer = customerService.getCustomerById(customerId);
 			job.setCustomer(customer);
+			job.setAutoCompleteCarPlateNumber(customer.getCarPlateNumber());
 		}
 		
 		model.addAttribute("jobOrder", job);
