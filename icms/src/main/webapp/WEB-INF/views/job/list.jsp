@@ -9,7 +9,7 @@
 <form id="filterForm" method="GET" action="?" class="form-search">
 	<div class="well">
 		<div class="pull-right">
-			<input id="jobNumberCustomer" placeholder="<fmt:message key="job.joNumberCustomer" />" name="jobNumberCustomer" class="input-medium" value="${jobNumberCustomer}" />
+			<input id="jobNumberCustomer"name="jobNumberCustomer" placeholder="<fmt:message key="job.joNumberCustomer" />" class="input-medium" value="${jobNumberCustomer}" />
 			<input id="jobDateFrom" name="jobDateFrom" class="datepicker input-small" placeholder="<fmt:message key="job.date.from" />" value='<fmt:formatDate value="${ jobDateFrom }" pattern="dd/MM/yyyy"/>' />
 			<input id="jobDateTo" name="jobDateTo" class="datepicker input-small" placeholder="<fmt:message key="job.date.to" />" value="<fmt:formatDate value="${ jobDateTo }" pattern="dd/MM/yyyy"/>" />
 			<input type="submit" class="btn btn-primary" value="<fmt:message key='general.search' />" />

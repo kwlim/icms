@@ -3,6 +3,7 @@ package com.lkwy.job.service;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.lkwy.code.service.CodeTrackService;
 import com.lkwy.common.util.CommonUtil;
 import com.lkwy.job.dao.IJobItemRepository;
 import com.lkwy.job.dao.IJobOrderRepository;
@@ -27,6 +29,9 @@ public class JobOrderService {
 	
 	@Autowired
 	IJobItemRepository jobItemRepo;
+	
+	@Autowired
+	CodeTrackService codeTrackService;
 	
 	public Page<JobOrder> getJobOrderByCustomerIdAndDateRange(String customerId, Date dateFrom, Date dateTo, Pageable pageable){
 		return joRepo.findAll(JobOrderSpecifications.byCustomerIdAndDateRange(customerId, dateFrom, dateTo), pageable);
@@ -57,7 +62,14 @@ public class JobOrderService {
 	}
 	
 	public JobOrder saveJob(JobOrder jo){
-		return joRepo.save(jo);
+		
+		JobOrder savedJob = joRepo.save(jo);
+
+		if(StringUtils.isEmpty(jo.getId())){
+			codeTrackService.incrementJobCode();
+		}
+		
+		return savedJob;
 	}
 	
 	public void deleteJob(String id){

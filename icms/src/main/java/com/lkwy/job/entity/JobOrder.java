@@ -41,6 +41,8 @@ public class JobOrder extends AbstractAuditablePersistable{
 	
 	private Float discount;
 
+	private Integer millage;
+	
 	@Transient
 	private String autoCompleteCarPlateNumber;
 	
@@ -107,5 +109,13 @@ public class JobOrder extends AbstractAuditablePersistable{
 	public void setAutoCompleteCarPlateNumber(String autoCompleteCarPlateNumber) {
 		this.autoCompleteCarPlateNumber = autoCompleteCarPlateNumber;
 	}
-		
+
+	public Integer getMillage() {
+		return millage;
+	}
+
+	public void setMillage(Integer millage) {
+		this.millage = millage;
+	}
+	
 }

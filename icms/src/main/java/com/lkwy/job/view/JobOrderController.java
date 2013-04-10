@@ -34,6 +34,7 @@ import com.lkwy.brand.entity.Brand;
 import com.lkwy.brand.service.BrandService;
 import com.lkwy.category.entity.ItemCategory;
 import com.lkwy.category.service.ItemCategoryService;
+import com.lkwy.code.service.CodeTrackService;
 import com.lkwy.common.util.DisplayTagUtil;
 import com.lkwy.customer.entity.Customer;
 import com.lkwy.customer.service.CustomerService;
@@ -52,22 +53,25 @@ public class JobOrderController {
 	static final Logger LOGGER = LoggerFactory.getLogger(JobOrderController.class);
 	
 	@Autowired
-	JobOrderService jobService;
+	private JobOrderService jobService;
 	
 	@Autowired
-	PurchaseOrderService poService;
+	private PurchaseOrderService poService;
 	
 	@Autowired
-	CustomerService customerService;
+	private CustomerService customerService;
 	
 	@Autowired
-	ItemService itemService;
+	private ItemService itemService;
 
 	@Autowired
-	ItemCategoryService itemCatService;
+	private ItemCategoryService itemCatService;
 
 	@Autowired
-	BrandService brandService;
+	private BrandService brandService;
+	
+	@Autowired
+	private CodeTrackService codeTrackService;
 	
 	@ModelAttribute("allBrandList")
 	public List<Brand> getAllBrand(){
@@ -159,7 +163,8 @@ public class JobOrderController {
 			Customer customer = customerService.getCustomerByCarPlateNumber(job.getAutoCompleteCarPlateNumber());
 			if(customer == null){
 				//create new and assign to job
-				customerService.saveCustomer(new Customer(job.getAutoCompleteCarPlateNumber()));
+				Customer newCustomer = customerService.saveCustomer(new Customer(job.getAutoCompleteCarPlateNumber()));
+				job.setCustomer(newCustomer);
 			}
 			else{
 				job.setCustomer(customer);
@@ -299,6 +304,7 @@ public class JobOrderController {
 		
 		JobOrder job = new JobOrder();
 		job.setJobDate(new Date());
+		job.setJobNumber(codeTrackService.getNextJobCode());
 		
 		if(StringUtils.isNotEmpty(customerId)){
 			Customer customer = customerService.getCustomerById(customerId);
@@ -313,12 +319,12 @@ public class JobOrderController {
 	
 	@RequestMapping(value={"/", ""})
 	public String list(ModelMap model, HttpServletRequest request, 
-			@RequestParam(value="joNumberCustomer", required=false) String jobNumberCustomer, 
-			@RequestParam(value="joDateFrom", required=false) Date jobDateFrom,
-			@RequestParam(value="joDateTo", required=false) Date jobDateTo){
+			@RequestParam(value="jobNumberCustomer", required=false) String jobNumberCustomer, 
+			@RequestParam(value="jobDateFrom", required=false) Date jobDateFrom,
+			@RequestParam(value="jobDateTo", required=false) Date jobDateTo){
 		
 		String id = "job";
-        String sort = DisplayTagUtil.getListSort(id, request, new String[]{"", "joNumber", "customer.carPlateNumber", "price", "jobDate", "modifiedDate"}, "jobDate");
+        String sort = DisplayTagUtil.getListSort(id, request, new String[]{"", "joNumber", "customer.carPlateNumber", "price", "jobDate", "modifiedDate"}, "modifiedDate");
         Boolean desc = DisplayTagUtil.getListDesc(id, request, true);
         Integer start = DisplayTagUtil.getListStart(id, request, null);
         

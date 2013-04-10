@@ -17,47 +17,58 @@
 	<form:hidden path="id"/>
 	
 	<div class="row-fluid">
-		<div class="span6">
+		<div class="span4">
 			<div class="control-group <form:errors path="customer.id" cssClass="error">error</form:errors>">
 				<label class="control-label" for="customer.id">
 					<fmt:message key="customer.label"/>
 					<span class="mandatory"><fmt:message key="general.mandatory"/></span>
 				</label>
 				<div class="controls">
-					<form:input path="autoCompleteCarPlateNumber"/>
+					<form:input path="autoCompleteCarPlateNumber" cssClass="input-medium"/>
 					<form:hidden path="customer.id" />
 					<div><form:errors path="customer.id" cssClass="help-inline"/></div>
 				</div>
 			</div>
 		</div>
-		<div class="span6">
-			<div class="control-group <form:errors path="jobNumber" cssClass="error">error</form:errors>">
-				<label class="control-label" for="jobNumber">
-					<fmt:message key="job.number"/>
-					<span class="mandatory"><fmt:message key="general.mandatory"/></span>
+		<div class="span4">
+			<div class="control-group <form:errors path="millage" cssClass="error">error</form:errors>">
+				<label class="control-label" for="millage">
+					<fmt:message key="job.millage"/>
 				</label>
 				<div class="controls">
-					<form:input path="jobNumber" />
-					<div><form:errors path="jobNumber" cssClass="help-inline"/></div>
+					<form:input path="millage" cssClass="input-medium"/>
+					<div><form:errors path="millage" cssClass="help-inline"/></div>
 				</div>
 			</div>
 		</div>
+		<div class="span4">
+			<div class="control-group <form:errors path="jobNumber" cssClass="error">error</form:errors>">
+				<label class="control-label" for="jobNumber">
+					<fmt:message key="job.number"/>
+				</label>
+				<div class="control-label">
+					<form:hidden path="jobNumber" />
+					<strong><c:out value="${ jobOrder.jobNumber }"/></strong>
+				</div>
+			</div>
+		</div>
+		
 	</div>
 	
 	<div class="row-fluid">
-		<div class="span6">
+		<div class="span4">
 			<div class="control-group <form:errors path="jobDate" cssClass="error">error</form:errors>">
 				<label class="control-label" for="jobDate">
 					<fmt:message key="job.jobDate"/>
 					<span class="mandatory"><fmt:message key="general.mandatory"/></span>
 				</label>
 				<div class="controls">
-					<form:input path="jobDate" class="datepicker"/>
+					<form:input path="jobDate" cssClass="datepicker input-medium"/>
 					<div><form:errors path="jobDate" cssClass="help-inline"/></div>
 				</div>
 			</div>
 		</div>
-		<div class="span6">
+		<div class="span8">
 			<label class="control-label" for="remark">
 			<fmt:message key="general.remark"/>
 		</label>
@@ -119,22 +130,22 @@
 	<div class="well well-small">
 	<div class="row-fluid">
 		<div class="span5">
-			<h3>Item Name</h3>
+			<h3><fmt:message key="job.item.name"/></h3>
 		</div>
 		<div class="span2">
-			<h3>Stock Price</h3>
+			<h3><fmt:message key="job.item.stockPrice"/></h3>
 		</div>
 		<div class="span1">
-			<h3>Unit</h3>
+			<h3><fmt:message key="job.item.unit"/></h3>
 		</div>
 		<div class="span1">
-			<h3>Markup</h3>
+			<h3><fmt:message key="job.item.price"/></h3>
 		</div>
 		<div class="span1">
-			<h3>Labour</h3>
+			<h3><fmt:message key="job.item.labour"/></h3>
 		</div>
 		<div class="span1">
-			<div class="pull-right"><h3>Total</h3></div>
+			<div class="pull-right"><h3><fmt:message key="general.total"/></h3></div>
 		</div>
 		<div class="span1">
 			&nbsp;
@@ -164,7 +175,11 @@
 			<c:out value="${ tempJobItem.item.name }"/> (<c:out value="${ tempJobItem.item.code }"/>)
 		</div>
 		<div class="span2 control-group <form:errors path="jobItemList[${status.index }].stockPrice" cssClass="error">error</form:errors>">
+			
+			<a href="javascript:toggleStockPrice('exp_${tempJobItem.id}')"><i class="halflings-icon plus" id="exp_${tempJobItem.id}_icon"></i></a>
+			<span id="exp_${tempJobItem.id}" style="display: none">
 			<form:input path="jobItemList[${status.index }].stockPrice" cssClass="input-mini" onchange="updateItemTotal()"/>
+			</span>
 			<form:errors path="jobItemList[${status.index }].stockPrice" cssClass="help-inline"/>
 		</div>
 		<div class="span1 control-group <form:errors path="jobItemList[${status.index }].unit" cssClass="error">error</form:errors>">
@@ -197,7 +212,7 @@
 		<div class="span5"></div>
 		<div class="span2"></div>
 		<div class="span1"></div>
-		<div class="span2"><h3>Discount</h3></div>
+		<div class="span2"><h3><fmt:message key="job.discount"/></h3></div>
 		<div class="span1 control-group <form:errors path="discount" cssClass="error">error</form:errors>">
 			<form:input path="discount" cssClass="input-mini" onchange="updateItemTotal()"/>
 			<form:errors path="discount" cssClass="help-inline"/>
@@ -208,7 +223,7 @@
 		<div class="span5"></div>
 		<div class="span2"></div>
 		<div class="span1"></div>
-		<div class="span2"><h3>Grand Total</h3></div>
+		<div class="span2"><h3><fmt:message key="general.grandTotal"/></h3></div>
 		<div class="span1">
 			<div id="grandTotal" class="pull-right">300.00</div>
 		</div>
@@ -320,6 +335,19 @@ function deleteRecords() {
     }
     
     return false;
+}
+
+function toggleStockPrice(exp_id){
+	var iconId = "#"+exp_id+"_icon";
+	var targetSection = "#"+exp_id;
+	
+	$(targetSection).toggle();
+	if($(targetSection).is(":visible")){
+		$(iconId).attr('class', 'halflings-icon minus');
+	}else{
+		$(iconId).attr('class', 'halflings-icon plus');
+	}
+	
 }
 
 function cancel(){

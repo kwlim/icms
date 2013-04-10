@@ -22,7 +22,7 @@
 						<h3><fmt:message key="customer.label"/></h3>
 					</label>
 					<div class="controls">
-						<c:out value="${jobOrder.customer.name }"/>
+						<c:out value="${jobOrder.customer.carPlateNumber }"/>
 					</div>
 				</div>
 			</div>
@@ -67,27 +67,27 @@
 		<thead>
 			<tr>
 				<th class="header">Item Name</th>
-				<th class="header">Stock Price</th>
 				<th class="header">Unit</th>
-				<th class="header">Markup</th>
-				<th class="header">Labour</th>
-				<th class="header">Total</th>
+				<th class="header" style="text-align: right;">Price Per Unit</th>
+				<th class="header" style="text-align: right;">Price</th>
+				<th class="header" style="text-align: right;">Labour</th>
+				<th class="header" style="text-align: right; width: 10em">Total</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="jobItem" items="${ jobItemList }" varStatus="status">
 				<tr >
-					<td><c:out value="${ jobItem.item.name }"/> (<c:out value="${ jobItem.item.code }"/>)</td>
-					<td id="stockPrice"><fmt:formatNumber minFractionDigits="2" value="${ jobItem.stockPrice }"/></td>
+					<td ><c:out value="${ jobItem.item.name }"/> (<c:out value="${ jobItem.item.code }"/>)</td>
 					<td id="unit"><c:out value="${ jobItem.unit }"/></td>
-					<td id="markup"><fmt:formatNumber minFractionDigits="2" value="${ jobItem.markup }"/></td>
-					<td id="labour"><fmt:formatNumber minFractionDigits="2" value="${ jobItem.labour }"/></td>
-					<td id="total"><fmt:formatNumber minFractionDigits="2" value="${ (jobItem.stockPrice * jobItem.unit) +  jobItem.markup + jobItem.labour}"/></td>
+					<td id="markup" style="text-align: right;"><fmt:formatNumber minFractionDigits="2" value="${ (jobItem.stockPrice * jobItem.unit +  jobItem.markup)/jobItem.unit }"/></td>
+					<td id="markup" style="text-align: right;"><fmt:formatNumber minFractionDigits="2" value="${ (jobItem.stockPrice * jobItem.unit) +  jobItem.markup }"/></td>
+					<td id="labour" style="text-align: right;"><fmt:formatNumber minFractionDigits="2" value="${ jobItem.labour }"/></td>
+					<td id="total" style="text-align: right;"><fmt:formatNumber minFractionDigits="2" value="${ (jobItem.stockPrice * jobItem.unit) +  jobItem.markup + jobItem.labour}"/></td>
 				</tr>
 			</c:forEach>
 				<tr >
-					<td  colspan="5" style="text-align: right;"><b>Grand Total</b></td>
-					<td colspan="1"><b><fmt:formatNumber minFractionDigits="2" value="${ jobOrder.price }"/></b></td>
+					<td colspan="5" style="text-align: right;"><b>Grand Total</b></td>
+					<td style="text-align: right;"><b><fmt:formatNumber minFractionDigits="2" value="${ jobOrder.price }"/></b></td>
 				</tr>
 		</tbody>
 		
