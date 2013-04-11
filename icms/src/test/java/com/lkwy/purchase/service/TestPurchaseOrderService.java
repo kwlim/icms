@@ -1,6 +1,7 @@
 package com.lkwy.purchase.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import com.lkwy.common.AbstractTest;
 import com.lkwy.common.util.CommonUtil;
 import com.lkwy.common.util.DisplayTagUtil;
+import com.lkwy.item.entity.Item;
 import com.lkwy.purchase.entity.PurchaseOrder;
 import com.lkwy.purchase.entity.StockOrder;
 
@@ -24,6 +26,33 @@ public class TestPurchaseOrderService extends AbstractTest{
 	
 	@Autowired
 	PurchaseOrderService poService;
+	
+	@Test
+	public void testgetDistinctStockOrderItemAndMonthYear(){
+		
+		List<Item> list = poService.getDistinctStockOrderItemAndMonthYear(4, 2013);
+		LOGGER.debug("list size = {}", list.size());
+		
+		for(Item item: list){
+			LOGGER.debug("item = {}", item.getName());
+		}
+		
+	}
+	
+	@Test
+	public void testgetDistinctStockOrderItemAndDateRange(){
+		DateTime firstDayOfMonth = new DateTime(2013, 4, 1, 0, 0, 0);
+		DateTime lastDayOfMonth = firstDayOfMonth.dayOfMonth().withMaximumValue();
+		Date lastDayOfMonthEndDate = CommonUtil.convertDateAsEndDate(lastDayOfMonth.toDate());
+		
+		List<Item> list = poService.getDistinctStockOrderItemAndDateRange(firstDayOfMonth.toDate(), lastDayOfMonthEndDate);
+		LOGGER.debug("list size = {}", list.size());
+		
+		for(Item item: list){
+			LOGGER.debug("item = {}", item.getName());
+		}
+		
+	}
 	
 	@Test
 	public void testgetSumStockOrderQuantityByItemIdAndPoDateRange(){

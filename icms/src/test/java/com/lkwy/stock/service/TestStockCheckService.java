@@ -18,6 +18,19 @@ public class TestStockCheckService extends AbstractTest{
 	StockCheckService stockCheckService;
 	
 	@Test
+	public void testrecalculateStockBringForwardForAllItem(){
+		
+		stockCheckService.recalculateStockBringForwardForAllItem(5, 2013);
+		
+		List<StockCheck> list = stockCheckService.getStockCheckListForItem("cda7a876-f737-413d-b434-511a92c08509", 4, 2013);
+		
+		for(StockCheck sc: list){
+			LOGGER.debug("{} - {}|{}", new Object[]{sc.getItem().getName(), sc.getType(), sc.getUnit()});
+		}
+		
+	}
+	
+	@Test
 	public void testgetStockCheckListForItemOnDateRange(){
 		List<StockCheck> stockCheckList = stockCheckService.getStockCheckListForItemOnDateRange("a6585d72-f984-4bc2-8092-058af3436d3e", 4, 2013, null, null);
 		

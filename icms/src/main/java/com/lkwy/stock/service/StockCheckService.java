@@ -5,14 +5,17 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.lkwy.common.util.CommonUtil;
 import com.lkwy.item.entity.Item;
 import com.lkwy.item.service.ItemService;
@@ -39,6 +42,47 @@ public class StockCheckService {
 	
 	@Autowired
 	ItemService itemService;
+	
+	@Scheduled(cron="0 0 * * * *")
+	public void calculateStockCheckBfFromLastMonth(){
+		LOGGER.debug("StockCheckService|CalculateStockCheckBfFromLastMonth|ScheduleJobRun");
+		
+		DateTime now = new DateTime();
+		recalculateStockBringForwardForAllItem(now.getMonthOfYear(), now.getYear());
+	}
+	
+	public void recalculateStockBringForwardForAllItem(int month, int year){
+		LOGGER.debug("RecalculateStockBr|{}|{}", month, year);
+		DateTime now = new DateTime(year, month, 1, 0, 0);
+		DateTime lastMonth = now.minusMonths(1);
+		
+		List<Item> stockBfItemList = stockBfService.getDistinctStockBringForwardItemAndMonthYear(lastMonth.getMonthOfYear(), lastMonth.getYear());
+		List<Item> purchaseItemList = poService.getDistinctStockOrderItemAndMonthYear(lastMonth.getMonthOfYear(), lastMonth.getYear());
+		List<Item> jobItemList = jobService.getDistinctJobOrderItemAndMonthYear(lastMonth.getMonthOfYear(), lastMonth.getYear());
+		
+		Map<String, Item> distinctItemMap = Maps.newHashMap();
+		mergeItem(distinctItemMap, stockBfItemList);
+		mergeItem(distinctItemMap, purchaseItemList);
+		mergeItem(distinctItemMap, jobItemList);
+		
+		//CONTINUE
+		for(Item item: distinctItemMap.values()){
+			//get bring forward for item + month + year if any
+			//if yes then update
+			StockBringForward sbf = stockBfService.getStockBringFowardCreateIfApplicable(month, year, item.getId());
+			if(sbf == null){
+				generateStockBringForward(item.getId(), month, year);
+			}else{
+				regenerateStockBringForward(sbf.getId());
+			}
+		}
+	}
+	
+	public void mergeItem(Map<String, Item> distinctItemMap, List<Item> itemList){
+		for(Item item: itemList){
+			distinctItemMap.put(item.getId(), item);
+		}
+	}
 	
 	public Long getStockBalanceForItem(String itemId, int month, int year){
 		DateTime firstDayOfMonth = new DateTime(year, month, 1, 0, 0);
@@ -69,7 +113,11 @@ public class StockCheckService {
 		StockBringForward bf = stockBfService.getStockBringForwardById(bfId);
 		DateTime bfDateTime = new DateTime(bf.getBfDate());
 		DateTime lastMonth = bfDateTime.minusMonths(1);
+		
 		Long balance = getStockBalanceForItem(bf.getItem().getId(), lastMonth.getMonthOfYear(), lastMonth.getYear());
+		
+		LOGGER.debug("StockCheckService|regenerateStockBringForward|{}|{}|{} - {}", bf.getItem().getName(), lastMonth.getMonthOfYear(), lastMonth.getYear(), balance);
+		
 		bf.setUnit(balance.intValue());
 		
 		stockBfService.saveStockBringForward(bf);
@@ -80,9 +128,8 @@ public class StockCheckService {
 		DateTime lastMonth = firstDayOfMonth.minusDays(1);
 		
 		long balanceFromLastMonth = getStockBalanceForItem(itemId, lastMonth.getMonthOfYear(), lastMonth.getYear());
-		LOGGER.debug("StockCheckService|generateStockBringForward|{}|{} - {}", new Object[]{month, year, balanceFromLastMonth});
 		
-		if(balanceFromLastMonth > 0){
+//		if(balanceFromLastMonth > 0){
 			
 			StockBringForward stockBf = new StockBringForward();
 			Item item = itemService.getItemById(itemId);
@@ -91,10 +138,12 @@ public class StockCheckService {
 			stockBf.setUnit((int)balanceFromLastMonth);
 			stockBf.setCreatedDate(firstDayOfMonth.toDate());
 			
+			LOGGER.debug("StockCheckService|generateStockBringForward|{}|{}|{} - {}", new Object[]{item.getName(), month, year, balanceFromLastMonth});
+			
 			return stockBfService.saveStockBringForward(stockBf);
-		}
-		
-		return null;
+//		}
+//		
+//		return null;
 	}
 	
 	public List<StockCheck> getStockCheckListForItemOnDateRange(String itemId, Integer monthFrom, Integer yearFrom, Integer monthTo, Integer yearTo){

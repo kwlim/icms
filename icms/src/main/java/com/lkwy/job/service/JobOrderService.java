@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.lkwy.code.service.CodeTrackService;
 import com.lkwy.common.util.CommonUtil;
+import com.lkwy.item.entity.Item;
 import com.lkwy.job.dao.IJobItemRepository;
 import com.lkwy.job.dao.IJobOrderRepository;
 import com.lkwy.job.dao.JobOrderSpecifications;
@@ -32,6 +34,19 @@ public class JobOrderService {
 	
 	@Autowired
 	CodeTrackService codeTrackService;
+	
+	public List<Item> getDistinctJobOrderItemAndMonthYear(int month, int year){
+		DateTime firstDayOfMonth = new DateTime(year, month, 1, 0, 0);
+		DateTime lastDayOfMonth = firstDayOfMonth.dayOfMonth().withMaximumValue();
+		
+		return getDistinctJobOrderItemAndDateRange(firstDayOfMonth.toDate(), lastDayOfMonth.toDate());
+	}
+	
+	public List<Item> getDistinctJobOrderItemAndDateRange(Date dateFrom, Date dateTo){
+		Date processedDateFrom = CommonUtil.convertDateAsStartDate(dateFrom);
+		Date processedDateTo = CommonUtil.convertDateAsEndDate(dateTo);
+		return jobItemRepo.findDistinctJobItemDateRange(processedDateFrom, processedDateTo);
+	}
 	
 	public Page<JobOrder> getJobOrderByCustomerIdAndDateRange(String customerId, Date dateFrom, Date dateTo, Pageable pageable){
 		return joRepo.findAll(JobOrderSpecifications.byCustomerIdAndDateRange(customerId, dateFrom, dateTo), pageable);

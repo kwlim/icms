@@ -3,6 +3,7 @@ package com.lkwy.purchase.service;
 import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.lkwy.common.util.CommonUtil;
+import com.lkwy.item.entity.Item;
 import com.lkwy.purchase.dao.IPurchaseOrderRepository;
 import com.lkwy.purchase.dao.IStockOrderRepository;
 import com.lkwy.purchase.dao.PurchaseOrderSpecifications;
@@ -29,6 +31,19 @@ public class PurchaseOrderService {
 	
 	@Autowired
 	IStockOrderRepository stockOrderRepo;
+	
+	public List<Item> getDistinctStockOrderItemAndMonthYear(int month, int year){
+		DateTime firstDayOfMonth = new DateTime(year, month, 1, 0, 0);
+		DateTime lastDayOfMonth = firstDayOfMonth.dayOfMonth().withMaximumValue();
+		
+		return getDistinctStockOrderItemAndDateRange(firstDayOfMonth.toDate(), lastDayOfMonth.toDate());
+	}
+	
+	public List<Item> getDistinctStockOrderItemAndDateRange(Date dateFrom, Date dateTo){
+		Date processedDateFrom = CommonUtil.convertDateAsStartDate(dateFrom);
+		Date processedDateTo = CommonUtil.convertDateAsEndDate(dateTo);
+		return stockOrderRepo.findDistinctStockOrderItemDateRange(processedDateFrom, processedDateTo);
+	}
 	
 	public Page<PurchaseOrder> getPoByVendorIdAndDateRange(String vendorId, Date dateFrom, Date dateTo, Pageable pageable){
 		Date processedDateFrom = CommonUtil.convertDateAsStartDate(dateFrom);

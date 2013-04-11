@@ -1,6 +1,7 @@
 package com.lkwy.job.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import com.lkwy.common.AbstractTest;
 import com.lkwy.common.util.CommonUtil;
 import com.lkwy.common.util.DisplayTagUtil;
+import com.lkwy.item.entity.Item;
 import com.lkwy.job.entity.JobOrder;
 
 public class TestJobOrderService extends AbstractTest{
@@ -23,6 +25,33 @@ public class TestJobOrderService extends AbstractTest{
 	
 	@Autowired
 	JobOrderService jobService;
+	
+	@Test
+	public void testgetDistinctJobOrderItemAndMonthYear(){
+		
+		List<Item> list = jobService.getDistinctJobOrderItemAndMonthYear(4, 2013);
+		LOGGER.debug("list size = {}", list.size());
+		
+		for(Item item: list){
+			LOGGER.debug("item = {}", item.getName());
+		}
+		
+	}
+	
+	@Test
+	public void testgetDistinctJobOrderItemAndDateRange(){
+		DateTime firstDayOfMonth = new DateTime(2013, 4, 1, 0, 0, 0);
+		DateTime lastDayOfMonth = firstDayOfMonth.dayOfMonth().withMaximumValue();
+		Date lastDayOfMonthEndDate = CommonUtil.convertDateAsEndDate(lastDayOfMonth.toDate());
+		
+		List<Item> list = jobService.getDistinctJobOrderItemAndDateRange(firstDayOfMonth.toDate(), lastDayOfMonthEndDate);
+		LOGGER.debug("list size = {}", list.size());
+		
+		for(Item item: list){
+			LOGGER.debug("item = {}", item.getName());
+		}
+		
+	}
 	
 	@Test
 	public void testgetSumItemUnitByItemIdAndPoDateRange(){
