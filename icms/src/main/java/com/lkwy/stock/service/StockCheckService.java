@@ -43,7 +43,7 @@ public class StockCheckService {
 	@Autowired
 	ItemService itemService;
 	
-	@Scheduled(cron="0 0 * * * *")
+	@Scheduled(cron="0 3 * * * *")
 	public void calculateStockCheckBfFromLastMonth(){
 		LOGGER.debug("StockCheckService|CalculateStockCheckBfFromLastMonth|ScheduleJobRun");
 		
