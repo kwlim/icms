@@ -9,6 +9,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="Mr Lim & Mrs Lim">
 	<title><fmt:message key="general.app.name"/></title>
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/img/favicon.ico"/>
 	<!-- end: Meta -->
 	
 	<!-- start: Mobile Specific -->

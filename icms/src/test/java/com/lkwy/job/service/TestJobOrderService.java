@@ -27,6 +27,36 @@ public class TestJobOrderService extends AbstractTest{
 	JobOrderService jobService;
 	
 	@Test
+	public void testgetSumMarkupLabourPrice() {
+		
+		DateTime date = new DateTime(2013, 4, 7, 0, 0);
+		
+		Double sum = jobService.getSumMarkupLabourPrice(date.toDate());
+		LOGGER.debug("{}|sum={}", date, sum);
+		
+	}
+	
+	@Test
+	public void testgetSumMarkupPrice() {
+		
+		DateTime date = new DateTime(2013, 4, 7, 0, 0);
+		
+		Double sum = jobService.getSumMarkupPrice(date.toDate());
+		LOGGER.debug("{}|sum={}", date, sum);
+		
+	}
+	
+	@Test
+	public void testgetSumJomPrice() {
+		
+		DateTime date = new DateTime(2013, 4, 7, 0, 0);
+		
+		Double sum = jobService.getSumJobPrice(date.toDate());
+		LOGGER.debug("{}|sum={}", date, sum);
+		
+	}
+	
+	@Test
 	public void testgetDistinctJobOrderItemAndMonthYear(){
 		
 		List<Item> list = jobService.getDistinctJobOrderItemAndMonthYear(4, 2013);

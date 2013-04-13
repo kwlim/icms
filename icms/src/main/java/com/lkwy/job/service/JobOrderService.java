@@ -35,6 +35,27 @@ public class JobOrderService {
 	@Autowired
 	CodeTrackService codeTrackService;
 	
+	public Double getSumMarkupLabourPrice(Date dateFrom){
+		Date processedDateFrom = CommonUtil.convertDateAsStartDate(dateFrom);
+		Date processedDateTo = CommonUtil.convertDateAsEndDate(dateFrom);
+		
+		return jobItemRepo.sumMarkupLabourByDateRange(processedDateFrom, processedDateTo);
+	}
+	
+	public Double getSumMarkupPrice(Date dateFrom){
+		Date processedDateFrom = CommonUtil.convertDateAsStartDate(dateFrom);
+		Date processedDateTo = CommonUtil.convertDateAsEndDate(dateFrom);
+		
+		return jobItemRepo.sumMarkupByDateRange(processedDateFrom, processedDateTo);
+	}
+	
+	public Double getSumJobPrice(Date dateFrom){
+		Date processedDateFrom = CommonUtil.convertDateAsStartDate(dateFrom);
+		Date processedDateTo = CommonUtil.convertDateAsEndDate(dateFrom);
+		
+		return joRepo.sumByJobDateAndJobDate(processedDateFrom, processedDateTo);
+	}
+	
 	public List<Item> getDistinctJobOrderItemAndMonthYear(int month, int year){
 		DateTime firstDayOfMonth = new DateTime(year, month, 1, 0, 0);
 		DateTime lastDayOfMonth = firstDayOfMonth.dayOfMonth().withMaximumValue();
@@ -53,11 +74,11 @@ public class JobOrderService {
 	}
 	
 	public Long getSumItemUnitByItemIdAndPoDateRange(String itemId, Date dateFrom, Date dateTo){
-		return jobItemRepo.sumByItemIdAndPoDateRange(itemId, dateFrom, dateTo);
+		return jobItemRepo.sumUnitByItemIdAndJobDateRange(itemId, dateFrom, dateTo);
 	}
 	
 	public List<JobItem> getJobItemByItemIdAndPoDateRange(String itemId, Date dateFrom, Date dateTo){ 
-		return jobItemRepo.findByItemIdAndPoDateRange(itemId, dateFrom, dateTo);
+		return jobItemRepo.findByItemIdAndJobDateRange(itemId, dateFrom, dateTo);
 	}
 	
 	public Page<JobOrder> getJobOrderByJobNumberCarPlateJobDateRange(String jobNumberOrCarPlate, Date dateFrom, Date dateTo, Pageable pageable){

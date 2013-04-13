@@ -116,6 +116,9 @@
 			</tr>
 		</thead>
 		<tbody>
+		<c:set var="totalPurchase" value="${ 0 }"/>
+		<c:set var="totalSold" value="${ 0 }"/>
+		<c:set var="totalBf" value="${ 0 }"/>
 		<c:forEach var="stockCheck" items="${ stockCheckList }" varStatus="status">
 			<tr >
 				<td><fmt:formatDate value="${ stockCheck.date }" pattern="dd/MM/yyyy" /></td>
@@ -125,9 +128,9 @@
 						@RM <fmt:formatNumber minFractionDigits="2" value="${ stockCheck.price }"/>
 					</c:if>
 				</td>
-				<td><c:if test="${ stockCheck.type == scTypeBringForward }"><c:out value="${ stockCheck.unit }"/></c:if></td>
-				<td><c:if test="${ stockCheck.type == scTypePurchase }"><c:out value="${ stockCheck.unit }"/></c:if></td>
-				<td><c:if test="${ stockCheck.type == scTypeSold }"><c:out value="${ stockCheck.unit }"/></c:if></td>
+				<td><c:if test="${ stockCheck.type == scTypeBringForward }"><c:out value="${ stockCheck.unit }"/><c:set var="totalBf" value="${ totalBf+stockCheck.unit }"/></c:if></td>
+				<td><c:if test="${ stockCheck.type == scTypePurchase }"><c:out value="${ stockCheck.unit }"/><c:set var="totalPurchase" value="${ totalPurchase+stockCheck.unit }"/></c:if></td>
+				<td><c:if test="${ stockCheck.type == scTypeSold }"><c:out value="${ stockCheck.unit }"/><c:set var="totalSold" value="${ totalSold+stockCheck.unit }"/></c:if></td>
 				<td>
 					<c:choose>
 						<c:when test="${ stockCheck.type == scTypePurchase }">
@@ -152,6 +155,33 @@
 				</td>
 			</tr>
 		</c:forEach>
+		
+			<tr >
+				<td colspan="2" style="text-align: right; padding-right: 20px">
+					<h3>Total</h3>
+				</td>
+				<td>
+					<c:out value="${ totalBf }"/>
+				</td>
+				<td>
+					<c:out value="${ totalPurchase }"/>
+				</td>
+				<td>
+					<c:out value="${ totalSold }"/>
+				</td>
+				<td>
+				</td>
+			</tr>
+			<tr >
+				<td colspan="2" style="text-align: right; padding-right: 20px">
+					<h3>Stock Balance</h3>
+				</td>
+				<td colspan="3" style="text-align: center;">
+					<h3><c:out value="${ totalBf + totalPurchase - totalSold }"/></h3>
+				</td>
+				<td>
+				</td>
+			</tr>
 		</tbody>
 		
 		<c:if test="${ empty stockCheckList }">

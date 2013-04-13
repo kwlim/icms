@@ -11,6 +11,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="Mr Lim & Mrs Lim">
 	<title><fmt:message key="general.app.name"/></title>
+	<title><fmt:message key="general.app.name"/></title>
 	<!-- end: Meta -->
 	
 	<!-- start: Mobile Specific -->
