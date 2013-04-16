@@ -18,6 +18,7 @@ import com.lkwy.common.util.CommonUtil;
 import com.lkwy.common.util.DisplayTagUtil;
 import com.lkwy.item.entity.Item;
 import com.lkwy.job.entity.JobOrder;
+import com.lkwy.job.entity.JobPriceCategory;
 
 public class TestJobOrderService extends AbstractTest{
 	
@@ -25,6 +26,49 @@ public class TestJobOrderService extends AbstractTest{
 	
 	@Autowired
 	JobOrderService jobService;
+	
+	@Test
+	public void getSumPriceMarkupLabourByItemCategory(){
+		
+		DateTime dateFrom = new DateTime(2013, 4, 7, 0, 0);
+		DateTime dateTo = new DateTime(2013, 4, 7, 23, 59);
+		
+		List<JobPriceCategory> list = jobService.getSumPriceMarkupLabourByItemCategory(dateFrom.toDate(), dateTo.toDate());
+		LOGGER.debug("list size = {}", list.size());
+		
+		for(JobPriceCategory temp: list){
+			LOGGER.debug("cat = {}|{}|{}", new Object[]{temp.getCategory().getName(), temp.getPrice(), temp.getEarning()});
+		}
+		
+	}
+	
+	@Test
+	public void getSumMarkupLabourByItemCategory(){
+		
+		DateTime date = new DateTime(2013, 4, 7, 0, 0);
+		
+		List<JobPriceCategory> list = jobService.getSumMarkupLabourByItemCategory(date.toDate());
+		LOGGER.debug("list size = {}", list.size());
+		
+		for(JobPriceCategory temp: list){
+			LOGGER.debug("cat = {}|{}", temp.getCategory().getName(), temp.getPrice());
+		}
+		
+	}
+	
+	@Test
+	public void testgetSumPriceByItemCategory(){
+		
+		DateTime date = new DateTime(2013, 4, 7, 0, 0);
+		
+		List<JobPriceCategory> list = jobService.getSumPriceByItemCategory(date.toDate());
+		LOGGER.debug("list size = {}", list.size());
+		
+		for(JobPriceCategory temp: list){
+			LOGGER.debug("cat = {}|{}", temp.getCategory().getName(), temp.getPrice());
+		}
+		
+	}
 	
 	@Test
 	public void testgetSumMarkupLabourPrice() {

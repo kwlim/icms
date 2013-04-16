@@ -13,7 +13,7 @@ import com.lkwy.job.entity.JobOrder;
 public interface IJobOrderRepository extends JpaRepository<JobOrder, String>{
 	
 	@Query("SELECT SUM(jo.price) FROM JobOrder jo WHERE jo.jobDate >= ?1 AND jo.jobDate <= ?2")
-	public Double sumByJobDateAndJobDate(Date dateFrom, Date dateTo);
+	public Double sumPriceByJobDate(Date dateFrom, Date dateTo);
 	
 	public Page<JobOrder> findAll(Specification<JobOrder> specs, Pageable pageable);
 	

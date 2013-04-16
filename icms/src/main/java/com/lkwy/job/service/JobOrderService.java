@@ -20,6 +20,7 @@ import com.lkwy.job.dao.IJobOrderRepository;
 import com.lkwy.job.dao.JobOrderSpecifications;
 import com.lkwy.job.entity.JobItem;
 import com.lkwy.job.entity.JobOrder;
+import com.lkwy.job.entity.JobPriceCategory;
 
 @Service
 public class JobOrderService {
@@ -34,6 +35,34 @@ public class JobOrderService {
 	
 	@Autowired
 	CodeTrackService codeTrackService;
+	
+	public List<JobPriceCategory> getSumPriceMarkupLabourByItemCategory(Date dateFrom, Date dateTo){
+		Date processedDateFrom = CommonUtil.convertDateAsStartDate(dateFrom);
+		Date processedDateTo = CommonUtil.convertDateAsEndDate(dateTo);
+		
+		return jobItemRepo.sumPriceMarkupLabourByJobDateGroupByItemCategory(processedDateFrom, processedDateTo);
+	}
+	
+	public List<JobPriceCategory> getSumPriceMarkupLabourByItemCategory(Date dateFrom){
+		Date processedDateFrom = CommonUtil.convertDateAsStartDate(dateFrom);
+		Date processedDateTo = CommonUtil.convertDateAsEndDate(dateFrom);
+		
+		return jobItemRepo.sumPriceMarkupLabourByJobDateGroupByItemCategory(processedDateFrom, processedDateTo);
+	}
+	
+	public List<JobPriceCategory> getSumMarkupLabourByItemCategory(Date dateFrom){
+		Date processedDateFrom = CommonUtil.convertDateAsStartDate(dateFrom);
+		Date processedDateTo = CommonUtil.convertDateAsEndDate(dateFrom);
+		
+		return jobItemRepo.sumMarkupLabourByJobDateGroupByItemCategory(processedDateFrom, processedDateTo);
+	}
+	
+	public List<JobPriceCategory> getSumPriceByItemCategory(Date dateFrom){
+		Date processedDateFrom = CommonUtil.convertDateAsStartDate(dateFrom);
+		Date processedDateTo = CommonUtil.convertDateAsEndDate(dateFrom);
+		
+		return jobItemRepo.sumPriceByJobDateGroupByItemCategory(processedDateFrom, processedDateTo);
+	}
 	
 	public Double getSumMarkupLabourPrice(Date dateFrom){
 		Date processedDateFrom = CommonUtil.convertDateAsStartDate(dateFrom);
@@ -53,7 +82,7 @@ public class JobOrderService {
 		Date processedDateFrom = CommonUtil.convertDateAsStartDate(dateFrom);
 		Date processedDateTo = CommonUtil.convertDateAsEndDate(dateFrom);
 		
-		return joRepo.sumByJobDateAndJobDate(processedDateFrom, processedDateTo);
+		return joRepo.sumPriceByJobDate(processedDateFrom, processedDateTo);
 	}
 	
 	public List<Item> getDistinctJobOrderItemAndMonthYear(int month, int year){

@@ -51,7 +51,7 @@ function initChart(){
 			,{
 				data: totalEarningData, 
 				color: '#2FABE9',
-				label: 'Total Markup',
+				label: 'Total Earning',
 				lines: { show: true, fill: true},
 				points: { show: true}
 			}
