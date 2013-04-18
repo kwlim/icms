@@ -102,6 +102,7 @@ public class UserService {
         user.setLastname(form.getLastname());
 	    user.setNickname(form.getNickname());
 	    user.setStatus(form.getStatus());
+	    user.setIsAdmin(form.getIsAdmin());
 	    
 	    Group group = groupService.getGroupById(form.getGroupId());
 	    user.setGroup(group);

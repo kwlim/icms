@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
+import com.lkwy.billing.service.BillingService;
 import com.lkwy.common.security.util.HashSalt;
 import com.lkwy.common.security.util.PasswordGeneratorUtil;
 import com.lkwy.common.security.util.PasswordSalt;
@@ -35,6 +36,9 @@ public class SecurityManager {
     
     @Autowired
     private GroupService groupService;
+    
+    @Autowired
+    private BillingService billingService;
     
     @PostConstruct
     public void init(){
@@ -73,6 +77,9 @@ public class SecurityManager {
             adminUser.setLastname(UserService.ADMIN_USER_NAME);
             adminUser.setNickname(UserService.ADMIN_USER_NAME);
             
+            adminUser.setIsAdmin(true);
+            adminUser.setStatus(User.STATUS.ACTIVE.getValue());
+            
             Group adminGroup = groupService.getGroupByName(GroupService.ADMIN_GROUP_NAME);
             adminUser.setGroup(adminGroup);
             
@@ -105,6 +112,12 @@ public class SecurityManager {
             if(!StringUtils.equals(hash, user.getPassword())){
                 throw new BadCredentialsException("error.login.invalid");
             }
+            
+            //not admin user and billing expired
+            if(!user.getIsAdmin() && billingService.isExpired()){
+            	throw new BadCredentialsException("error.login.expired");
+            }
+            
         }
         catch(NoSuchAlgorithmException e){
             LOGGER.error("Error in comparing user password", e);
@@ -114,6 +127,7 @@ public class SecurityManager {
             LOGGER.error("Error in comparing user password", e);
             throw new BadCredentialsException("error.login.error");
         }
+        
         
         user.setPermissionList(convertPermissionListToDTO(user.getGroup().getPermissionList()));
         

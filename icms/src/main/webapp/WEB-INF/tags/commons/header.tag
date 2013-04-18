@@ -59,6 +59,7 @@
 							
 							<ul class="dropdown-menu">
 								<li><a href="${ pageContext.request.contextPath }/profile"><i class="halflings-icon white user"></i> Profile</a></li>
+								<li><a href="${ pageContext.request.contextPath }/company"><i class="halflings-icon white user"></i> Company</a></li>
 								<li><a href="${ pageContext.request.contextPath }/logout"><i class="halflings-icon white off"></i> Logout</a></li>
 							</ul>
 						</li>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -44,6 +45,7 @@ public class User extends AbstractAuditablePersistable{
     private String firstname;
     private String lastname;
     private String nickname;
+    @Lob
     private String address;
     private String email;
     
@@ -59,6 +61,8 @@ public class User extends AbstractAuditablePersistable{
     
     @Transient
     private List<PermissionDTO> permissionList;
+    
+    private Boolean isAdmin;
     
     public String getFullname(){
     	StringBuilder fullname = new StringBuilder(firstname);
@@ -162,4 +166,13 @@ public class User extends AbstractAuditablePersistable{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+	
 }

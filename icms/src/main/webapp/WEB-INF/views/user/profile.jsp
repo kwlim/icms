@@ -107,13 +107,7 @@
 	
 </form:form>
 
-
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui-1.9.1.custom.min.js"></script>
 <script type="text/javascript">
-
-$(document).ready(function(){
-    $(".datepicker").datepicker({dateFormat : 'dd/m/yy'});
-});
 
 </script>
 

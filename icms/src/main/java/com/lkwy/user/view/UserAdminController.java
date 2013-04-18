@@ -176,9 +176,9 @@ public class UserAdminController {
         model.addAttribute("groupId", groupId);
         model.addAttribute("id", id);
         
-        Pageable page = new PageRequest(start, DisplayTagUtil.DEFAULT_PAGE_SIZE, (desc != null && desc)?Sort.Direction.DESC:Sort.Direction.ASC, sort);
+        Pageable pageable = new PageRequest(start, DisplayTagUtil.DEFAULT_PAGE_SIZE, (desc != null && desc)?Sort.Direction.DESC:Sort.Direction.ASC, sort);
         
-        Page<User> returnPage = userService.getUserByUsernameFirstnameLastnameGroup(username, firstname, lastname, groupId, page); 
+        Page<User> returnPage = userService.getUserByUsernameFirstnameLastnameGroup(username, firstname, lastname, groupId, pageable); 
         
         model.put("rows", returnPage);
         model.put("size", (int)returnPage.getTotalElements());

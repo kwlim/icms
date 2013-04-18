@@ -14,6 +14,8 @@ public class UserDTO extends UserProfileDTO{
     @NotEmpty
     private String groupId;
     
+    private Boolean isAdmin;
+    
     public UserDTO() {
 		
 	}
@@ -48,6 +50,14 @@ public class UserDTO extends UserProfileDTO{
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
     
 }

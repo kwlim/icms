@@ -92,6 +92,15 @@
 		</div>
 	</div>
 	
+	<div class="control-group">
+		<label class="control-label" for="dob">
+			<fmt:message key="user.isAdmin"/>
+		</label>
+		<div class="controls">
+			<form:checkbox path="isAdmin"/>
+		</div>
+	</div>
+	
 	<div class="control-group <form:errors path="groupId" cssClass="error">error</form:errors>">
 		<label class="control-label" for="groupId">
 			<fmt:message key="user.group"/>

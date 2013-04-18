@@ -110,7 +110,7 @@ public class GroupController {
                 return "group/new";
             }
             
-            return "redirect:/group/list";
+            return "redirect:/group/";
         }
         
     }
@@ -181,7 +181,7 @@ public class GroupController {
                 redirectAttributes.addFlashAttribute("message", "group.delete.partial.success.message");
             }
         }
-        return "redirect:/group/list";
+        return "redirect:/group/";
     }
     
     protected boolean validForDelete(String id){
