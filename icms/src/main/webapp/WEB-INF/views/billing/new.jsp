@@ -27,7 +27,6 @@
 
 	<div class="form-actions">
 		<button type="submit" class="btn btn-primary"><fmt:message key="general.submit"/></button>
-		<button type="button" class="btn" onclick="cancel()"><fmt:message key="general.cancel"/></button>
 	</div>
 
 </form:form>
@@ -39,7 +38,6 @@
 	action="${pageContext.request.contextPath}/billing/payment/save/submit">
 	
 	<form:hidden path="id"/>
-	<form:hidden path="billing.id"/>
 	
 	<div class="row-fluid">
 		<div class="span5">
@@ -66,10 +64,9 @@
 			</div>
 		</div>
 		<div class="span2">
-			<button class="btn btn-primary">Add Payment</button>
+			<button class="btn btn-primary">Save Payment</button>
 		</div>
 	</div>
-	
 
 </form:form>
 
@@ -99,13 +96,33 @@
 		<display:column media="html"  titleKey="general.actions" sortable="false" class="tableAction">
 			<c:url var="editUrl" value="/billing/payment/edit/${ paymentList.id }"/>
 			<a href="${ editUrl }" class="btn btn-info" data-rel="tooltip" data-original-title="<fmt:message key='general.edit'/>">
-				<i class="halflings-icon edit" ></i>                                       
+				<i class="halflings-icon edit" ></i>                                 
 			</a>
 		</display:column>
 	</display:table>
 </form>
 
 <script type="text/javascript">
+
+$(document).ready(function() {
+	initSelectAll();
+});
+
+function initSelectAll(){
+	$('#selectall').click(function(){ 
+	       var $checkbox = $(this).find(':checkbox');
+	       $checkbox.attr('checked', !$checkbox.attr('checked'));
+	       
+	       if($('#selectall').is(":checked")){
+	    	   var cb = $("#filterForm :checkbox").attr('checked', true);
+	    	   $.uniform.update(cb);
+	       }else{
+	    	   var cb = $("#filterForm :checkbox").removeAttr('checked');
+	    	   $.uniform.update(cb);
+	       }
+	       
+	 });
+}
 
 function deleteRecords() {
     if ($("[name=id]:checked").length > 0) {

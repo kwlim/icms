@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.lkwy.common.entity.AbstractAuditablePersistable;
 
@@ -14,6 +15,7 @@ public class Payment extends AbstractAuditablePersistable{
 	
 	private static final long serialVersionUID = -8293297799908520581L;
 	
+	@NotNull
 	private Date paymentDate;
 	private Float amount;
 	

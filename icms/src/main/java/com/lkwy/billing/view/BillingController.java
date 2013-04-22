@@ -17,8 +17,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.lkwy.billing.entity.Billing;
@@ -32,6 +34,52 @@ public class BillingController {
 	
 	@Autowired
 	private BillingService billingService;
+	
+	@RequestMapping("/payment/edit/{paymentId}")
+	public String editPayment(ModelMap model, HttpServletRequest request, @PathVariable("paymentId") String paymentId){
+		
+		Billing billing = billingService.getBillingCreateIfNotExist();
+		model.addAttribute("billing", billing);
+		
+		Payment payment = billingService.getPaymentById(paymentId);
+		model.addAttribute("payment", payment);
+		
+		initPaymentList(model, request);
+		
+		return "/billing/new";
+	}
+	
+	@RequestMapping(value="payment/delete", method=RequestMethod.POST)
+    public String deletePayment(ModelMap model, RedirectAttributes redirectAttributes, @RequestParam(value = "id", required = false) String[] ids){
+        if(ids !=  null && ids.length > 0){
+            for(String id: ids){
+            	billingService.deletePayment(id);
+            }
+            redirectAttributes.addFlashAttribute("message", "payment.delete.success.message");
+        }
+        return "redirect:/billing/";
+    }
+	
+	@RequestMapping(value="/payment/save/submit",method=RequestMethod.POST)
+	public String submitPayment(ModelMap model, HttpServletRequest request, RedirectAttributes redirectAttributes, @Valid Payment payment, BindingResult result){
+		
+		Billing billing = billingService.getBillingCreateIfNotExist();
+		
+		if(result.hasErrors()){
+			model.addAttribute("billing", billing);
+			
+			payment.setBilling(billing);
+			model.addAttribute("payment", payment);
+			
+			initPaymentList(model, request);
+			return "/billing/new";
+		}
+		
+		billingService.savePaymentAndCalculateExpiry(payment);
+		redirectAttributes.addFlashAttribute("message", "payment.addSuccess");
+		
+		return "redirect:/billing/";
+	}
 	
 	@RequestMapping(value="/save/submit",method=RequestMethod.POST)
 	public String submitBilling(ModelMap model, HttpServletRequest request, RedirectAttributes redirectAttributes, @Valid Billing billing, BindingResult result){
@@ -61,14 +109,12 @@ public class BillingController {
 		model.addAttribute("billing", billing);
 		
 		Payment payment = new Payment();
-		payment.setBilling(billing);
 		model.addAttribute("payment", payment);
 		
 		initPaymentList(model, request);
 		
 		return "/billing/new";
 	}
-	
 	
 	
 	protected void initPaymentList(ModelMap model, HttpServletRequest request){

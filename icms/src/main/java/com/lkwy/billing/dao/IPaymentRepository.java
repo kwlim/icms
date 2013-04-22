@@ -9,5 +9,6 @@ import com.lkwy.billing.entity.Payment;
 public interface IPaymentRepository extends JpaRepository<Payment, String>{
 	
 	public Page<Payment> findByBilling_billingKey(String billingKey, Pageable pageable);
-
+	
+	
 }

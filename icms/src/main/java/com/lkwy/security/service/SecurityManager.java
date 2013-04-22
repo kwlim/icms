@@ -106,6 +106,10 @@ public class SecurityManager {
             throw new BadCredentialsException("error.login.invalid");
         }
         
+        if(!user.getIsAdmin() && billingService.isExpired()){
+        	throw new BadCredentialsException("error.login.expired");
+        }
+        
         try{
             String hash  = PasswordGeneratorUtil.hashPassword(new PasswordSalt(user.getRandomSalt(), password));
             
