@@ -18,8 +18,6 @@
 	<security:http pattern="/login*" security="none"/>
 	
 	<security:http use-expressions="true"  access-denied-page="/unauthorized">
-		<!-- <security:intercept-url pattern="/**" access="permitAll" /> -->
-		
 		<!-- the order here very important: from specific to general -->	
 		<security:intercept-url pattern="/**" access="isAuthenticated()"/>
 		

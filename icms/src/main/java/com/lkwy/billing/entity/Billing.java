@@ -21,7 +21,6 @@ public class Billing extends AbstractAuditablePersistable{
 	@NotNull
 	private String billingKey;
 	
-	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Date expiryDate;
 

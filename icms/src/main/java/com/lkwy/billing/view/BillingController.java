@@ -84,7 +84,7 @@ public class BillingController {
 	@RequestMapping(value="/save/submit",method=RequestMethod.POST)
 	public String submitBilling(ModelMap model, HttpServletRequest request, RedirectAttributes redirectAttributes, @Valid Billing billing, BindingResult result){
 		
-		if(result.hasErrors()){
+		if(invalidBilling(billing, result)){
 			model.addAttribute("billing", billing);
 			
 			Payment payment = new Payment();
@@ -99,6 +99,22 @@ public class BillingController {
 		redirectAttributes.addFlashAttribute("message", "billing.updateSuccess");
 		
 		return "redirect:/billing/";
+	}
+	
+
+	protected boolean invalidBilling(Billing billing, BindingResult result){
+		boolean invalid = false;
+		
+		if(result.hasErrors()){
+			invalid = true;
+		}
+		
+		if(billing.getExpiryDate() == null){
+			result.rejectValue("expiryDate", "NotNull.billing.expiryDate");
+			invalid = true;
+		}
+		
+		return invalid;
 	}
 	
 	
