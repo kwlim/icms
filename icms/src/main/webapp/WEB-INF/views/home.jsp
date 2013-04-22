@@ -2,10 +2,13 @@
 
 <commons:header />
 
+<h2><fmt:message key="general.welcome"/></h2>
+
+<sec:authorize access="hasRole('ROLE_REPORT_VIEW')">
 <div class="box">
 	<div class="box-header">
 		<h2>
-			<i class="halflings-icon list-alt"></i><span class="break"></span>Daily Chart
+			<i class="halflings-icon list-alt"></i><span class="break"></span><fmt:message key="report.daily.sales.chart"/>
 		</h2>
 	</div>
 	<div class="box-content center">
@@ -13,7 +16,7 @@
 	</div>
 	
 </div>
-
+</sec:authorize>
 
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.flot.js"></script>

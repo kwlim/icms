@@ -40,12 +40,16 @@
 		</div>
 	</div>
 	<div class="control-group">
+		<sec:authorize access="hasRole('ROLE_ITEM_DELETE')">
 		<button type="submit" class="btn btn-danger" onclick="return deleteRecords()">
 			<i class="halflings-icon trash"></i> <fmt:message key="general.delete"/>
 		</button>
+		</sec:authorize>
+		<sec:authorize access="hasRole('ROLE_ITEM_ADD_EDIT')">
 		<button type="button" class="btn btn-info" onclick="newRecords()">
 			<i class="halflings-icon edit"></i>  <fmt:message key="general.new"/>
 		</button>
+		</sec:authorize>
 	</div>
 	<display:table id="${id}" name="${rows}" size="${size}" pagesize="10"
 		export="false" class="table table-striped table-bordered table-condensed"
@@ -67,10 +71,12 @@
 			<a href="${ viewUrl }" class="btn btn-success" data-rel="tooltip" data-original-title="<fmt:message key='general.view'/>">
 				<i class="halflings-icon zoom-in"></i> 
 			</a>
+			<sec:authorize access="hasRole('ROLE_ITEM_ADD_EDIT')">
 			<c:url var="editUrl" value="/item/edit/${ item.id }"/>
 			<a href="${ editUrl }" class="btn btn-info" data-rel="tooltip" data-original-title="<fmt:message key='general.edit'/>">
 				<i class="halflings-icon edit" ></i>                                       
 			</a>
+			</sec:authorize>
 		</display:column>
 	</display:table>
 </form>

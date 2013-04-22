@@ -111,6 +111,15 @@ public class GroupService {
         
         roleMap.put(GroupPermission.MODULE_GROUP, getModulePermissionList(GroupPermission.MODULE_GROUP, true, true, true));
         roleMap.put(GroupPermission.MODULE_USER, getModulePermissionList(GroupPermission.MODULE_USER, true, true, true));
+        roleMap.put(GroupPermission.MODULE_BILLING, getModulePermissionList(GroupPermission.MODULE_BILLING, true, true, true));
+        roleMap.put(GroupPermission.MODULE_COMPANY, getModulePermissionList(GroupPermission.MODULE_COMPANY, false, true, false));
+        roleMap.put(GroupPermission.MODULE_CUSTOMER, getModulePermissionList(GroupPermission.MODULE_CUSTOMER, true, true, true));
+        roleMap.put(GroupPermission.MODULE_ITEM, getModulePermissionList(GroupPermission.MODULE_ITEM, true, true, true));
+        roleMap.put(GroupPermission.MODULE_ITEM_CATEGORY, getModulePermissionList(GroupPermission.MODULE_ITEM_CATEGORY, true, true, true));
+        roleMap.put(GroupPermission.MODULE_JOB, getModulePermissionList(GroupPermission.MODULE_JOB, true, true, true));
+        roleMap.put(GroupPermission.MODULE_PURCHASE, getModulePermissionList(GroupPermission.MODULE_PURCHASE, true, true, true));
+        roleMap.put(GroupPermission.MODULE_REPORT, getModulePermissionList(GroupPermission.MODULE_REPORT, true, false, false));
+        roleMap.put(GroupPermission.MODULE_VENDOR, getModulePermissionList(GroupPermission.MODULE_VENDOR, true, true, true));
         
         return roleMap;
     }

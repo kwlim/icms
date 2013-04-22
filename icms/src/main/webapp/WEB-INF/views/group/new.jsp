@@ -41,7 +41,7 @@
 	</div>
 	
 	<c:forEach var="roleEntry" items="${ roleMap }">
-		
+		<div style="margin-top: 30px">
 		<fieldset>
 			<legend><span><c:out value="${ roleEntry.key }"/></span></legend>
 		</fieldset>
@@ -58,7 +58,7 @@
 			</label>
 		</c:forEach>
 		</fieldset>
-		
+		</div>
 	</c:forEach>
 	
 	<div class="form-actions">

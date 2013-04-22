@@ -20,13 +20,18 @@ public class GroupPermission extends AbstractPersistable{
     public static final String ACTION_DELETE = "DELETE";
     public static final String ACTION_VIEW = "VIEW";
     
-    public static final String MODULE_DATA = "DATA";
-    public static final String MODULE_CAMPAIGN = "CAMPAIGN";
-    public static final String MODULE_CONTACT_POLICY = "CONTACT_POLICY";
-    public static final String MODULE_COMM_CHANNEL = "COMM_CHANNEL";
-    public static final String MODULE_REPORT = "REPORT";
     public static final String MODULE_GROUP = "GROUP";
     public static final String MODULE_USER = "USER";
+    public static final String MODULE_BILLING = "BILLING";
+    
+    public static final String MODULE_ITEM_CATEGORY = "ITEM_CATEGORY";
+    public static final String MODULE_ITEM = "ITEM";
+    public static final String MODULE_COMPANY = "COMPANY";
+    public static final String MODULE_CUSTOMER = "CUSTOMER";
+    public static final String MODULE_JOB = "JOB";
+    public static final String MODULE_PURCHASE = "PURCHASE";
+    public static final String MODULE_REPORT = "REPORT";
+    public static final String MODULE_VENDOR = "VENDOR";
     
     private String permissionKey;
     

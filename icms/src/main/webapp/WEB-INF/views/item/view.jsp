@@ -146,9 +146,11 @@
 							</a>
 						</c:when>
 						<c:when test="${ stockCheck.type == scTypeBringForward }">
+							<sec:authorize access="hasRole('ROLE_ITEM_ADD_EDIT')">
 							<a href="javascript:regenerateBf('${ stockCheck.parentId }')" class="btn btn-success" data-rel="tooltip" data-original-title="<fmt:message key='item.bf.recalculate'/>">
 								<i class="halflings-icon refresh"></i>
 							</a>
+							</sec:authorize>
 						</c:when>
 					</c:choose>
 					

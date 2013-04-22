@@ -38,17 +38,27 @@
 				<div class="nav-no-collapse header-nav">
 					<ul class="nav pull-right">
 						<!-- end: Message Dropdown -->
+						<sec:authorize access="hasAnyRole('ROLE_BILLING_VIEW', 'ROLE_BILLING_ADD_EDIT', 'ROLE_BILLING_DELETE',
+							'ROLE_GROUP_VIEW', 'ROLE_GROUP_ADD_EDIT', 'ROLE_GROUP_DELETE',
+							'ROLE_USER_VIEW', 'ROLE_USER_ADD_EDIT', 'ROLE_USER_DELETE')">
 						<li class="dropdown">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="halflings-icon white wrench"></i>
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="${pageContext.request.contextPath}/billing/" title=""><i class="halflings-icon white road"></i> <fmt:message key="billing.label"/></a></li>
-								<li><a href="${pageContext.request.contextPath}/group/"><i class="halflings-icon white th"></i> <fmt:message key="user.group"/></a></li>
-								<li><a href="${pageContext.request.contextPath}/user/"><i class="halflings-icon white eye-open"></i> <fmt:message key="user.label"/></a></li>
+								<sec:authorize access="hasAnyRole('ROLE_BILLING_VIEW', 'ROLE_BILLING_ADD_EDIT', 'ROLE_BILLING_DELETE')">
+									<li><a href="${pageContext.request.contextPath}/billing/" title=""><i class="halflings-icon white road"></i> <fmt:message key="billing.label"/></a></li>
+								</sec:authorize>
+								<sec:authorize access="hasAnyRole('ROLE_USER_VIEW', 'ROLE_USER_ADD_EDIT', 'ROLE_USER_DELETE')">
+									<li><a href="${pageContext.request.contextPath}/user/"><i class="halflings-icon white eye-open"></i> <fmt:message key="user.label"/></a></li>
+								</sec:authorize>
+								<sec:authorize access="hasAnyRole('ROLE_GROUP_VIEW', 'ROLE_GROUP_ADD_EDIT', 'ROLE_GROUP_DELETE')">
+									<li><a href="${pageContext.request.contextPath}/group/"><i class="halflings-icon white th"></i> <fmt:message key="user.group"/></a></li>
+								</sec:authorize>
 							</ul>
 						</li>
+						</sec:authorize>
 						<!-- start: User Dropdown -->
 						<sec:authorize access="isAuthenticated()">
 						<li class="dropdown">
@@ -58,9 +68,11 @@
 							</a>
 							
 							<ul class="dropdown-menu">
-								<li><a href="${ pageContext.request.contextPath }/profile"><i class="halflings-icon white user"></i> Profile</a></li>
-								<li><a href="${ pageContext.request.contextPath }/company"><i class="halflings-icon white user"></i> Company</a></li>
-								<li><a href="${ pageContext.request.contextPath }/logout"><i class="halflings-icon white off"></i> Logout</a></li>
+								<li><a href="${ pageContext.request.contextPath }/profile"><i class="halflings-icon white user"></i> <fmt:message key="user.profile"/></a></li>
+								<sec:authorize access="hasAnyRole('ROLE_COMPANY_VIEW', 'ROLE_COMPANY_ADD_EDIT', 'ROLE_COMPANY_DELETE')">
+									<li><a href="${ pageContext.request.contextPath }/company"><i class="halflings-icon white user"></i> <fmt:message key="company.label"/></a></li>
+								</sec:authorize>
+								<li><a href="${ pageContext.request.contextPath }/logout"><i class="halflings-icon white off"></i> <fmt:message key="general.logout"/></a></li>
 							</ul>
 						</li>
 						</sec:authorize>
