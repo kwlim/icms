@@ -132,11 +132,21 @@ public class VendorController {
 	@RequestMapping("delete")
     public String deleteItem(ModelMap model, RedirectAttributes redirectAttributes, @RequestParam(value = "id", required = false) String[] ids){
 		if(ids !=  null && ids.length > 0){
+			boolean allDel = true;
             for(String id: ids){
-                vendorService.deleteVendor(id);
+            	try{
+            		vendorService.deleteVendor(id);
+            	}
+            	catch(Exception e){
+            		LOGGER.error("Error in deleting item", e);
+            		allDel = false;
+            	}
             }
-            
-            redirectAttributes.addFlashAttribute("message", "vendor.delete.success.message");
+            if(allDel){
+            	redirectAttributes.addFlashAttribute("message", "vendor.delete.success.message");
+            }else{
+            	redirectAttributes.addFlashAttribute("message", "vendor.partial.delete.success.message");
+            }
         }
         return "redirect:/vendor/";
 	}

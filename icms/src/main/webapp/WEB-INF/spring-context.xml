@@ -52,7 +52,7 @@
 		<property name="packagesToScan" value="com.lkwy" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-				<property name="showSql" value="true" />
+				<property name="showSql" value="${jpa.showSql}" />
 				<property name="generateDdl" value="true" />
 				<property name="databasePlatform" value="${persistence.dialect}" />
 			</bean>

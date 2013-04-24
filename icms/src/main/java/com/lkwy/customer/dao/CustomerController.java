@@ -65,11 +65,22 @@ public class CustomerController {
 	@RequestMapping("delete")
 	public String deleteCustomer(ModelMap model, RedirectAttributes redirectAttributes, @RequestParam(value = "id", required = false) String[] ids){
 		if(ids !=  null && ids.length > 0){
+			boolean allDel = true;
             for(String id: ids){
-                customerService.deleteCustomer(id);
+            	try{
+            		customerService.deleteCustomer(id);
+            	}
+            	catch(Exception e){
+            		LOGGER.error("Error in deleting item", e);
+            		allDel = false;
+            	}
             }
             
-            redirectAttributes.addFlashAttribute("message", "customer.delete.success.message");
+            if(allDel){
+            	redirectAttributes.addFlashAttribute("message", "customer.delete.success.message");
+            }else{
+            	redirectAttributes.addFlashAttribute("message", "customer.partial.delete.success.message");
+            }
         }
         return "redirect:/customer/";
 	}

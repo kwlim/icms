@@ -229,11 +229,22 @@ public class ItemController {
 	@RequestMapping("delete")
     public String deleteItem(ModelMap model, RedirectAttributes redirectAttributes, @RequestParam(value = "id", required = false) String[] ids){
 		if(ids !=  null && ids.length > 0){
+			boolean allDel = true;
             for(String id: ids){
-                itemService.deleteItem(id);
+            	try{
+            		itemService.deleteItem(id);
+            	}
+            	catch(Exception e){
+            		LOGGER.error("Error in deleting item", e);
+            		allDel = false;
+            	}
             }
             
-            redirectAttributes.addFlashAttribute("message", "item.delete.success.message");
+            if(allDel){
+            	redirectAttributes.addFlashAttribute("message", "item.delete.success.message");
+            }else{
+            	redirectAttributes.addFlashAttribute("message", "item.partial.delete.success.message");
+            }
         }
         return "redirect:/item/";
 	}

@@ -3,7 +3,7 @@
 <commons:header-login/>
 
 <div class="login-box"> 
-	<c:if test="${not empty param.login_error}">
+	<c:if test="${not empty param.error}">
 	<div class="alert alert-error">
 		<fmt:message key="${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}" />
 	</div>
@@ -13,7 +13,7 @@
 		<h2>ICMS</h2>
 	</div>
 	<h2>Login to your account</h2>
-	<form class="form-horizontal" action="${ pageContext.request.contextPath }/j_spring_security_check"  method="post">		
+	<form class="form-horizontal" action="${ pageContext.request.contextPath }/submitlogin"  method="post">		
 		<div class="input-prepend" title="Username">
 			<span class="add-on"><i class="halflings-icon user"></i></span>
 			<input class="input-large span10" name="j_username" id="username" type="text" placeholder="<fmt:message key="general.username"/>"/>

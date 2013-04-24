@@ -17,19 +17,49 @@
 	<security:http pattern="/js/**" security="none" />
 	<security:http pattern="/login*" security="none"/>
 	
-	<security:http use-expressions="true"  access-denied-page="/unauthorized">
+	<security:http entry-point-ref="authenticationEntryPoint" use-expressions="true" access-denied-page="/unauthorized">
 		<!-- the order here very important: from specific to general -->	
 		<security:intercept-url pattern="/**" access="isAuthenticated()"/>
 		
-		<security:form-login login-page="/login" always-use-default-target="true"
-			default-target-url="/dashboard/" authentication-failure-url="/login?login_error=1" />
-		<security:logout logout-url="/logout" logout-success-url="/login"/>
+		<security:custom-filter position="FORM_LOGIN_FILTER" ref="localLoginFilter"/>
+		<security:custom-filter position="LOGOUT_FILTER" ref="localLogoutFilter"/>
 	</security:http>
 	
-	<beans:bean id='localAuthenticationProvider' class='com.lkwy.security.service.LocalAuthenticationProvider'/>
+	<beans:bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<beans:property name="loginFormUrl" value="/login" />
+	</beans:bean>
 	
-	<security:authentication-manager>
+	<!-- login filter -->
+	<beans:bean id="localLoginFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+		<beans:property name="authenticationManager" ref="authenticationManager"/>
+		<beans:property name="filterProcessesUrl" value="/submitlogin"/>
+		<beans:property name="authenticationSuccessHandler" ref="localSuccessHandler"/>
+		<beans:property name="authenticationFailureHandler" ref="localFailureHandler"/>
+	</beans:bean>
+	
+	<beans:bean id='localSuccessHandler' class='com.lkwy.security.service.CustomAuthenticationSuccessHandler'>
+		<beans:property name="defaultTargetUrl" value="/dashboard/" />
+	</beans:bean>
+	
+	<beans:bean id="localFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <beans:property name="defaultFailureUrl" value="/login?error=1" />
+    </beans:bean>
+	
+	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider ref="localAuthenticationProvider"/>
 	</security:authentication-manager>
+	
+	<beans:bean id='localAuthenticationProvider' class='com.lkwy.security.service.LocalAuthenticationProvider'/>
+	<!-- end login filter -->
+	
+	<beans:bean id="localLogoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+		<beans:constructor-arg value="/login" />
+		<beans:constructor-arg>
+			<beans:list>
+				<beans:bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler" />
+			</beans:list>
+		</beans:constructor-arg>
+		<beans:property name="filterProcessesUrl" value="/logout" />
+	</beans:bean>
 	
 </beans:beans>

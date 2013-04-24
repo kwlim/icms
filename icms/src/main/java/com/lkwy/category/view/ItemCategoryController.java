@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,10 +23,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.lkwy.category.entity.ItemCategory;
 import com.lkwy.category.service.ItemCategoryService;
 import com.lkwy.common.util.DisplayTagUtil;
+import com.lkwy.item.view.ItemController;
 
 @Controller
 @RequestMapping("/itemCategory")
 public class ItemCategoryController {
+	
+	static final Logger LOGGER = LoggerFactory.getLogger(ItemCategoryController.class);
 	
 	@Autowired
 	ItemCategoryService itemCatService;
@@ -72,11 +77,24 @@ public class ItemCategoryController {
 	@RequestMapping("delete")
     public String deleteItemCategory(ModelMap model, RedirectAttributes redirectAttributes, @RequestParam(value = "id", required = false) String[] ids){
 		if(ids !=  null && ids.length > 0){
+			boolean allDel = true;
             for(String id: ids){
-                itemCatService.deleteCategory(id);
+            	try{
+            		itemCatService.deleteCategory(id);
+            	}
+            	catch(Exception e){
+            		LOGGER.error("Error in deleting item category", e);
+            		allDel = false;
+            	}
+                
             }
             
-            redirectAttributes.addFlashAttribute("message", "itemcategory.delete.success.message");
+            if(allDel){
+            	redirectAttributes.addFlashAttribute("message", "itemcategory.delete.success.message");
+            }else{
+            	redirectAttributes.addFlashAttribute("message", "itemcategory.partial.delete.success.message");
+            }
+            
         }
         return "redirect:/itemCategory/";
 	}

@@ -25,7 +25,17 @@
 	</footer>
 	</div><!--/.fluid-container-->
 	
+<c:if test="${ !empty sessionScope.generalmessage }">
+	<script type="text/javascript">
+	$(document).ready(function() {
+		noty({"text":"${sessionScope.generalmessage}","layout":"top","type":"error","closeButton":"true"});
+	});
+	</script>
+	<c:set var="generalmessage" value="" scope="session"/>
+</c:if>	
 
 </body>
+
+
 
 </html>
