@@ -15,17 +15,18 @@
 	<div class="control-group <form:errors path="name" cssClass="error">error</form:errors>">
 		<label class="control-label" for="name">
 			<fmt:message key="company.name"/>
+			<span class="mandatory"><fmt:message key="general.mandatory"/></span>
 		</label>
 		<div class="controls">
-			<form:input path="name"/>
+			<form:input path="name" cssClass="input-xxlarge"/>
 			<form:errors path="name" cssClass="help-inline"/>
 		</div>
 	</div>
 	
 	<div class="control-group <form:errors path="registrationNumber" cssClass="error">error</form:errors>">
 		<label class="control-label" for=registrationNumber>
-			<fmt:message key="user.firstname"/>
-			<span class="mandatory"><fmt:message key="company.registrationNumber"/></span>
+			<fmt:message key="company.registrationNumber"/>
+			<span class="mandatory"><fmt:message key="general.mandatory"/></span>
 		</label>
 		<div class="controls">
 			<form:input path="registrationNumber" />
@@ -38,7 +39,7 @@
 			<fmt:message key="company.address"/>
 		</label>
 		<div class="controls">
-			<form:textarea path="address" class="input-xlarge" rows="5"/>
+			<form:textarea path="address" class="input-xxlarge" rows="5"/>
 		</div>
 	</div>
 	

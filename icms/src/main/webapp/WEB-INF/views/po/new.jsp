@@ -24,7 +24,7 @@
 					<span class="mandatory"><fmt:message key="general.mandatory"/></span>
 				</label>
 				<div class="controls">
-					<form:select path="vendor.id">
+					<form:select path="vendor.id" cssClass="input-xlarge" >
 						<form:option value=""></form:option>
 						<form:options items="${ allVendorList }" itemLabel="companyName" itemValue="id"/>
 					</form:select>

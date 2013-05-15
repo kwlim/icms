@@ -26,7 +26,7 @@
 			<span class="mandatory"><fmt:message key="general.mandatory"/></span>
 		</label>
 		<div class="controls">
-			<form:input path="name" />
+			<form:input path="name" cssClass="input-xxlarge"/>
 			<form:errors path="name" cssClass="help-inline"/>
 		</div>
 	</div>
@@ -35,7 +35,7 @@
 			<fmt:message key="general.remark"/>
 		</label>
 		<div class="controls">
-			<form:textarea path="remark"/>
+			<form:textarea path="remark" cssClass="input-xxlarge" rows="5"/>
 		</div>
 	</div>
 	<div class="form-actions">

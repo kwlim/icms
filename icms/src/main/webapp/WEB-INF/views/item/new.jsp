@@ -25,7 +25,7 @@
 			<span class="mandatory"><fmt:message key="general.mandatory"/></span>
 		</label>
 		<div class="controls">
-			<form:input path="code" />
+			<form:input path="code" cssClass="input-xlarge"/>
 			<form:errors path="code" cssClass="help-inline"/>
 		</div>
 	</div>
@@ -35,7 +35,7 @@
 			<span class="mandatory"><fmt:message key="general.mandatory"/></span>
 		</label>
 		<div class="controls">
-			<form:input path="name" />
+			<form:input path="name" cssClass="input-xlarge"/>
 			<form:errors path="name" cssClass="help-inline"/>
 		</div>
 	</div>
@@ -44,7 +44,7 @@
 			<fmt:message key="item.category.label"/>
 		</label>
 		<div class="controls">
-			<form:select path="category.id" onchange="toggleNewCategory()">
+			<form:select path="category.id" onchange="toggleNewCategory()" cssClass="input-xlarge">
 				<form:option value=""></form:option>
 				<form:option value="new">Create New...</form:option>
 				<form:options items="${ allCategoryList }" itemLabel="name" itemValue="id"/>
@@ -58,7 +58,7 @@
 			<fmt:message key="item.brand.label"/>
 		</label>
 		<div class="controls">
-			<form:select path="brand.id" onchange="toggleNewBrand()">
+			<form:select path="brand.id" onchange="toggleNewBrand()" cssClass="input-xlarge">
 				<form:option value=""></form:option>
 				<form:option value="new">Create New...</form:option>
 				<form:options items="${ allBrandList }" itemLabel="name" itemValue="id"/>
@@ -72,7 +72,7 @@
 			<fmt:message key="general.remark"/>
 		</label>
 		<div class="controls">
-			<form:textarea path="remark" />
+			<form:textarea path="remark" cssClass="input-xxlarge" rows="5"/>
 		</div>
 	</div>
 	<div class="control-group <form:errors path="lowAmountNotif" cssClass="error">error</form:errors>">

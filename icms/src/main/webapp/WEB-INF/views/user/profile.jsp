@@ -27,7 +27,7 @@
 			<span class="mandatory"><fmt:message key="general.mandatory"/></span>
 		</label>
 		<div class="controls">
-			<form:input path="firstname" />
+			<form:input path="firstname" class="input-xlarge"/>
 			<form:errors path="firstname" cssClass="help-inline"/>
 		</div>
 	</div>
@@ -38,7 +38,7 @@
 			<span class="mandatory"><fmt:message key="general.mandatory"/></span>
 		</label>
 		<div class="controls">
-			<form:input path="lastname" />
+			<form:input path="lastname" class="input-xlarge"/>
 			<form:errors path="lastname" cssClass="help-inline"/>
 		</div>
 	</div>
@@ -48,7 +48,7 @@
 			<fmt:message key="user.nickname"/>
 		</label>
 		<div class="controls">
-			<form:input path="nickname" />
+			<form:input path="nickname" class="input-xlarge"/>
 		</div>
 	</div>
 	
@@ -57,7 +57,7 @@
 			<fmt:message key="user.address"/>
 		</label>
 		<div class="controls">
-			<form:textarea path="address" class="input-xlarge" rows="5"/>
+			<form:textarea path="address" class="input-xxlarge" rows="5"/>
 		</div>
 	</div>
 	
@@ -67,7 +67,7 @@
 			<span class="mandatory"><fmt:message key="general.mandatory"/></span>
 		</label>
 		<div class="controls">
-			<form:input path="email" />
+			<form:input path="email" class="input-xlarge"/>
 			<form:errors path="email" cssClass="help-inline"/>
 		</div>
 	</div>
@@ -86,7 +86,7 @@
 			<fmt:message key="user.password"/>
 		</label>
 		<div class="controls">
-			<form:password path="password" />
+			<form:password path="password" class="input-xlarge"/>
 			<form:errors path="password" cssClass="help-inline"/>
 		</div>
 	</div>
@@ -96,7 +96,7 @@
 			<fmt:message key="user.retypePassword"/>
 		</label>
 		<div class="controls">
-			<form:password path="retypePassword" />
+			<form:password path="retypePassword" class="input-xlarge"/>
 			<form:errors path="retypePassword" cssClass="help-inline"/>
 		</div>
 	</div>

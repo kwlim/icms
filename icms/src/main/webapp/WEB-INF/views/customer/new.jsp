@@ -31,7 +31,7 @@
 			<fmt:message key="general.name"/>
 		</label>
 		<div class="controls">
-			<form:input path="name" />
+			<form:input path="name" cssClass="input-xlarge"/>
 		</div>
 	</div>
 	<div class="control-group ">
@@ -47,7 +47,7 @@
 			<fmt:message key="customer.address"/>
 		</label>
 		<div class="controls">
-			<form:textarea path="address" />
+			<form:textarea path="address" cssClass="input-xxlarge" rows="5"/>
 		</div>
 	</div>
 	<div class="control-group">
@@ -55,7 +55,7 @@
 			<fmt:message key="general.remark"/>
 		</label>
 		<div class="controls">
-			<form:textarea path="remark" />
+			<form:textarea path="remark" cssClass="input-xxlarge" rows="5"/>
 		</div>
 	</div>
 	<div class="form-actions">

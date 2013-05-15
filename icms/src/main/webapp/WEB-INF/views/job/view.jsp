@@ -86,6 +86,10 @@
 				</tr>
 			</c:forEach>
 				<tr >
+					<td colspan="5" style="text-align: right;"><b>Discount(RM)</b></td>
+					<td style="text-align: right;"><b><fmt:formatNumber minFractionDigits="2" value="${ jobOrder.discount }"/></b></td>
+				</tr>
+				<tr >
 					<td colspan="5" style="text-align: right;"><b>Grand Total</b></td>
 					<td style="text-align: right;"><b><fmt:formatNumber minFractionDigits="2" value="${ jobOrder.price }"/></b></td>
 				</tr>

@@ -22,7 +22,7 @@
 			<span class="mandatory"><fmt:message key="general.mandatory"/></span>
 		</label>
 		<div class="controls">
-			<form:input path="companyName" />
+			<form:input path="companyName" cssClass="input-xxlarge"/>
 			<form:errors path="companyName" cssClass="help-inline"/>
 		</div>
 	</div>
@@ -31,7 +31,7 @@
 			<fmt:message key="vendor.contact.person"/>
 		</label>
 		<div class="controls">
-			<form:input path="contactPerson" />
+			<form:input path="contactPerson" cssClass="input-xlarge"/>
 		</div>
 	</div>
 	<div class="control-group ">
@@ -55,7 +55,7 @@
 			<fmt:message key="vendor.address"/>
 		</label>
 		<div class="controls">
-			<form:textarea path="address" />
+			<form:textarea path="address" cssClass="input-xxlarge" rows="5"/>
 		</div>
 	</div>
 	<div class="control-group">
@@ -63,7 +63,7 @@
 			<fmt:message key="general.remark"/>
 		</label>
 		<div class="controls">
-			<form:textarea path="remark" />
+			<form:textarea path="remark" cssClass="input-xxlarge" rows="5"/>
 		</div>
 	</div>
 	<div class="form-actions">

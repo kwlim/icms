@@ -294,8 +294,6 @@ public class JobOrderController {
 		JobOrder job = jobService.getJobById(id);
 		model.addAttribute("jobOrder", job);
 		
-		model.addAttribute("jobItemList", job.getJobItemList());
-		
 		return new ModelAndView("pdfJobOrderView", model);
 	}
 	
