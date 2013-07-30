@@ -12,6 +12,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Index;
+
 import com.lkwy.common.entity.AbstractAuditablePersistable;
 import com.lkwy.group.entity.Group;
 import com.lkwy.group.entity.PermissionDTO;
@@ -40,6 +42,7 @@ public class User extends AbstractAuditablePersistable{
     private static final long serialVersionUID = 4980168230977242911L;
     
     @Column(unique=true, nullable=false)
+    @Index(name="idx_username")
     private String username;
     private String password;
     private String firstname;
@@ -57,6 +60,7 @@ public class User extends AbstractAuditablePersistable{
     @OneToOne
     private Group group;
     
+    @Index(name="idx_status")
     private Integer status;
     
     @Transient

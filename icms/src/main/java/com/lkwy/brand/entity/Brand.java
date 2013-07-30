@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Index;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.lkwy.common.entity.AbstractAuditablePersistable;
@@ -16,6 +17,7 @@ public class Brand extends AbstractAuditablePersistable{
 	
 	@NotEmpty
 	@Column(unique=true, nullable=false)
+	@Index(name="idx_name")
 	private String name;
 	
 	public Brand() {

@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Index;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.google.common.collect.Lists;
@@ -22,6 +23,7 @@ public class Group extends AbstractAuditablePersistable{
     
     @Column(unique=true)
     @NotEmpty
+    @Index(name="idx_name")
     private String name;
     
     @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="group", orphanRemoval=true)

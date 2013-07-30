@@ -5,6 +5,8 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Index;
+
 import com.lkwy.common.entity.AbstractAuditablePersistable;
 
 @Entity
@@ -14,6 +16,7 @@ public class Company extends AbstractAuditablePersistable{
 	private static final long serialVersionUID = -8311691749851939904L;
 	
 	@NotNull
+	@Index(name="idx_companyKey")
 	private String companyKey;
 	private String name;
 	private String registrationNumber;

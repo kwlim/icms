@@ -10,6 +10,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Index;
+
 import com.lkwy.common.entity.AbstractAuditablePersistable;
 
 @Entity
@@ -19,6 +21,7 @@ public class Billing extends AbstractAuditablePersistable{
 	private static final long serialVersionUID = -8997482244888252238L;
 	
 	@NotNull
+	@Index(name="idx_billingKey")
 	private String billingKey;
 	
 	@Temporal(TemporalType.DATE)

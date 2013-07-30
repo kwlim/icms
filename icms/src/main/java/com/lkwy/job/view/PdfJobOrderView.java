@@ -24,7 +24,6 @@ import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
 import com.lowagie.text.Font;
-import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.Rectangle;
@@ -50,9 +49,9 @@ public class PdfJobOrderView extends AbstractPdfView{
 	
 	@Override
 	protected Document newDocument() {
-		//Rectangle pagesize = new Rectangle(216f, 720f);
-		//return new Document(pagesize, 10f, 10f, 10f, 10f);
-		return new Document(PageSize.A4.rotate(), 10f, 10f, 10f, 10f);
+		Rectangle pagesize = new Rectangle(617.95f, 793.7f);
+		return new Document(pagesize, 10f, 10f, 10f, 10f);
+//		return new Document(PageSize.A4.rotate(), 10f, 10f, 10f, 10f);
 	}
 	
 	@Override

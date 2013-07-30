@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Index;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.lkwy.common.entity.AbstractAuditablePersistable;
@@ -17,8 +18,13 @@ public class Customer extends AbstractAuditablePersistable{
 	
 	@Column(unique=true, nullable=false)
 	@NotEmpty
+	@Index(name="idx_carPlateNumber")
 	private String carPlateNumber;
+	
+	@Index(name="idx_name")
 	private String name;
+	
+	@Index(name="idx_contactNumber")
 	private String contactNumber;
 	private String address;
 	

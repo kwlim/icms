@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Index;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.lkwy.common.entity.AbstractAuditablePersistable;
@@ -24,11 +25,14 @@ public class JobOrder extends AbstractAuditablePersistable{
 	private static final long serialVersionUID = 4711879357247741629L;
 	
 	@NotEmpty
+	@Index(name="idx_jobNumber")
 	private String jobNumber;
 	
 	@Lob
 	private String remark;
+	
 	@NotNull
+	@Index(name="idx_jobDate")
 	private Date jobDate;
 	
 	@OneToMany(mappedBy="jobOrder", cascade=CascadeType.ALL)

@@ -7,6 +7,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Index;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.lkwy.brand.entity.Brand;
@@ -21,8 +22,11 @@ public class Item extends AbstractAuditablePersistable{
 	
 	@NotEmpty
 	@Column(unique=true, nullable=false)
+	@Index(name="idx_code")
 	private String code;
+	
 	@NotEmpty
+	@Index(name="idx_name")
 	private String name;
 	
 	@Lob 

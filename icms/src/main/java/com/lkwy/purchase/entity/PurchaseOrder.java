@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Index;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.lkwy.common.entity.AbstractAuditablePersistable;
@@ -22,8 +23,11 @@ public class PurchaseOrder extends AbstractAuditablePersistable{
 	
 	private static final long serialVersionUID = -4064344215763318559L;
 	@NotEmpty
+	@Index(name="idx_poNumber")
 	private String poNumber;
+	
 	@NotNull
+	@Index(name="idx_poDate")
 	private Date poDate;
 	private Double price;
 	

@@ -3,6 +3,8 @@ package com.lkwy.code.entity;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Index;
+
 import com.lkwy.common.entity.AbstractPersistable;
 
 @Entity
@@ -11,6 +13,7 @@ public class CodeTrack extends AbstractPersistable{
 	
 	private static final long serialVersionUID = 6742775167358220313L;
 	
+	@Index(name="idx_moduleKey")
 	private String moduleKey;
 	private Integer counter;
 	

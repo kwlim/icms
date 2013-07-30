@@ -3,6 +3,7 @@ package com.lkwy.vendor.entity;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Index;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.lkwy.common.entity.AbstractAuditablePersistable;
@@ -14,8 +15,13 @@ public class Vendor extends AbstractAuditablePersistable{
 	private static final long serialVersionUID = -1052020518058335396L;
 	
 	@NotEmpty
+	@Index(name="idx_companyName")
 	private String companyName;
+	
+	@Index(name="idx_contactPerson")
 	private String contactPerson;
+	
+	@Index(name="idx_contactNumber")
 	private String contactNumber;
 	private String officeNumber;
 	private String address;

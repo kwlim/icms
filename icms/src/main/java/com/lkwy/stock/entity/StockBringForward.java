@@ -8,6 +8,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Index;
+
 import com.lkwy.common.entity.AbstractAuditablePersistable;
 import com.lkwy.item.entity.Item;
 
@@ -18,6 +20,7 @@ public class StockBringForward extends AbstractAuditablePersistable{
 	private static final long serialVersionUID = -7566447990882341583L;
 
 	@Temporal(TemporalType.DATE)
+	@Index(name="idx_bfDate")
 	private Date bfDate;
 	
 	@OneToOne
